@@ -65,7 +65,7 @@ namespace IdeaVideoAI
             int index = (int)e.UserState;
             updateItemInListView(index);
 
-            if(index == 0)
+            if (index == 0)
             {
                 curVideoIndex = 0;
                 updateVideoDetail(curVideoIndex);
@@ -95,10 +95,10 @@ namespace IdeaVideoAI
 
             progressBar1.Value = e.ProgressPercentage;
 
-            int index = (int) e.UserState;
+            int index = (int)e.UserState;
             updateItemInListView(index);
 
-            if(index + 1 == datas.Count())
+            if (index + 1 == datas.Count())
             {
                 button2.Enabled = true;
             }
