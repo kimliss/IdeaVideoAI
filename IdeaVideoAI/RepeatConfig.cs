@@ -43,17 +43,35 @@ namespace IdeaVideoAI
         public double brightnessV2;
 
 
+        //是否随机拉伸
+        public bool isZoom = false;
+
+        public double zoomV1;
+
+        public double zoomV2;
+
+
+        //是否随机旋转
+        public bool isRotate = false;
+
+        public double rotateV1;
+
+        public double rotateV2;
+
+        public double rotateZoomV;
+
+
         //是否添加背景音乐
         public bool isBackAudio = true;
 
         //背景音乐
-        public List<String> backAudioFiles;
+        public List<String> backAudioFiles = new List<string>();
 
 
         //是否叠加视频
         public bool isOverlay = true;
 
         //叠加视频
-        public List<String> overlayVideoFiles;
+        public List<String> overlayVideoFiles = new List<string>();
     }
 }

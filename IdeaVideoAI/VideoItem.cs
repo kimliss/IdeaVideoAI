@@ -15,5 +15,9 @@ namespace IdeaVideoAI
 
         public string status;
 
+        public int width;
+
+        public int height;
+
     }
 }

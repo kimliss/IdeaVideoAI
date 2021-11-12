@@ -51,12 +51,19 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nUDRotateZoom = new System.Windows.Forms.NumericUpDown();
+            this.nUDRotateV2 = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbRotate = new System.Windows.Forms.CheckBox();
+            this.nUDRotateV1 = new System.Windows.Forms.NumericUpDown();
+            this.lbOverCount = new System.Windows.Forms.Label();
+            this.lbBackCount = new System.Windows.Forms.Label();
             this.tbRepeatLog = new System.Windows.Forms.TextBox();
             this.nUDSetptsV2 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.cbSetpts = new System.Windows.Forms.CheckBox();
             this.nUDSetptsV1 = new System.Windows.Forms.NumericUpDown();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
             this.button9 = new System.Windows.Forms.Button();
             this.cbOverlay = new System.Windows.Forms.CheckBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -82,6 +89,10 @@
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.btnRepeat = new System.Windows.Forms.Button();
+            this.nUDZoomV2 = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbZoom = new System.Windows.Forms.CheckBox();
+            this.nUDZoomV1 = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -90,6 +101,9 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDRotateZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDRotateV2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDRotateV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDSetptsV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDSetptsV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDBrightnessV2)).BeginInit();
@@ -100,6 +114,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -343,12 +359,23 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.nUDZoomV2);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.cbZoom);
+            this.tabPage2.Controls.Add(this.nUDZoomV1);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.nUDRotateZoom);
+            this.tabPage2.Controls.Add(this.nUDRotateV2);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.cbRotate);
+            this.tabPage2.Controls.Add(this.nUDRotateV1);
+            this.tabPage2.Controls.Add(this.lbOverCount);
+            this.tabPage2.Controls.Add(this.lbBackCount);
             this.tabPage2.Controls.Add(this.tbRepeatLog);
             this.tabPage2.Controls.Add(this.nUDSetptsV2);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.cbSetpts);
             this.tabPage2.Controls.Add(this.nUDSetptsV1);
-            this.tabPage2.Controls.Add(this.checkBox12);
             this.tabPage2.Controls.Add(this.button9);
             this.tabPage2.Controls.Add(this.cbOverlay);
             this.tabPage2.Controls.Add(this.label23);
@@ -381,6 +408,119 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "去重";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(307, 287);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 15);
+            this.label2.TabIndex = 93;
+            this.label2.Text = "先放大";
+            // 
+            // nUDRotateZoom
+            // 
+            this.nUDRotateZoom.DecimalPlaces = 1;
+            this.nUDRotateZoom.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nUDRotateZoom.Location = new System.Drawing.Point(372, 284);
+            this.nUDRotateZoom.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUDRotateZoom.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDRotateZoom.Name = "nUDRotateZoom";
+            this.nUDRotateZoom.Size = new System.Drawing.Size(73, 23);
+            this.nUDRotateZoom.TabIndex = 92;
+            this.nUDRotateZoom.Value = new decimal(new int[] {
+            11,
+            0,
+            0,
+            65536});
+            // 
+            // nUDRotateV2
+            // 
+            this.nUDRotateV2.Location = new System.Drawing.Point(215, 284);
+            this.nUDRotateV2.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nUDRotateV2.Name = "nUDRotateV2";
+            this.nUDRotateV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDRotateV2.TabIndex = 91;
+            this.nUDRotateV2.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(183, 288);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 15);
+            this.label1.TabIndex = 90;
+            this.label1.Text = "~";
+            // 
+            // cbRotate
+            // 
+            this.cbRotate.AutoSize = true;
+            this.cbRotate.Location = new System.Drawing.Point(15, 286);
+            this.cbRotate.Name = "cbRotate";
+            this.cbRotate.Size = new System.Drawing.Size(66, 19);
+            this.cbRotate.TabIndex = 88;
+            this.cbRotate.Text = "旋转(0)";
+            this.cbRotate.UseVisualStyleBackColor = true;
+            // 
+            // nUDRotateV1
+            // 
+            this.nUDRotateV1.Location = new System.Drawing.Point(113, 284);
+            this.nUDRotateV1.Maximum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nUDRotateV1.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            -2147483648});
+            this.nUDRotateV1.Name = "nUDRotateV1";
+            this.nUDRotateV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDRotateV1.TabIndex = 89;
+            this.nUDRotateV1.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            -2147483648});
+            // 
+            // lbOverCount
+            // 
+            this.lbOverCount.AutoSize = true;
+            this.lbOverCount.Location = new System.Drawing.Point(217, 386);
+            this.lbOverCount.Name = "lbOverCount";
+            this.lbOverCount.Size = new System.Drawing.Size(111, 15);
+            this.lbOverCount.TabIndex = 87;
+            this.lbOverCount.Text = "请选择叠加的视频";
+            // 
+            // lbBackCount
+            // 
+            this.lbBackCount.AutoSize = true;
+            this.lbBackCount.Location = new System.Drawing.Point(217, 338);
+            this.lbBackCount.Name = "lbBackCount";
+            this.lbBackCount.Size = new System.Drawing.Size(98, 15);
+            this.lbBackCount.TabIndex = 86;
+            this.lbBackCount.Text = "请现在背景音乐";
             // 
             // tbRepeatLog
             // 
@@ -465,29 +605,20 @@
             0,
             131072});
             // 
-            // checkBox12
-            // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(210, 282);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(78, 19);
-            this.checkBox12.TabIndex = 79;
-            this.checkBox12.Text = "随机开始";
-            this.checkBox12.UseVisualStyleBackColor = true;
-            // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(111, 280);
+            this.button9.Location = new System.Drawing.Point(111, 382);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 78;
-            this.button9.Text = "视频目录";
+            this.button9.Text = "视频库";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // cbOverlay
             // 
             this.cbOverlay.AutoSize = true;
-            this.cbOverlay.Location = new System.Drawing.Point(15, 282);
+            this.cbOverlay.Location = new System.Drawing.Point(15, 384);
             this.cbOverlay.Name = "cbOverlay";
             this.cbOverlay.Size = new System.Drawing.Size(78, 19);
             this.cbOverlay.TabIndex = 77;
@@ -497,7 +628,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(15, 337);
+            this.label23.Location = new System.Drawing.Point(15, 439);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(59, 15);
             this.label23.TabIndex = 76;
@@ -514,7 +645,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(111, 391);
+            this.button8.Location = new System.Drawing.Point(111, 493);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 68;
@@ -524,7 +655,8 @@
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(15, 393);
+            this.checkBox10.Enabled = false;
+            this.checkBox10.Location = new System.Drawing.Point(15, 495);
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(52, 19);
             this.checkBox10.TabIndex = 67;
@@ -533,17 +665,18 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(111, 232);
+            this.button7.Location = new System.Drawing.Point(111, 334);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 66;
-            this.button7.Text = "音乐目录";
+            this.button7.Text = "音乐库";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // cbBackground
             // 
             this.cbBackground.AutoSize = true;
-            this.cbBackground.Location = new System.Drawing.Point(15, 234);
+            this.cbBackground.Location = new System.Drawing.Point(15, 336);
             this.cbBackground.Name = "cbBackground";
             this.cbBackground.Size = new System.Drawing.Size(78, 19);
             this.cbBackground.TabIndex = 61;
@@ -763,7 +896,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(346, 395);
+            this.label9.Location = new System.Drawing.Point(346, 497);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 15);
             this.label9.TabIndex = 17;
@@ -771,7 +904,7 @@
             // 
             // numericUpDown5
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(417, 391);
+            this.numericUpDown5.Location = new System.Drawing.Point(417, 493);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(53, 23);
             this.numericUpDown5.TabIndex = 18;
@@ -783,7 +916,7 @@
             // 
             // numericUpDown6
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(281, 391);
+            this.numericUpDown6.Location = new System.Drawing.Point(281, 493);
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(53, 23);
             this.numericUpDown6.TabIndex = 16;
@@ -796,7 +929,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(210, 395);
+            this.label10.Location = new System.Drawing.Point(210, 497);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 15);
             this.label10.TabIndex = 15;
@@ -811,6 +944,81 @@
             this.btnRepeat.Text = "去重";
             this.btnRepeat.UseVisualStyleBackColor = true;
             this.btnRepeat.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // nUDZoomV2
+            // 
+            this.nUDZoomV2.DecimalPlaces = 1;
+            this.nUDZoomV2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nUDZoomV2.Location = new System.Drawing.Point(215, 234);
+            this.nUDZoomV2.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUDZoomV2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDZoomV2.Name = "nUDZoomV2";
+            this.nUDZoomV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDZoomV2.TabIndex = 97;
+            this.nUDZoomV2.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            65536});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(183, 238);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(15, 15);
+            this.label7.TabIndex = 96;
+            this.label7.Text = "~";
+            // 
+            // cbZoom
+            // 
+            this.cbZoom.AutoSize = true;
+            this.cbZoom.Location = new System.Drawing.Point(15, 236);
+            this.cbZoom.Name = "cbZoom";
+            this.cbZoom.Size = new System.Drawing.Size(66, 19);
+            this.cbZoom.TabIndex = 94;
+            this.cbZoom.Text = "拉伸(1)";
+            this.cbZoom.UseVisualStyleBackColor = true;
+            // 
+            // nUDZoomV1
+            // 
+            this.nUDZoomV1.DecimalPlaces = 1;
+            this.nUDZoomV1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nUDZoomV1.Location = new System.Drawing.Point(113, 234);
+            this.nUDZoomV1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUDZoomV1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDZoomV1.Name = "nUDZoomV1";
+            this.nUDZoomV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDZoomV1.TabIndex = 95;
+            this.nUDZoomV1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // Form1
             // 
@@ -835,6 +1043,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDRotateZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDRotateV2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDRotateV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDSetptsV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDSetptsV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDBrightnessV2)).EndInit();
@@ -845,6 +1056,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -900,11 +1113,22 @@
         private Label label22;
         private Button button9;
         private CheckBox cbOverlay;
-        private CheckBox checkBox12;
         private NumericUpDown nUDSetptsV2;
         private Label label4;
         private CheckBox cbSetpts;
         private NumericUpDown nUDSetptsV1;
         private TextBox tbRepeatLog;
+        private Label lbOverCount;
+        private Label lbBackCount;
+        private NumericUpDown nUDRotateV2;
+        private Label label1;
+        private CheckBox cbRotate;
+        private NumericUpDown nUDRotateV1;
+        private Label label2;
+        private NumericUpDown nUDRotateZoom;
+        private NumericUpDown nUDZoomV2;
+        private Label label7;
+        private CheckBox cbZoom;
+        private NumericUpDown nUDZoomV1;
     }
 }

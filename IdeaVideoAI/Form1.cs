@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
+using Xabe.FFmpeg;
 
 namespace IdeaVideoAI
 {
@@ -12,7 +13,10 @@ namespace IdeaVideoAI
 
         int curVideoIndex = -1;
 
-        string[] statusDesc = new string[6] { "读取中", "待标注", "已标注", "已处理","待去重","已去重" };
+        string[] statusDesc = new string[6] { "读取中", "待标注", "已标注", "已处理", "待去重", "已去重" };
+
+
+        RepeatConfig repeatConfig = new RepeatConfig();
 
         List<WatermarkVideoItem> waterMarkDatas = new List<WatermarkVideoItem>();
 
@@ -155,7 +159,7 @@ namespace IdeaVideoAI
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = true;
             fd.Title = "Please Select File";
-            fd.Filter = "All Media Files|*.wav;*.aac;*.wma;*.wmv;*.avi;*.mpg;*.mpeg;*.m1v;*.mp2;*.mp3;*.mpa;*.mpe;*.m3u;*.mp4;*.mov;*.3g2;*.3gp2;*.3gp;*.3gpp;*.m4a;*.cda;*.aif;*.aifc;*.aiff;*.mid;*.midi;*.rmi;*.mkv;*.WAV;*.AAC;*.WMA;*.WMV;*.AVI;*.MPG;*.MPEG;*.M1V;*.MP2;*.MP3;*.MPA;*.MPE;*.M3U;*.MP4;*.MOV;*.3G2;*.3GP2;*.3GP;*.3GPP;*.M4A;*.CDA;*.AIF;*.AIFC;*.AIFF;*.MID;*.MIDI;*.RMI;*.MKV";
+            fd.Filter = "All Video Files|*.mp4;*.mpg;*.mpeg;*.avi;*.rm;*.rmvb;*.mov;*.wmv;*.asf;*.dat;*.asx;*.wvx;*.mpe;*.mpa";
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 curVideoIndex = 0;
@@ -236,7 +240,8 @@ namespace IdeaVideoAI
                         videoData.status = statusDesc[0];
 
                         waterMarkDatas.Add(videoData);
-                    }else
+                    }
+                    else
                     {
                         RepeatVideoItem videoData = new RepeatVideoItem();
 
@@ -252,7 +257,7 @@ namespace IdeaVideoAI
 
                 loadListView();
 
-                if(isWaterMark)backgroundWorkerCover.RunWorkerAsync();
+                if (isWaterMark) backgroundWorkerCover.RunWorkerAsync();
             }
         }
 
@@ -265,7 +270,8 @@ namespace IdeaVideoAI
             if (isWaterMark)
             {
                 waterMarkDatas.ForEach(data => tempDatas.Add(data));
-            }else
+            }
+            else
             {
                 repeatDatas.ForEach(data => tempDatas.Add(data));
             }
@@ -300,7 +306,8 @@ namespace IdeaVideoAI
             if (isWaterMark)
             {
                 videoData = waterMarkDatas[index];
-            }else
+            }
+            else
             {
                 videoData = repeatDatas[index];
             }
@@ -603,16 +610,13 @@ namespace IdeaVideoAI
             loadListView();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private async void button6_Click(object sender, EventArgs e)
         {
-            if(repeatDatas.Count <= 0)
+            if (repeatDatas.Count <= 0)
             {
                 MessageBox.Show("请至少选择一个去重的视频");
                 return;
             }
-
-
-            RepeatConfig repeatConfig = new RepeatConfig();
 
             //是否随机速率
             repeatConfig.isSetpts = cbSetpts.Checked;
@@ -635,6 +639,17 @@ namespace IdeaVideoAI
             repeatConfig.brightnessV1 = (double)nUDBrightnessV1.Value;
             repeatConfig.brightnessV2 = (double)nUDBrightnessV2.Value;
 
+            //是否旋转
+            repeatConfig.isRotate = cbRotate.Checked;
+            repeatConfig.rotateV1 = (double)nUDRotateV1.Value;
+            repeatConfig.rotateV2 = (double)nUDRotateV2.Value;
+            repeatConfig.rotateZoomV = (double)nUDRotateZoom.Value;
+
+            //是否拉伸
+            repeatConfig.isZoom = cbZoom.Checked;
+            repeatConfig.zoomV1 = (double)nUDZoomV1.Value;
+            repeatConfig.zoomV2 = (double)nUDZoomV2.Value;
+
 
             //是否添加随机背景音乐
             repeatConfig.isBackAudio = cbBackground.Checked;
@@ -642,20 +657,39 @@ namespace IdeaVideoAI
             //是否添加叠加视频
             repeatConfig.isOverlay = cbOverlay.Checked;
 
-            if(!(repeatConfig.isSetpts || repeatConfig.isContrast || repeatConfig.isSaturation || repeatConfig.isBrightness))
+            if (!(repeatConfig.isSetpts || repeatConfig.isContrast || repeatConfig.isSaturation || repeatConfig.isBrightness || repeatConfig.isBackAudio || repeatConfig.isOverlay || repeatConfig.isRotate || repeatConfig.isZoom))
             {
                 MessageBox.Show("请至少选择一个随机参数");
                 return;
             }
 
+            if (repeatConfig.isBackAudio && repeatConfig.backAudioFiles.Count <= 0)
+            {
+                MessageBox.Show("请至少选择一个背景音乐");
+                return;
+            }
+
+            if (repeatConfig.isOverlay && repeatConfig.overlayVideoFiles.Count <= 0)
+            {
+                MessageBox.Show("请至少选择一个叠加视频");
+                return;
+            }
+            
+            btnRepeat.Enabled = false;
 
             for (int i = 0; i < repeatDatas.Count; i++)
             {
                 RepeatVideoItem videoData = repeatDatas[i];
+
+                var mediaInfo = await FFmpeg.GetMediaInfo(videoData.filePath);
+                int width = mediaInfo.VideoStreams.First().Width;
+                int height = mediaInfo.VideoStreams.First().Height;
+                videoData.width = width;
+                videoData.height = height;
+
                 updateRepeatCmd(videoData, repeatConfig);
             }
 
-            btnRepeat.Enabled = false;
             backgroundWorkerRepeat.RunWorkerAsync();
         }
 
@@ -666,67 +700,141 @@ namespace IdeaVideoAI
         /// <param name="repeatConfig"></param>
         public void updateRepeatCmd(RepeatVideoItem data, RepeatConfig repeatConfig)
         {
-            string cmdFormat = "{0} -y -i \"{1}\" -filter_complex \"{2}\" -map \"[audio]\" -map \"[{3}]\" \"{4}\"";
+            //0:ffmpeg 1: input 2: filterComplex 3: output
+            string cmdFormat = "{0} -y {1} -filter_complex \"{2}\"  -map [audio] -map [video] \"{3}\"";
 
-            string filter = "";
-            int pos = 1;
+            List<String> inputCmds = new List<string>();
+            inputCmds.Add(data.filePath);
+
+            string filterComplex = "";
+
+            if (repeatConfig.isOverlay)
+            {
+                string file = repeatConfig.overlayVideoFiles[new Random().Next(repeatConfig.overlayVideoFiles.Count)];
+                inputCmds.Add(file);
+
+                int overlayIndex = inputCmds.Count - 1;
+
+                filterComplex += String.Format("[{0}:v][0:v]scale2ref=w=iw:h=ih[overlay];[overlay]loop=loop=-1:size=1000[overlay];[0:v][overlay]overlay=shortest=1[video]", overlayIndex);
+            }
+            else
+            {
+                filterComplex = "[0:v]setpts=PTS-STARTPTS[video]";
+            }
 
             if (repeatConfig.isSetpts)
             {
-                double speed = Utils.nextRandomRange(repeatConfig.setptsV1, repeatConfig.setptsV2,2);
+                double speed = Utils.nextRandomRange(repeatConfig.setptsV1, repeatConfig.setptsV2, 2);
 
                 double pts = 1;
-                if(speed < 1)
+                if (speed < 1)
                 {
                     pts = 3 - 2 * speed;
                 }
-                else if(speed > 1)
+                else if (speed > 1)
                 {
                     pts = 1.5 - 0.5 * speed;
                 }
 
-                filter += string.Format("[0:a]atempo={0}[audio];[0:v]setpts={1}*PTS[1]", speed, pts);
+                filterComplex += string.Format(";[0:a]atempo={0}[audio];[video]setpts={1}*PTS[video]", speed, pts);
             }
             else
             {
-                filter += "[0:a]atempo=1.0[audio];[0:v]setpts=PTS-STARTPTS[1]";
+                filterComplex += ";[0:a]atempo=1.0[audio]";
             }
 
             if (repeatConfig.isContrast)
             {
                 double contrast = Utils.nextRandomRange((double)repeatConfig.contrastV1, (double)repeatConfig.contrastV2, 2);
 
-                filter += String.Format(";[{0}]eq=contrast={1}[{2}]", pos,contrast, ++pos);
+                filterComplex += String.Format(";[video]eq=contrast={0}[video]", contrast);
             }
 
             if (repeatConfig.isSaturation)
             {
-                double saturation = Utils.nextRandomRange((double)repeatConfig.saturationV1, (double)repeatConfig.saturationV2,2);
+                double saturation = Utils.nextRandomRange((double)repeatConfig.saturationV1, (double)repeatConfig.saturationV2, 2);
 
-                filter += String.Format(";[{0}]eq=saturation={1}[{2}]", pos, saturation, ++pos);
+                filterComplex += String.Format(";[video]eq=saturation={0}[video]", saturation);
             }
 
             if (repeatConfig.isBrightness)
             {
                 double brightness = Utils.nextRandomRange((double)repeatConfig.brightnessV1, (double)repeatConfig.brightnessV2);
 
-                filter += String.Format(";[{0}]eq=brightness={1}[{2}]", pos, brightness, ++pos);
+                filterComplex += String.Format(";[video]eq=brightness={0}[video]", brightness);
             }
 
-            string cmd = String.Format(cmdFormat,ffmpegCmd, data.filePath, filter, pos, Path.Join(data.tempRepeatDir, data.fileName));
+            if (repeatConfig.isRotate)
+            {
+                double rotate = Utils.nextRandomRange((double)repeatConfig.rotateV1, (double)repeatConfig.rotateV2, 0);
 
+                filterComplex += String.Format(";[video]rotate={0}*PI/180,zoompan=z={1}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={2}x{3}[video]", rotate, repeatConfig.rotateZoomV, data.width, data.height);
+            }
+
+            if (repeatConfig.isZoom)
+            {
+                double zoom = Utils.nextRandomRange((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2);
+                filterComplex += String.Format(";[video]zoompan=z={0}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={1}x{2}[video]", zoom, data.width, data.height);
+            }
+
+            if (repeatConfig.isBackAudio)
+            {
+                string file = repeatConfig.backAudioFiles[new Random().Next(repeatConfig.backAudioFiles.Count)];
+                inputCmds.Add(file);
+
+                int backgroundIndex = inputCmds.Count - 1;
+
+                filterComplex += String.Format(";[audio]volume=volume=2[aout0];[{0}:a]volume=volume=1[aout1];[aout1]aloop=loop=-1:size=2e+09,atrim=0:43[aconcat]; [aout0][aconcat]amix=inputs=2:duration=first:dropout_transition=0 [audio]", backgroundIndex);
+            }
+
+            string inputCMD = "";
+            inputCmds.ForEach(x =>
+            {
+                inputCMD += String.Format(" -i \"{0}\" ", x);
+            });
+
+            string cmd = String.Format(cmdFormat, ffmpegCmd, inputCMD, filterComplex, Path.Join(data.tempRepeatDir, data.fileName));
             data.repeatCmd = cmd;
 
             if (String.IsNullOrEmpty(tbRepeatLog.Text))
             {
-                tbRepeatLog.Text = cmd;
-            }else
-            {
-                tbRepeatLog.Text = tbRepeatLog.Text + "\r\n" + cmd;
+                tbRepeatLog.Text = System.DateTime.Now + "\r\n" + cmd;
             }
-
+            else
+            {
+                tbRepeatLog.Text = System.DateTime.Now + "\r\n" + cmd + "\r\n\r\n" + tbRepeatLog.Text;
+            }
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            repeatConfig.backAudioFiles.Clear();
+
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Multiselect = true;
+            fd.Title = "Please Select File";
+            fd.Filter = "All Audio Files|*.mp3;*.wma;*.rm;*.wav;*.mid;*.ape;*.flac";
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                repeatConfig.backAudioFiles.AddRange(fd.FileNames);
+                lbBackCount.Text = "" + fd.FileNames.Length;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            repeatConfig.overlayVideoFiles.Clear();
+
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Multiselect = true;
+            fd.Title = "Please Select File";
+            fd.Filter = "All Video Files|*.mpg;*.mpeg;*.avi;*.rm;*.rmvb;*.mov;*.wmv;*.asf;*.dat;*.asx;*.wvx;*.mpe;*.mpa";
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                repeatConfig.overlayVideoFiles.AddRange(fd.FileNames);
+                lbOverCount.Text = "" + fd.FileNames.Count();
+            }
+        }
     }
 
 }
