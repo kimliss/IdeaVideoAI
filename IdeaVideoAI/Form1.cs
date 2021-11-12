@@ -650,6 +650,12 @@ namespace IdeaVideoAI
             repeatConfig.zoomV1 = (double)nUDZoomV1.Value;
             repeatConfig.zoomV2 = (double)nUDZoomV2.Value;
 
+            //是否抖动
+            repeatConfig.isShakes = cBShakes.Checked;
+            repeatConfig.shakesV1 = (double)nUDShakesV1.Value;
+            repeatConfig.shakesV2 = (double)nUDShakesV2.Value;
+            repeatConfig.shakesLength = (double)nUDShakesLength.Value;
+
 
             //是否添加随机背景音乐
             repeatConfig.isBackAudio = cbBackground.Checked;
@@ -657,7 +663,7 @@ namespace IdeaVideoAI
             //是否添加叠加视频
             repeatConfig.isOverlay = cbOverlay.Checked;
 
-            if (!(repeatConfig.isSetpts || repeatConfig.isContrast || repeatConfig.isSaturation || repeatConfig.isBrightness || repeatConfig.isBackAudio || repeatConfig.isOverlay || repeatConfig.isRotate || repeatConfig.isZoom))
+            if (!(repeatConfig.isSetpts || repeatConfig.isContrast || repeatConfig.isSaturation || repeatConfig.isBrightness || repeatConfig.isBackAudio || repeatConfig.isOverlay || repeatConfig.isRotate || repeatConfig.isZoom || repeatConfig.isShakes))
             {
                 MessageBox.Show("请至少选择一个随机参数");
                 return;
@@ -775,6 +781,12 @@ namespace IdeaVideoAI
             {
                 double zoom = Utils.nextRandomRange((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2);
                 filterComplex += String.Format(";[video]zoompan=z={0}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={1}x{2}[video]", zoom, data.width, data.height);
+            }
+
+            if (repeatConfig.isShakes)
+            {
+                double shakes = Utils.nextRandomRange((double)repeatConfig.shakesV1, (double)repeatConfig.shakesV2,0);
+                filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.0015,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}[video]", shakes, shakes + repeatConfig.shakesLength, data.width, data.height);
             }
 
             if (repeatConfig.isBackAudio)

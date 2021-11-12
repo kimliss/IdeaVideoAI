@@ -51,6 +51,14 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.nUDShakesV2 = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cBShakes = new System.Windows.Forms.CheckBox();
+            this.nUDShakesV1 = new System.Windows.Forms.NumericUpDown();
+            this.nUDZoomV2 = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbZoom = new System.Windows.Forms.CheckBox();
+            this.nUDZoomV1 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.nUDRotateZoom = new System.Windows.Forms.NumericUpDown();
             this.nUDRotateV2 = new System.Windows.Forms.NumericUpDown();
@@ -89,10 +97,8 @@
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.btnRepeat = new System.Windows.Forms.Button();
-            this.nUDZoomV2 = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbZoom = new System.Windows.Forms.CheckBox();
-            this.nUDZoomV1 = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.nUDShakesLength = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -101,6 +107,10 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDRotateZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDRotateV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDRotateV1)).BeginInit();
@@ -114,8 +124,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesLength)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -359,6 +368,12 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.nUDShakesLength);
+            this.tabPage2.Controls.Add(this.nUDShakesV2);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.cBShakes);
+            this.tabPage2.Controls.Add(this.nUDShakesV1);
             this.tabPage2.Controls.Add(this.nUDZoomV2);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.cbZoom);
@@ -409,10 +424,148 @@
             this.tabPage2.Text = "去重";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // nUDShakesV2
+            // 
+            this.nUDShakesV2.Location = new System.Drawing.Point(215, 282);
+            this.nUDShakesV2.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUDShakesV2.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nUDShakesV2.Name = "nUDShakesV2";
+            this.nUDShakesV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDShakesV2.TabIndex = 101;
+            this.nUDShakesV2.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(183, 286);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(15, 15);
+            this.label8.TabIndex = 100;
+            this.label8.Text = "~";
+            // 
+            // cBShakes
+            // 
+            this.cBShakes.AutoSize = true;
+            this.cBShakes.Location = new System.Drawing.Point(15, 284);
+            this.cBShakes.Name = "cBShakes";
+            this.cBShakes.Size = new System.Drawing.Size(52, 19);
+            this.cBShakes.TabIndex = 98;
+            this.cBShakes.Text = "抖动";
+            this.cBShakes.UseVisualStyleBackColor = true;
+            // 
+            // nUDShakesV1
+            // 
+            this.nUDShakesV1.Location = new System.Drawing.Point(113, 282);
+            this.nUDShakesV1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUDShakesV1.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nUDShakesV1.Name = "nUDShakesV1";
+            this.nUDShakesV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDShakesV1.TabIndex = 99;
+            this.nUDShakesV1.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // nUDZoomV2
+            // 
+            this.nUDZoomV2.DecimalPlaces = 1;
+            this.nUDZoomV2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nUDZoomV2.Location = new System.Drawing.Point(215, 234);
+            this.nUDZoomV2.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUDZoomV2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDZoomV2.Name = "nUDZoomV2";
+            this.nUDZoomV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDZoomV2.TabIndex = 97;
+            this.nUDZoomV2.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            65536});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(183, 238);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(15, 15);
+            this.label7.TabIndex = 96;
+            this.label7.Text = "~";
+            // 
+            // cbZoom
+            // 
+            this.cbZoom.AutoSize = true;
+            this.cbZoom.Location = new System.Drawing.Point(15, 236);
+            this.cbZoom.Name = "cbZoom";
+            this.cbZoom.Size = new System.Drawing.Size(66, 19);
+            this.cbZoom.TabIndex = 94;
+            this.cbZoom.Text = "拉伸(1)";
+            this.cbZoom.UseVisualStyleBackColor = true;
+            // 
+            // nUDZoomV1
+            // 
+            this.nUDZoomV1.DecimalPlaces = 1;
+            this.nUDZoomV1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nUDZoomV1.Location = new System.Drawing.Point(113, 234);
+            this.nUDZoomV1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUDZoomV1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDZoomV1.Name = "nUDZoomV1";
+            this.nUDZoomV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDZoomV1.TabIndex = 95;
+            this.nUDZoomV1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(307, 287);
+            this.label2.Location = new System.Drawing.Point(307, 332);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 15);
             this.label2.TabIndex = 93;
@@ -426,7 +579,7 @@
             0,
             0,
             65536});
-            this.nUDRotateZoom.Location = new System.Drawing.Point(372, 284);
+            this.nUDRotateZoom.Location = new System.Drawing.Point(372, 329);
             this.nUDRotateZoom.Maximum = new decimal(new int[] {
             10,
             0,
@@ -448,7 +601,7 @@
             // 
             // nUDRotateV2
             // 
-            this.nUDRotateV2.Location = new System.Drawing.Point(215, 284);
+            this.nUDRotateV2.Location = new System.Drawing.Point(215, 329);
             this.nUDRotateV2.Maximum = new decimal(new int[] {
             2,
             0,
@@ -466,7 +619,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(183, 288);
+            this.label1.Location = new System.Drawing.Point(183, 333);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(15, 15);
             this.label1.TabIndex = 90;
@@ -475,7 +628,7 @@
             // cbRotate
             // 
             this.cbRotate.AutoSize = true;
-            this.cbRotate.Location = new System.Drawing.Point(15, 286);
+            this.cbRotate.Location = new System.Drawing.Point(15, 331);
             this.cbRotate.Name = "cbRotate";
             this.cbRotate.Size = new System.Drawing.Size(66, 19);
             this.cbRotate.TabIndex = 88;
@@ -484,7 +637,7 @@
             // 
             // nUDRotateV1
             // 
-            this.nUDRotateV1.Location = new System.Drawing.Point(113, 284);
+            this.nUDRotateV1.Location = new System.Drawing.Point(113, 329);
             this.nUDRotateV1.Maximum = new decimal(new int[] {
             0,
             0,
@@ -507,7 +660,7 @@
             // lbOverCount
             // 
             this.lbOverCount.AutoSize = true;
-            this.lbOverCount.Location = new System.Drawing.Point(217, 386);
+            this.lbOverCount.Location = new System.Drawing.Point(217, 431);
             this.lbOverCount.Name = "lbOverCount";
             this.lbOverCount.Size = new System.Drawing.Size(111, 15);
             this.lbOverCount.TabIndex = 87;
@@ -516,7 +669,7 @@
             // lbBackCount
             // 
             this.lbBackCount.AutoSize = true;
-            this.lbBackCount.Location = new System.Drawing.Point(217, 338);
+            this.lbBackCount.Location = new System.Drawing.Point(217, 383);
             this.lbBackCount.Name = "lbBackCount";
             this.lbBackCount.Size = new System.Drawing.Size(98, 15);
             this.lbBackCount.TabIndex = 86;
@@ -607,7 +760,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(111, 382);
+            this.button9.Location = new System.Drawing.Point(111, 427);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 78;
@@ -618,7 +771,7 @@
             // cbOverlay
             // 
             this.cbOverlay.AutoSize = true;
-            this.cbOverlay.Location = new System.Drawing.Point(15, 384);
+            this.cbOverlay.Location = new System.Drawing.Point(15, 429);
             this.cbOverlay.Name = "cbOverlay";
             this.cbOverlay.Size = new System.Drawing.Size(78, 19);
             this.cbOverlay.TabIndex = 77;
@@ -628,7 +781,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(15, 439);
+            this.label23.Location = new System.Drawing.Point(15, 484);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(59, 15);
             this.label23.TabIndex = 76;
@@ -645,7 +798,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(111, 493);
+            this.button8.Location = new System.Drawing.Point(111, 538);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 68;
@@ -656,7 +809,7 @@
             // 
             this.checkBox10.AutoSize = true;
             this.checkBox10.Enabled = false;
-            this.checkBox10.Location = new System.Drawing.Point(15, 495);
+            this.checkBox10.Location = new System.Drawing.Point(15, 540);
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(52, 19);
             this.checkBox10.TabIndex = 67;
@@ -665,7 +818,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(111, 334);
+            this.button7.Location = new System.Drawing.Point(111, 379);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 66;
@@ -676,7 +829,7 @@
             // cbBackground
             // 
             this.cbBackground.AutoSize = true;
-            this.cbBackground.Location = new System.Drawing.Point(15, 336);
+            this.cbBackground.Location = new System.Drawing.Point(15, 381);
             this.cbBackground.Name = "cbBackground";
             this.cbBackground.Size = new System.Drawing.Size(78, 19);
             this.cbBackground.TabIndex = 61;
@@ -896,7 +1049,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(346, 497);
+            this.label9.Location = new System.Drawing.Point(346, 542);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 15);
             this.label9.TabIndex = 17;
@@ -904,7 +1057,7 @@
             // 
             // numericUpDown5
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(417, 493);
+            this.numericUpDown5.Location = new System.Drawing.Point(417, 538);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(53, 23);
             this.numericUpDown5.TabIndex = 18;
@@ -916,7 +1069,7 @@
             // 
             // numericUpDown6
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(281, 493);
+            this.numericUpDown6.Location = new System.Drawing.Point(281, 538);
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(53, 23);
             this.numericUpDown6.TabIndex = 16;
@@ -929,7 +1082,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(210, 497);
+            this.label10.Location = new System.Drawing.Point(210, 542);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 15);
             this.label10.TabIndex = 15;
@@ -945,76 +1098,32 @@
             this.btnRepeat.UseVisualStyleBackColor = true;
             this.btnRepeat.Click += new System.EventHandler(this.button6_Click);
             // 
-            // nUDZoomV2
+            // label11
             // 
-            this.nUDZoomV2.DecimalPlaces = 1;
-            this.nUDZoomV2.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nUDZoomV2.Location = new System.Drawing.Point(215, 234);
-            this.nUDZoomV2.Maximum = new decimal(new int[] {
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(307, 285);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 15);
+            this.label11.TabIndex = 103;
+            this.label11.Text = "长度";
+            // 
+            // nUDShakesLength
+            // 
+            this.nUDShakesLength.Location = new System.Drawing.Point(372, 282);
+            this.nUDShakesLength.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.nUDZoomV2.Minimum = new decimal(new int[] {
+            this.nUDShakesLength.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.nUDZoomV2.Name = "nUDZoomV2";
-            this.nUDZoomV2.Size = new System.Drawing.Size(73, 23);
-            this.nUDZoomV2.TabIndex = 97;
-            this.nUDZoomV2.Value = new decimal(new int[] {
-            15,
-            0,
-            0,
-            65536});
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(183, 238);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(15, 15);
-            this.label7.TabIndex = 96;
-            this.label7.Text = "~";
-            // 
-            // cbZoom
-            // 
-            this.cbZoom.AutoSize = true;
-            this.cbZoom.Location = new System.Drawing.Point(15, 236);
-            this.cbZoom.Name = "cbZoom";
-            this.cbZoom.Size = new System.Drawing.Size(66, 19);
-            this.cbZoom.TabIndex = 94;
-            this.cbZoom.Text = "拉伸(1)";
-            this.cbZoom.UseVisualStyleBackColor = true;
-            // 
-            // nUDZoomV1
-            // 
-            this.nUDZoomV1.DecimalPlaces = 1;
-            this.nUDZoomV1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nUDZoomV1.Location = new System.Drawing.Point(113, 234);
-            this.nUDZoomV1.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.nUDZoomV1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nUDZoomV1.Name = "nUDZoomV1";
-            this.nUDZoomV1.Size = new System.Drawing.Size(64, 23);
-            this.nUDZoomV1.TabIndex = 95;
-            this.nUDZoomV1.Value = new decimal(new int[] {
+            this.nUDShakesLength.Name = "nUDShakesLength";
+            this.nUDShakesLength.Size = new System.Drawing.Size(73, 23);
+            this.nUDShakesLength.TabIndex = 102;
+            this.nUDShakesLength.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -1043,6 +1152,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDRotateZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDRotateV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDRotateV1)).EndInit();
@@ -1056,8 +1169,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1130,5 +1242,11 @@
         private Label label7;
         private CheckBox cbZoom;
         private NumericUpDown nUDZoomV1;
+        private NumericUpDown nUDShakesV2;
+        private Label label8;
+        private CheckBox cBShakes;
+        private NumericUpDown nUDShakesV1;
+        private Label label11;
+        private NumericUpDown nUDShakesLength;
     }
 }

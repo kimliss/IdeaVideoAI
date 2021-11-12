@@ -61,6 +61,16 @@ namespace IdeaVideoAI
         public double rotateZoomV;
 
 
+        //是否抖动
+        public bool isShakes = false;
+
+        public double shakesV1;
+
+        public double shakesV2;
+
+        public double shakesLength;
+
+
         //是否添加背景音乐
         public bool isBackAudio = true;
 
