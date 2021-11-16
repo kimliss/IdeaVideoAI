@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 using Xabe.FFmpeg;
+using Xabe.FFmpeg.Downloader;
 
 namespace IdeaVideoAI
 {
@@ -9,11 +10,9 @@ namespace IdeaVideoAI
     public partial class Form1 : Form
     {
 
-        string ffmpegCmd = "ffmpeg";
-
         int curVideoIndex = -1;
 
-        string[] statusDesc = new string[7] { "读取中", "待标注", "已标注", "已处理", "待去重", "已去重","去重失败" };
+        //string[] statusDesc = new string[7] { "读取中", "待标注", "已标注", "已处理", "待去重", "已去重","去重失败" };
 
 
         RepeatConfig repeatConfig = new RepeatConfig();
@@ -35,10 +34,6 @@ namespace IdeaVideoAI
         public Form1()
         {
             InitializeComponent();
-
-            string ffmpegPath = Path.Join(Environment.CurrentDirectory, "ffmpeg.exe");
-            if (File.Exists(ffmpegPath)) ffmpegCmd = ffmpegPath;
-
 
             backgroundWorkerCover = new System.ComponentModel.BackgroundWorker();
             backgroundWorkerCover.WorkerReportsProgress = true;
@@ -62,9 +57,16 @@ namespace IdeaVideoAI
             {
                 WatermarkVideoItem videoData = waterMarkDatas[i];
 
-                Utils.execCmd(videoData.coverCmd);
+                bool result = Utils.ffmpeg(videoData.coverCmd);
+                if (result)
+                {
+                    videoData.status = VideoStatus.WatermarkDoCoverSuccess;
+                }
+                else
+                {
+                    videoData.status = VideoStatus.WatermarkDoCoverError;
+                }
 
-                videoData.status = statusDesc[1];
 
                 backgroundWorkerCover.ReportProgress((int)((i + 1.0) / waterMarkDatas.Count() * 100), i);
             }
@@ -92,9 +94,16 @@ namespace IdeaVideoAI
             {
                 WatermarkVideoItem videoData = waterMarkDatas[i];
 
-                Utils.execCmd(getClearCmd(videoData));
+                bool result = Utils.ffmpeg(getClearCmd(videoData));
+                if (result)
+                {
+                    videoData.status = VideoStatus.WatermarkDoSuccess;
+                }
+                else
+                {
+                    videoData.status = VideoStatus.WatermarkDoError;
+                }
 
-                videoData.status = statusDesc[3];
 
                 backgroundWorkerWaterMark.ReportProgress((int)((i + 1.0) / waterMarkDatas.Count() * 100), i);
             }
@@ -110,7 +119,7 @@ namespace IdeaVideoAI
 
             if (index + 1 == waterMarkDatas.Count())
             {
-                button2.Enabled = true;
+                btnRemoveWatermark.Enabled = true;
             }
         }
 
@@ -121,7 +130,15 @@ namespace IdeaVideoAI
             {
                 RepeatVideoItem videoData = repeatDatas[i];
 
-                Utils.execCmd(videoData.repeatCmd);
+                bool result = Utils.ffmpeg(videoData.repeatCmd);
+                if (result)
+                {
+                    videoData.status = VideoStatus.RepeatDoSuccess;
+                }
+                else
+                {
+                    videoData.status = VideoStatus.RepeatDoError;
+                }
 
                 backgroundWorkerRepeat.ReportProgress((int)((i + 1.0) / repeatDatas.Count() * 100), i);
             }
@@ -139,7 +156,11 @@ namespace IdeaVideoAI
             }
         }
 
-
+        /// <summary>
+        /// 获取图片大小
+        /// </summary>
+        /// <param name="p_PictureBox"></param>
+        /// <returns></returns>
         public Rectangle GetPictureBoxZoomSize(PictureBox p_PictureBox)
         {
             if (p_PictureBox != null)
@@ -148,6 +169,124 @@ namespace IdeaVideoAI
                 return (Rectangle)_ImageRectanglePropert.GetValue(p_PictureBox, null);
             }
             return new Rectangle(0, 0, 0, 0);
+        }
+
+        /// <summary>
+        /// 加载文件列表
+        /// </summary>
+        private void loadListView()
+        {
+
+            bool isWaterMark = tabControl1.SelectedIndex == 0;
+            List<VideoItem> tempDatas = new List<VideoItem>();
+
+            if (isWaterMark)
+            {
+                waterMarkDatas.ForEach(data => tempDatas.Add(data));
+            }
+            else
+            {
+                repeatDatas.ForEach(data => tempDatas.Add(data));
+            }
+
+            listView1.BeginUpdate();
+            listView1.Items.Clear();
+
+            for (int i = 0; i < tempDatas.Count; i++)
+            {
+
+                VideoItem data = tempDatas[i];
+
+                ListViewItem listViewItem = new ListViewItem();
+
+                listViewItem.Text = i + 1 + "-" + data.fileName;
+                listViewItem.SubItems.Add(Utils.getVideoStatus(data.status));
+
+                listView1.Items.Add(listViewItem);
+            }
+
+            listView1.EndUpdate();
+        }
+
+        /// <summary>
+        /// 更新单个文件列表项
+        /// </summary>
+        /// <param name="index"></param>
+        private void updateItemInListView(int index)
+        {
+            if (index < 0) return;
+
+            bool isWaterMark = tabControl1.SelectedIndex == 0;
+
+            VideoItem videoData;
+
+            if (isWaterMark)
+            {
+                videoData = waterMarkDatas[index];
+            }
+            else
+            {
+                videoData = repeatDatas[index];
+            }
+
+            ListViewItem listViewItem = listView1.Items[index];
+            listViewItem.SubItems.Clear();
+            listViewItem.Text = index + 1 + "-" + videoData.fileName;
+            listViewItem.SubItems.Add(Utils.getVideoStatus(videoData.status));
+
+        }
+
+        /// <summary>
+        /// 更新去水印 - 图片标注信息
+        /// </summary>
+        /// <param name="index"></param>
+        private void updateWaterMarkDetail(int index)
+        {
+            bool isWaterMark = tabControl1.SelectedIndex == 0;
+            if (!isWaterMark || index < 0) return;
+
+            WatermarkVideoItem videoData = waterMarkDatas[index];
+
+            dicPoints = videoData.docPoints;
+
+            try
+            {
+                Image dummy = Image.FromFile(Path.Join(videoData.tempCoverDir, videoData.coverName));
+
+                pictureBox1.Image = dummy;
+                pictureBox1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            string clearCmd = " ";
+            videoData.waterMarkDatas.ForEach(x =>
+            {
+                clearCmd += String.Format("delogo=x={0}:y={1}:w={2}:h={3}:show=0,", x.X,
+                x.Y, x.W, x.H);
+            });
+            clearCmd = clearCmd.Remove(clearCmd.Length - 1);
+            textBox1.Text = clearCmd;
+        }
+
+        /// <summary>
+        /// 获取去水印指令
+        /// </summary>
+        /// <param name="videoData"></param>
+        /// <returns></returns>
+        private string getClearCmd(WatermarkVideoItem videoData)
+        {
+            string clearCmd = String.Format(" -y -i \"{0}\" -vf \"", videoData.filePath);
+            videoData.waterMarkDatas.ForEach(x =>
+            {
+                clearCmd += String.Format("delogo=x={0}:y={1}:w={2}:h={3}:show=0,", x.X,
+                x.Y, x.W, x.H);
+            });
+            clearCmd = clearCmd.Remove(clearCmd.Length - 1);
+            clearCmd += String.Format("\" \"{0}\"", Path.Join(videoData.tempClearWaterMarkDir, videoData.fileName));
+            return clearCmd;
         }
 
         private void openVideoFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -234,8 +373,8 @@ namespace IdeaVideoAI
                         videoData.tempClearWaterMarkDir = clearWaterMarkPath;
 
                         videoData.coverName = i + 1 + ".jpg";
-                        videoData.coverCmd = String.Format("{0} -ss 00:00:05 -y -i \"{1}\" -vframes 1 \"{2}\"", ffmpegCmd, videoData.filePath, Path.Join(videoCoverPath, videoData.coverName));
-                        videoData.status = statusDesc[0];
+                        videoData.coverCmd = String.Format(" -y -ss 00:00:05 -i \"{0}\" -vframes 1 \"{1}\"", videoData.filePath, Path.Join(videoCoverPath, videoData.coverName));
+                        videoData.status = VideoStatus.WatermarkLoad;
 
                         waterMarkDatas.Add(videoData);
                     }
@@ -245,7 +384,7 @@ namespace IdeaVideoAI
 
                         videoData.filePath = files[i];
                         videoData.fileName = Path.GetFileName(videoData.filePath);
-                        videoData.status = statusDesc[4];
+                        videoData.status = VideoStatus.RepeatLoad;
 
                         videoData.tempRepeatDir = videoRepeatPath;
 
@@ -259,94 +398,6 @@ namespace IdeaVideoAI
             }
         }
 
-        private void loadListView()
-        {
-
-            bool isWaterMark = tabControl1.SelectedIndex == 0;
-            List<VideoItem> tempDatas = new List<VideoItem>();
-
-            if (isWaterMark)
-            {
-                waterMarkDatas.ForEach(data => tempDatas.Add(data));
-            }
-            else
-            {
-                repeatDatas.ForEach(data => tempDatas.Add(data));
-            }
-
-            listView1.BeginUpdate();
-            listView1.Items.Clear();
-
-            for (int i = 0; i < tempDatas.Count; i++)
-            {
-
-                VideoItem data = tempDatas[i];
-
-                ListViewItem listViewItem = new ListViewItem();
-
-                listViewItem.Text = i + 1 + "-" + data.fileName;
-                listViewItem.SubItems.Add(data.status);
-
-                listView1.Items.Add(listViewItem);
-            }
-
-            listView1.EndUpdate();
-        }
-
-        private void updateItemInListView(int index)
-        {
-            if (index < 0) return;
-
-            bool isWaterMark = tabControl1.SelectedIndex == 0;
-
-            VideoItem videoData;
-
-            if (isWaterMark)
-            {
-                videoData = waterMarkDatas[index];
-            }
-            else
-            {
-                videoData = repeatDatas[index];
-            }
-
-            ListViewItem listViewItem = listView1.Items[index];
-            listViewItem.SubItems.Clear();
-            listViewItem.Text = index + 1 + "-" + videoData.fileName;
-            listViewItem.SubItems.Add(videoData.status);
-
-        }
-
-        private void updateWaterMarkDetail(int index)
-        {
-            bool isWaterMark = tabControl1.SelectedIndex == 0;
-            if (!isWaterMark || index < 0) return;
-
-            WatermarkVideoItem videoData = waterMarkDatas[index];
-
-            dicPoints = videoData.docPoints;
-
-            try
-            {
-                Image dummy = Image.FromFile(Path.Join(videoData.tempCoverDir, videoData.coverName));
-
-                pictureBox1.Image = dummy;
-                pictureBox1.Refresh();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            string clearCmd = " ";
-            videoData.waterMarkDatas.ForEach(x =>
-            {
-                clearCmd += String.Format("delogo=x={0}:y={1}:w={2}:h={3}:show=0,", x.X,
-                x.Y, x.W, x.H);
-            });
-            clearCmd = clearCmd.Remove(clearCmd.Length - 1);
-            textBox1.Text = clearCmd;
-        }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -416,7 +467,7 @@ namespace IdeaVideoAI
 
                     WatermarkVideoItem curVideoData = waterMarkDatas[curVideoIndex];
 
-                    curVideoData.status = statusDesc[2];
+                    curVideoData.status = VideoStatus.WatermarkDoMark;
                     curVideoData.docPoints.Remove(pointStart);
                     curVideoData.docPoints.Add(pointStart, pointContinue);
                     curVideoData.waterMarkDatas.Add(water);
@@ -432,37 +483,7 @@ namespace IdeaVideoAI
             bDrawStart = false;
         }
 
-        private string getClearCmd(WatermarkVideoItem videoData)
-        {
-            string clearCmd = String.Format("{0} -y -i \"{1}\" -vf \"", ffmpegCmd, videoData.filePath);
-            videoData.waterMarkDatas.ForEach(x =>
-            {
-                clearCmd += String.Format("delogo=x={0}:y={1}:w={2}:h={3}:show=0,", x.X,
-                x.Y, x.W, x.H);
-            });
-            clearCmd = clearCmd.Remove(clearCmd.Length - 1);
-            clearCmd += String.Format("\" \"{0}\"", Path.Join(videoData.tempClearWaterMarkDir, videoData.fileName));
-            return clearCmd;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            WatermarkVideoItem curVideoData = waterMarkDatas[curVideoIndex];
-
-            if (curVideoData.waterMarkDatas.Count() <= 0)
-            {
-                MessageBox.Show("请先标注水印，再操作");
-                return;
-            }
-
-            Utils.execCmd(getClearCmd(curVideoData), true);
-
-            curVideoData.status = statusDesc[2];
-
-            updateItemInListView(curVideoIndex);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void btnRemoveWatermark_Click(object sender, EventArgs e)
         {
             int markCount = 0;
             List<String> unMarks = new List<String>();
@@ -488,14 +509,14 @@ namespace IdeaVideoAI
                 result = MessageBox.Show(this, message, caption, buttons, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    button2.Enabled = false;
+                    btnRemoveWatermark.Enabled = false;
                     this.backgroundWorkerWaterMark.RunWorkerAsync();
                 }
 
                 return;
             }
 
-            button2.Enabled = false;
+            btnRemoveWatermark.Enabled = false;
             this.backgroundWorkerWaterMark.RunWorkerAsync();
         }
 
@@ -532,7 +553,7 @@ namespace IdeaVideoAI
                     {
                         next.docPoints = new Dictionary<Point, Point>(cur.docPoints);
                         next.waterMarkDatas = new List<WaterMarkConfig>(cur.waterMarkDatas);
-                        next.status = statusDesc[2];
+                        next.status = VideoStatus.WatermarkDoMark;
                         updateItemInListView(curVideoIndex + 1);
                     }
                 }
@@ -555,7 +576,7 @@ namespace IdeaVideoAI
 
                 if (curVideoData.waterMarkDatas.Count <= 0)
                 {
-                    curVideoData.status = statusDesc[1];
+                    curVideoData.status = VideoStatus.WatermarkDoCoverSuccess;
                 }
             }
 
@@ -704,8 +725,8 @@ namespace IdeaVideoAI
         /// <param name="repeatConfig"></param>
         public void updateRepeatCmd(RepeatVideoItem data, RepeatConfig repeatConfig)
         {
-            //0:ffmpeg 1: input 2: filterComplex 3: output
-            string cmdFormat = "{0} -y {1} -filter_complex \"{2}\"  -map [audio] -map [video] \"{3}\"";
+            //0: input 1: filterComplex 2: output
+            string cmdFormat = " -y {0} -filter_complex \"{1}\"  -map [audio] -map [video] \"{2}\"";
 
             List<String> inputCmds = new List<string>();
             Dictionary<String, int> ssCmds = new Dictionary<String, int>();
@@ -805,7 +826,7 @@ namespace IdeaVideoAI
                 }
             });
 
-            string cmd = String.Format(cmdFormat, ffmpegCmd, inputCMD, filterComplex, Path.Join(data.tempRepeatDir, data.fileName));
+            string cmd = String.Format(cmdFormat, inputCMD, filterComplex, Path.Join(data.tempRepeatDir, data.fileName));
             data.repeatCmd = cmd;
 
             if (String.IsNullOrEmpty(tbRepeatLog.Text))
@@ -846,6 +867,12 @@ namespace IdeaVideoAI
                 repeatConfig.overlayVideoFiles.AddRange(fd.FileNames);
                 lbOverCount.Text = "" + fd.FileNames.Count();
             }
+        }
+
+        private async void 安装FfmpegToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official);
+            MessageBox.Show("安装成功");
         }
     }
 

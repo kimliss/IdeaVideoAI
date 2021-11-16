@@ -4,11 +4,39 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xabe.FFmpeg;
 
 namespace IdeaVideoAI
 {
     public static class Utils
     {
+
+        public static string getVideoStatus(VideoStatus videoStatus)
+        {
+            switch (videoStatus)
+            {
+                case VideoStatus.WatermarkLoad:
+                    return "待读取封面";
+                case VideoStatus.WatermarkDoCoverSuccess:
+                    return "已读取封面";
+                case VideoStatus.WatermarkDoCoverError:
+                    return "读取封面失败";
+                case VideoStatus.WatermarkDoMark:
+                    return "已标注";
+                case VideoStatus.WatermarkDoSuccess:
+                    return "去水印成功";
+                case VideoStatus.WatermarkDoError:
+                    return "去水印失败";
+                case VideoStatus.RepeatLoad:
+                    return "待去重";
+                case VideoStatus.RepeatDoSuccess:
+                    return "去重成功";
+                case VideoStatus.RepeatDoError:
+                    return "去重失败";
+
+            }
+            return "";
+        }
 
         public static int nextRandomRange(int minimum, int maximum)
         {
@@ -79,26 +107,19 @@ namespace IdeaVideoAI
             return nextRandomRangeAndExcluding(minimum, maximum, 1, excluding);
         }
 
-        public static void execCmd(string cmd, bool isShow)
+        public static bool ffmpeg(string arguments)
         {
-            var startInfo = new ProcessStartInfo
+            try
             {
-                WindowStyle = isShow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden,
-                FileName = "cmd.exe",
-                Arguments = "/C" + cmd,
-                UseShellExecute = true
-            };
-            var process = new Process
+                IConversionResult conversionResult = FFmpeg.Conversions.New()
+                    .Start(arguments).GetAwaiter().GetResult();
+                return true;
+            }
+            catch (Exception ex)
             {
-                StartInfo = startInfo
-            };
-            process.Start();
-            process.WaitForExit();
-        }
-
-        public static void execCmd(string cmd)
-        {
-            execCmd(cmd, false);
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
     }

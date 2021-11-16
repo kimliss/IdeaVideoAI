@@ -13,11 +13,17 @@ namespace IdeaVideoAI
 
         public string fileName;
 
-        public string status;
+        public VideoStatus status;
 
         public int width;
 
         public int height;
 
+    }
+
+    public enum VideoStatus
+    {
+        WatermarkLoad,WatermarkDoCoverSuccess,WatermarkDoCoverError,WatermarkDoMark,WatermarkDoSuccess,WatermarkDoError,
+        RepeatLoad,RepeatDoSuccess,RepeatDoError
     }
 }
