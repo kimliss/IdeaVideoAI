@@ -51,6 +51,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.nUDShakesLength = new System.Windows.Forms.NumericUpDown();
             this.nUDShakesV2 = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.cBShakes = new System.Windows.Forms.CheckBox();
@@ -97,8 +99,6 @@
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.btnRepeat = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.nUDShakesLength = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -107,6 +107,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV2)).BeginInit();
@@ -124,7 +125,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesLength)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -423,6 +423,37 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "去重";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(307, 285);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 15);
+            this.label11.TabIndex = 103;
+            this.label11.Text = "长度";
+            // 
+            // nUDShakesLength
+            // 
+            this.nUDShakesLength.Location = new System.Drawing.Point(372, 282);
+            this.nUDShakesLength.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUDShakesLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDShakesLength.Name = "nUDShakesLength";
+            this.nUDShakesLength.Size = new System.Drawing.Size(73, 23);
+            this.nUDShakesLength.TabIndex = 102;
+            this.nUDShakesLength.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // nUDShakesV2
             // 
@@ -1098,37 +1129,6 @@
             this.btnRepeat.UseVisualStyleBackColor = true;
             this.btnRepeat.Click += new System.EventHandler(this.button6_Click);
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(307, 285);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 15);
-            this.label11.TabIndex = 103;
-            this.label11.Text = "长度";
-            // 
-            // nUDShakesLength
-            // 
-            this.nUDShakesLength.Location = new System.Drawing.Point(372, 282);
-            this.nUDShakesLength.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.nUDShakesLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nUDShakesLength.Name = "nUDShakesLength";
-            this.nUDShakesLength.Size = new System.Drawing.Size(73, 23);
-            this.nUDShakesLength.TabIndex = 102;
-            this.nUDShakesLength.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1152,6 +1152,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDZoomV2)).EndInit();
@@ -1169,7 +1170,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDShakesLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -10,6 +10,14 @@ namespace IdeaVideoAI
     public static class Utils
     {
 
+        public static int nextRandomRange(int minimum, int maximum)
+        {
+            Random rand = new Random();
+            int value = rand.Next(minimum,maximum);
+
+            return value;
+        }
+
         /// <summary>
         /// 获取随机数
         /// </summary>
@@ -24,6 +32,7 @@ namespace IdeaVideoAI
 
             return Math.Round(value, len);
         }
+
         /// <summary>
         /// 获取随机数 (默认取 1 位小数)
         /// </summary>
