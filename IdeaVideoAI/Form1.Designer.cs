@@ -76,10 +76,7 @@
             this.nUDSetptsV1 = new System.Windows.Forms.NumericUpDown();
             this.button9 = new System.Windows.Forms.Button();
             this.cbOverlay = new System.Windows.Forms.CheckBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.button7 = new System.Windows.Forms.Button();
             this.cbBackground = new System.Windows.Forms.CheckBox();
             this.nUDBrightnessV2 = new System.Windows.Forms.NumericUpDown();
@@ -94,10 +91,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbContrast = new System.Windows.Forms.CheckBox();
             this.nUDContrastV1 = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
             this.btnRepeat = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -123,8 +116,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDSaturationV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -393,10 +384,7 @@
             this.tabPage2.Controls.Add(this.nUDSetptsV1);
             this.tabPage2.Controls.Add(this.button9);
             this.tabPage2.Controls.Add(this.cbOverlay);
-            this.tabPage2.Controls.Add(this.label23);
             this.tabPage2.Controls.Add(this.label22);
-            this.tabPage2.Controls.Add(this.button8);
-            this.tabPage2.Controls.Add(this.checkBox10);
             this.tabPage2.Controls.Add(this.button7);
             this.tabPage2.Controls.Add(this.cbBackground);
             this.tabPage2.Controls.Add(this.nUDBrightnessV2);
@@ -411,10 +399,6 @@
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.cbContrast);
             this.tabPage2.Controls.Add(this.nUDContrastV1);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.numericUpDown5);
-            this.tabPage2.Controls.Add(this.numericUpDown6);
-            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.btnRepeat);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
@@ -450,7 +434,7 @@
             this.nUDShakesLength.Size = new System.Drawing.Size(73, 23);
             this.nUDShakesLength.TabIndex = 102;
             this.nUDShakesLength.Value = new decimal(new int[] {
-            2,
+            5,
             0,
             0,
             0});
@@ -491,9 +475,9 @@
             this.cBShakes.AutoSize = true;
             this.cBShakes.Location = new System.Drawing.Point(15, 284);
             this.cBShakes.Name = "cBShakes";
-            this.cBShakes.Size = new System.Drawing.Size(52, 19);
+            this.cBShakes.Size = new System.Drawing.Size(65, 19);
             this.cBShakes.TabIndex = 98;
-            this.cBShakes.Text = "抖动";
+            this.cBShakes.Text = "抖动(s)";
             this.cBShakes.UseVisualStyleBackColor = true;
             // 
             // nUDShakesV1
@@ -520,12 +504,12 @@
             // 
             // nUDZoomV2
             // 
-            this.nUDZoomV2.DecimalPlaces = 1;
+            this.nUDZoomV2.DecimalPlaces = 2;
             this.nUDZoomV2.Increment = new decimal(new int[] {
             1,
             0,
             0,
-            65536});
+            131072});
             this.nUDZoomV2.Location = new System.Drawing.Point(215, 234);
             this.nUDZoomV2.Maximum = new decimal(new int[] {
             10,
@@ -541,7 +525,7 @@
             this.nUDZoomV2.Size = new System.Drawing.Size(73, 23);
             this.nUDZoomV2.TabIndex = 97;
             this.nUDZoomV2.Value = new decimal(new int[] {
-            15,
+            12,
             0,
             0,
             65536});
@@ -567,12 +551,12 @@
             // 
             // nUDZoomV1
             // 
-            this.nUDZoomV1.DecimalPlaces = 1;
+            this.nUDZoomV1.DecimalPlaces = 2;
             this.nUDZoomV1.Increment = new decimal(new int[] {
             1,
             0,
             0,
-            65536});
+            131072});
             this.nUDZoomV1.Location = new System.Drawing.Point(113, 234);
             this.nUDZoomV1.Maximum = new decimal(new int[] {
             10,
@@ -588,10 +572,10 @@
             this.nUDZoomV1.Size = new System.Drawing.Size(64, 23);
             this.nUDZoomV1.TabIndex = 95;
             this.nUDZoomV1.Value = new decimal(new int[] {
-            1,
+            101,
             0,
             0,
-            0});
+            131072});
             // 
             // label2
             // 
@@ -604,12 +588,12 @@
             // 
             // nUDRotateZoom
             // 
-            this.nUDRotateZoom.DecimalPlaces = 1;
+            this.nUDRotateZoom.DecimalPlaces = 2;
             this.nUDRotateZoom.Increment = new decimal(new int[] {
             1,
             0,
             0,
-            65536});
+            131072});
             this.nUDRotateZoom.Location = new System.Drawing.Point(372, 329);
             this.nUDRotateZoom.Maximum = new decimal(new int[] {
             10,
@@ -632,6 +616,12 @@
             // 
             // nUDRotateV2
             // 
+            this.nUDRotateV2.DecimalPlaces = 2;
+            this.nUDRotateV2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.nUDRotateV2.Location = new System.Drawing.Point(215, 329);
             this.nUDRotateV2.Maximum = new decimal(new int[] {
             2,
@@ -668,6 +658,12 @@
             // 
             // nUDRotateV1
             // 
+            this.nUDRotateV1.DecimalPlaces = 2;
+            this.nUDRotateV1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.nUDRotateV1.Location = new System.Drawing.Point(113, 329);
             this.nUDRotateV1.Maximum = new decimal(new int[] {
             0,
@@ -711,6 +707,7 @@
             this.tbRepeatLog.Location = new System.Drawing.Point(587, 6);
             this.tbRepeatLog.Multiline = true;
             this.tbRepeatLog.Name = "tbRepeatLog";
+            this.tbRepeatLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbRepeatLog.Size = new System.Drawing.Size(311, 740);
             this.tbRepeatLog.TabIndex = 85;
             // 
@@ -729,15 +726,15 @@
             0,
             0});
             this.nUDSetptsV2.Minimum = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
-            0});
+            65536});
             this.nUDSetptsV2.Name = "nUDSetptsV2";
             this.nUDSetptsV2.Size = new System.Drawing.Size(73, 23);
             this.nUDSetptsV2.TabIndex = 83;
             this.nUDSetptsV2.Value = new decimal(new int[] {
-            110,
+            99,
             0,
             0,
             131072});
@@ -771,7 +768,7 @@
             131072});
             this.nUDSetptsV1.Location = new System.Drawing.Point(113, 52);
             this.nUDSetptsV1.Maximum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -809,15 +806,6 @@
             this.cbOverlay.Text = "叠加视频";
             this.cbOverlay.UseVisualStyleBackColor = true;
             // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(15, 484);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(59, 15);
-            this.label23.TabIndex = 76;
-            this.label23.Text = "局部随机";
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -826,26 +814,6 @@
             this.label22.Size = new System.Drawing.Size(59, 15);
             this.label22.TabIndex = 75;
             this.label22.Text = "全局随机";
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(111, 538);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 68;
-            this.button8.Text = "片段目录";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox10
-            // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Enabled = false;
-            this.checkBox10.Location = new System.Drawing.Point(15, 540);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(52, 19);
-            this.checkBox10.TabIndex = 67;
-            this.checkBox10.Text = "插播";
-            this.checkBox10.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
@@ -881,11 +849,16 @@
             0,
             0,
             0});
+            this.nUDBrightnessV2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.nUDBrightnessV2.Name = "nUDBrightnessV2";
             this.nUDBrightnessV2.Size = new System.Drawing.Size(73, 23);
             this.nUDBrightnessV2.TabIndex = 55;
             this.nUDBrightnessV2.Value = new decimal(new int[] {
-            10,
+            15,
             0,
             0,
             131072});
@@ -919,7 +892,7 @@
             131072});
             this.nUDBrightnessV1.Location = new System.Drawing.Point(113, 182);
             this.nUDBrightnessV1.Maximum = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -931,6 +904,11 @@
             this.nUDBrightnessV1.Name = "nUDBrightnessV1";
             this.nUDBrightnessV1.Size = new System.Drawing.Size(64, 23);
             this.nUDBrightnessV1.TabIndex = 53;
+            this.nUDBrightnessV1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             // 
             // nUDSaturationV2
             // 
@@ -946,19 +924,14 @@
             0,
             0,
             0});
-            this.nUDSaturationV2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nUDSaturationV2.Name = "nUDSaturationV2";
             this.nUDSaturationV2.Size = new System.Drawing.Size(73, 23);
             this.nUDSaturationV2.TabIndex = 50;
             this.nUDSaturationV2.Value = new decimal(new int[] {
-            15,
+            199,
             0,
             0,
-            65536});
+            131072});
             // 
             // label5
             // 
@@ -989,7 +962,7 @@
             131072});
             this.nUDSaturationV1.Location = new System.Drawing.Point(113, 134);
             this.nUDSaturationV1.Maximum = new decimal(new int[] {
-            1,
+            3,
             0,
             0,
             0});
@@ -997,10 +970,10 @@
             this.nUDSaturationV1.Size = new System.Drawing.Size(64, 23);
             this.nUDSaturationV1.TabIndex = 48;
             this.nUDSaturationV1.Value = new decimal(new int[] {
-            1,
+            101,
             0,
             0,
-            0});
+            131072});
             // 
             // nUDContrastV2
             // 
@@ -1017,15 +990,15 @@
             0,
             0});
             this.nUDContrastV2.Minimum = new decimal(new int[] {
-            1,
+            1000,
             0,
             0,
-            0});
+            -2147483648});
             this.nUDContrastV2.Name = "nUDContrastV2";
             this.nUDContrastV2.Size = new System.Drawing.Size(73, 23);
             this.nUDContrastV2.TabIndex = 45;
             this.nUDContrastV2.Value = new decimal(new int[] {
-            115,
+            145,
             0,
             0,
             131072});
@@ -1059,7 +1032,7 @@
             131072});
             this.nUDContrastV1.Location = new System.Drawing.Point(113, 91);
             this.nUDContrastV1.Maximum = new decimal(new int[] {
-            1,
+            1000,
             0,
             0,
             0});
@@ -1072,52 +1045,10 @@
             this.nUDContrastV1.Size = new System.Drawing.Size(64, 23);
             this.nUDContrastV1.TabIndex = 43;
             this.nUDContrastV1.Value = new decimal(new int[] {
-            1,
+            101,
             0,
             0,
-            0});
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(346, 542);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 15);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "插入时间";
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Location = new System.Drawing.Point(417, 538);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(53, 23);
-            this.numericUpDown5.TabIndex = 18;
-            this.numericUpDown5.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown6
-            // 
-            this.numericUpDown6.Location = new System.Drawing.Point(281, 538);
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(53, 23);
-            this.numericUpDown6.TabIndex = 16;
-            this.numericUpDown6.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(210, 542);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 15);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "插入时长";
+            131072});
             // 
             // btnRepeat
             // 
@@ -1168,8 +1099,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDSaturationV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1201,10 +1130,6 @@
         private PictureBox pictureBox1;
         private TabPage tabPage2;
         private Button btnRepeat;
-        private Label label9;
-        private NumericUpDown numericUpDown5;
-        private NumericUpDown numericUpDown6;
-        private Label label10;
         private CheckBox cbBackground;
         private NumericUpDown nUDBrightnessV2;
         private Label label12;
@@ -1219,9 +1144,6 @@
         private CheckBox cbContrast;
         private NumericUpDown nUDContrastV1;
         private Button button7;
-        private Button button8;
-        private CheckBox checkBox10;
-        private Label label23;
         private Label label22;
         private Button button9;
         private CheckBox cbOverlay;

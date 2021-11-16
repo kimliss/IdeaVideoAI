@@ -44,6 +44,41 @@ namespace IdeaVideoAI
             return nextRandomRange(minimum, maximum, 1);
         }
 
+        /// <summary>
+        /// 获取随机数 (默认取 1 位小数)
+        /// </summary>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        /// <returns></returns>
+        public static double nextRandomRangeAndExcluding(double minimum, double maximum, int len, double excluding)
+        {
+
+            if (minimum == maximum && minimum == excluding)
+            {
+                throw new ArgumentException("excluding");
+            }
+
+            double value = nextRandomRange(minimum, maximum, len);
+
+            while (value == excluding)
+            {
+                value = nextRandomRange(minimum, maximum, len);
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// 获取随机数 (默认取 1 位小数)
+        /// </summary>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        /// <returns></returns>
+        public static double nextRandomRangeAndExcluding(double minimum, double maximum, double excluding)
+        {
+            return nextRandomRangeAndExcluding(minimum, maximum, 1, excluding);
+        }
+
         public static void execCmd(string cmd, bool isShow)
         {
             var startInfo = new ProcessStartInfo

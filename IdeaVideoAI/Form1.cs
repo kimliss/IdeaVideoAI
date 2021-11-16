@@ -13,7 +13,7 @@ namespace IdeaVideoAI
 
         int curVideoIndex = -1;
 
-        string[] statusDesc = new string[6] { "读取中", "待标注", "已标注", "已处理", "待去重", "已去重" };
+        string[] statusDesc = new string[7] { "读取中", "待标注", "已标注", "已处理", "待去重", "已去重","去重失败" };
 
 
         RepeatConfig repeatConfig = new RepeatConfig();
@@ -114,7 +114,7 @@ namespace IdeaVideoAI
             }
         }
 
-        public void backgroundWorkerRepeat_DoWork(object sender, DoWorkEventArgs e)
+        public async void backgroundWorkerRepeat_DoWork(object sender, DoWorkEventArgs e)
         {
 
             for (int i = 0; i < repeatDatas.Count; i++)
@@ -122,8 +122,6 @@ namespace IdeaVideoAI
                 RepeatVideoItem videoData = repeatDatas[i];
 
                 Utils.execCmd(videoData.repeatCmd);
-
-                videoData.status = statusDesc[5];
 
                 backgroundWorkerRepeat.ReportProgress((int)((i + 1.0) / repeatDatas.Count() * 100), i);
             }
@@ -715,21 +713,9 @@ namespace IdeaVideoAI
 
             string filterComplex = "[0:v]setpts=PTS-STARTPTS[video];[0:a]atempo=1.0[audio]";
 
-            if (repeatConfig.isOverlay)
-            {
-                for (int i = 0; i< repeatConfig.overlayVideoFiles.Count; i++)
-                {
-                    string file = repeatConfig.overlayVideoFiles[i];
-                    inputCmds.Add(file);
-                    int overlayIndex = inputCmds.Count - 1;
-                    ssCmds.Add(file, Utils.nextRandomRange(1,10));
-                    filterComplex += String.Format(";[{0}:v][0:v]scale2ref=w=iw:h=ih[overlay];[overlay]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
-                }
-            }
-
             if (repeatConfig.isSetpts)
             {
-                double speed = Utils.nextRandomRange(repeatConfig.setptsV1, repeatConfig.setptsV2, 2);
+                double speed = Utils.nextRandomRangeAndExcluding(repeatConfig.setptsV1, repeatConfig.setptsV2, 2, 1);
 
                 double pts = 1;
                 if (speed < 1)
@@ -746,42 +732,42 @@ namespace IdeaVideoAI
 
             if (repeatConfig.isContrast)
             {
-                double contrast = Utils.nextRandomRange((double)repeatConfig.contrastV1, (double)repeatConfig.contrastV2, 2);
+                double contrast = Utils.nextRandomRangeAndExcluding((double)repeatConfig.contrastV1, (double)repeatConfig.contrastV2, 2,1);
 
                 filterComplex += String.Format(";[video]eq=contrast={0}[video]", contrast);
             }
 
             if (repeatConfig.isSaturation)
             {
-                double saturation = Utils.nextRandomRange((double)repeatConfig.saturationV1, (double)repeatConfig.saturationV2, 2);
+                double saturation = Utils.nextRandomRangeAndExcluding((double)repeatConfig.saturationV1, (double)repeatConfig.saturationV2, 2,1);
 
                 filterComplex += String.Format(";[video]eq=saturation={0}[video]", saturation);
             }
 
             if (repeatConfig.isBrightness)
             {
-                double brightness = Utils.nextRandomRange((double)repeatConfig.brightnessV1, (double)repeatConfig.brightnessV2);
+                double brightness = Utils.nextRandomRangeAndExcluding((double)repeatConfig.brightnessV1, (double)repeatConfig.brightnessV2,2,0);
 
                 filterComplex += String.Format(";[video]eq=brightness={0}[video]", brightness);
             }
 
             if (repeatConfig.isRotate)
             {
-                double rotate = Utils.nextRandomRange((double)repeatConfig.rotateV1, (double)repeatConfig.rotateV2, 0);
+                double rotate = Utils.nextRandomRangeAndExcluding((double)repeatConfig.rotateV1, (double)repeatConfig.rotateV2,2, 0);
 
                 filterComplex += String.Format(";[video]rotate={0}*PI/180,zoompan=z={1}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={2}x{3}[video]", rotate, repeatConfig.rotateZoomV, data.width, data.height);
             }
 
             if (repeatConfig.isZoom)
             {
-                double zoom = Utils.nextRandomRange((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2);
+                double zoom = Utils.nextRandomRangeAndExcluding((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2,2,1);
                 filterComplex += String.Format(";[video]zoompan=z={0}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={1}x{2}[video]", zoom, data.width, data.height);
             }
 
             if (repeatConfig.isShakes)
             {
-                double shakes = Utils.nextRandomRange((double)repeatConfig.shakesV1, (double)repeatConfig.shakesV2,0);
-                filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.01,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}[video]", shakes, shakes + repeatConfig.shakesLength, data.width, data.height);
+                double shakes = Utils.nextRandomRangeAndExcluding((double)repeatConfig.shakesV1, (double)repeatConfig.shakesV2,2, 0);
+                filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.003,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}[video]", shakes, shakes + repeatConfig.shakesLength, data.width, data.height);
             }
 
             if (repeatConfig.isBackAudio)
@@ -792,6 +778,18 @@ namespace IdeaVideoAI
                 int backgroundIndex = inputCmds.Count - 1;
 
                 filterComplex += String.Format(";[audio]volume=volume=2[aout0];[{0}:a]volume=volume=1[aout1];[aout1]aloop=loop=-1:size=2e+09,atrim=0:43[aconcat]; [aout0][aconcat]amix=inputs=2:duration=first:dropout_transition=0 [audio]", backgroundIndex);
+            }
+
+            if (repeatConfig.isOverlay)
+            {
+                for (int i = 0; i < repeatConfig.overlayVideoFiles.Count; i++)
+                {
+                    string file = repeatConfig.overlayVideoFiles[i];
+                    inputCmds.Add(file);
+                    int overlayIndex = inputCmds.Count - 1;
+                    ssCmds.Add(file, Utils.nextRandomRange(1, 10));
+                    filterComplex += String.Format(";[{0}:v][0:v]scale2ref=w=iw:h=ih[overlay];[overlay]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
+                }
             }
 
             string inputCMD = "";
