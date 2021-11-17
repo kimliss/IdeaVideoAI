@@ -732,21 +732,13 @@ namespace IdeaVideoAI
             Dictionary<String, int> ssCmds = new Dictionary<String, int>();
             inputCmds.Add(data.filePath);
 
-            string filterComplex = "[0:v]setpts=PTS-STARTPTS[video];[0:a]atempo=1.0[audio]";
+            string filterComplex = "[0:v]rotate=0[video];[0:a]atempo=1.0[audio]";
 
             if (repeatConfig.isSetpts)
             {
                 double speed = Utils.nextRandomRangeAndExcluding(repeatConfig.setptsV1, repeatConfig.setptsV2, 2, 1);
 
-                double pts = 1;
-                if (speed < 1)
-                {
-                    pts = 3 - 2 * speed;
-                }
-                else if (speed > 1)
-                {
-                    pts = 1.5 - 0.5 * speed;
-                }
+                double pts = 1 + (1 - speed) * 100 * 0.02;
 
                 filterComplex += string.Format(";[audio]atempo={0}[audio];[video]setpts={1}*PTS[video]", speed, pts);
             }
@@ -788,7 +780,7 @@ namespace IdeaVideoAI
             if (repeatConfig.isShakes)
             {
                 double shakes = Utils.nextRandomRangeAndExcluding((double)repeatConfig.shakesV1, (double)repeatConfig.shakesV2,2, 0);
-                filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.003,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}[video]", shakes, shakes + repeatConfig.shakesLength, data.width, data.height);
+                filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.008,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}[video]", shakes, shakes + repeatConfig.shakesLength, data.width, data.height);
             }
 
             if (repeatConfig.isBackAudio)
@@ -808,7 +800,7 @@ namespace IdeaVideoAI
                     string file = repeatConfig.overlayVideoFiles[i];
                     inputCmds.Add(file);
                     int overlayIndex = inputCmds.Count - 1;
-                    ssCmds.Add(file, Utils.nextRandomRange(1, 10));
+                    ssCmds.Add(file, Utils.nextRandomRange(0, 10));
                     filterComplex += String.Format(";[{0}:v][0:v]scale2ref=w=iw:h=ih[overlay];[overlay]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
                 }
             }
@@ -831,11 +823,11 @@ namespace IdeaVideoAI
 
             if (String.IsNullOrEmpty(tbRepeatLog.Text))
             {
-                tbRepeatLog.Text = System.DateTime.Now + "\r\n" + cmd;
+                tbRepeatLog.Text = System.DateTime.Now + "\r\nffmpeg" + cmd;
             }
             else
             {
-                tbRepeatLog.Text = System.DateTime.Now + "\r\n" + cmd + "\r\n\r\n" + tbRepeatLog.Text;
+                tbRepeatLog.Text = System.DateTime.Now + "\r\nffmpeg" + cmd + "\r\n\r\n" + tbRepeatLog.Text;
             }
         }
 

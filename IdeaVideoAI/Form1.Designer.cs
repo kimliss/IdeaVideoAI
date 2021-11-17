@@ -31,6 +31,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openVideoFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.安装FfmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -91,8 +93,6 @@
             this.cbContrast = new System.Windows.Forms.CheckBox();
             this.nUDContrastV1 = new System.Windows.Forms.NumericUpDown();
             this.btnRepeat = new System.Windows.Forms.Button();
-            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.安装FfmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -141,9 +141,24 @@
             // openVideoFileToolStripMenuItem
             // 
             this.openVideoFileToolStripMenuItem.Name = "openVideoFileToolStripMenuItem";
-            this.openVideoFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openVideoFileToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.openVideoFileToolStripMenuItem.Text = "打开视频";
             this.openVideoFileToolStripMenuItem.Click += new System.EventHandler(this.openVideoFileToolStripMenuItem_Click);
+            // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.安装FfmpegToolStripMenuItem});
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.帮助ToolStripMenuItem.Text = "帮助";
+            // 
+            // 安装FfmpegToolStripMenuItem
+            // 
+            this.安装FfmpegToolStripMenuItem.Name = "安装FfmpegToolStripMenuItem";
+            this.安装FfmpegToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.安装FfmpegToolStripMenuItem.Text = "安装 ffmpeg";
+            this.安装FfmpegToolStripMenuItem.Click += new System.EventHandler(this.安装FfmpegToolStripMenuItem_Click);
             // 
             // listView1
             // 
@@ -712,15 +727,15 @@
             131072});
             this.nUDSetptsV2.Location = new System.Drawing.Point(215, 52);
             this.nUDSetptsV2.Maximum = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
             this.nUDSetptsV2.Minimum = new decimal(new int[] {
-            5,
+            90,
             0,
             0,
-            65536});
+            131072});
             this.nUDSetptsV2.Name = "nUDSetptsV2";
             this.nUDSetptsV2.Size = new System.Drawing.Size(73, 23);
             this.nUDSetptsV2.TabIndex = 83;
@@ -742,6 +757,7 @@
             // cbSetpts
             // 
             this.cbSetpts.AutoSize = true;
+            this.cbSetpts.Enabled = false;
             this.cbSetpts.Location = new System.Drawing.Point(15, 54);
             this.cbSetpts.Name = "cbSetpts";
             this.cbSetpts.Size = new System.Drawing.Size(66, 19);
@@ -759,15 +775,15 @@
             131072});
             this.nUDSetptsV1.Location = new System.Drawing.Point(113, 52);
             this.nUDSetptsV1.Maximum = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
             this.nUDSetptsV1.Minimum = new decimal(new int[] {
-            5,
+            90,
             0,
             0,
-            65536});
+            131072});
             this.nUDSetptsV1.Name = "nUDSetptsV1";
             this.nUDSetptsV1.Size = new System.Drawing.Size(64, 23);
             this.nUDSetptsV1.TabIndex = 81;
@@ -1050,21 +1066,6 @@
             this.btnRepeat.Text = "去重";
             this.btnRepeat.UseVisualStyleBackColor = true;
             this.btnRepeat.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // 帮助ToolStripMenuItem
-            // 
-            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.安装FfmpegToolStripMenuItem});
-            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.帮助ToolStripMenuItem.Text = "帮助";
-            // 
-            // 安装FfmpegToolStripMenuItem
-            // 
-            this.安装FfmpegToolStripMenuItem.Name = "安装FfmpegToolStripMenuItem";
-            this.安装FfmpegToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.安装FfmpegToolStripMenuItem.Text = "安装 ffmpeg";
-            this.安装FfmpegToolStripMenuItem.Click += new System.EventHandler(this.安装FfmpegToolStripMenuItem_Click);
             // 
             // Form1
             // 
