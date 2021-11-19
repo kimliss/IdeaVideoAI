@@ -19,9 +19,7 @@ namespace IdeaVideoAI
 
         public int height;
 
-        public int videoDuration;
-
-        public int audioDuration;
+        public double framerate;
 
     }
 

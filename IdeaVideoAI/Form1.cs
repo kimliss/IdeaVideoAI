@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Reflection;
 using Xabe.FFmpeg;
 using Xabe.FFmpeg.Downloader;
@@ -291,6 +290,15 @@ namespace IdeaVideoAI
 
         private void openVideoFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!Utils.IsInPATH("ffmpeg") && !File.Exists(Path.Join(Environment.CurrentDirectory, "ffmpeg.exe")))
+            {
+                MessageBox.Show("ÕýÔÚÏÂÔØ Ffmpeg...");
+                FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official);
+                return;
+            }
+
+
+
             bool isWaterMark = tabControl1.SelectedIndex == 0;
 
             OpenFileDialog fd = new OpenFileDialog();
@@ -444,7 +452,9 @@ namespace IdeaVideoAI
                 float endX = startX + zoomImageRect.Width;
                 float endY = startY + zoomImageRect.Height;
 
-                if (pointStart.X >= startX && pointStart.X <= endX && pointStart.Y >= startY && pointStart.Y <= endY &&
+                if (
+                    image != null &&
+                    pointStart.X >= startX && pointStart.X <= endX && pointStart.Y >= startY && pointStart.Y <= endY &&
                     pointContinue.X >= startX && pointContinue.X <= endX && pointContinue.Y >= startY && pointContinue.Y <= endY &&
                     pointContinue.X >= pointStart.X && pointContinue.Y >= pointStart.Y &&
                     curVideoIndex >= 0
@@ -708,11 +718,9 @@ namespace IdeaVideoAI
 
                 var mediaInfo = await FFmpeg.GetMediaInfo(videoData.filePath);
                 var videoInfo = mediaInfo.VideoStreams.First();
-                var audioInfo = mediaInfo.AudioStreams.First();
                 videoData.width = videoInfo.Width;
                 videoData.height = videoInfo.Height;
-                videoData.videoDuration = videoInfo.Duration.Seconds;
-                videoData.audioDuration = audioInfo.Duration.Seconds;
+                videoData.framerate = videoInfo.Framerate;
 
                 updateRepeatCmd(videoData, repeatConfig);
             }
@@ -727,6 +735,10 @@ namespace IdeaVideoAI
         /// <param name="repeatConfig"></param>
         public void updateRepeatCmd(RepeatVideoItem data, RepeatConfig repeatConfig)
         {
+            int width = data.width;
+            double framerate = data.framerate;
+            int height = data.height;
+
             //0: input 1: filterComplex 2: output
             string cmdFormat = " -y {0} -filter_complex \"{1}\"  -map [audio] -map [video] \"{2}\"";
 
@@ -770,19 +782,19 @@ namespace IdeaVideoAI
             {
                 double rotate = Utils.nextRandomRangeAndExcluding((double)repeatConfig.rotateV1, (double)repeatConfig.rotateV2,2, 0);
 
-                filterComplex += String.Format(";[video]rotate={0}*PI/180,zoompan=z={1}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={2}x{3}[video]", rotate, repeatConfig.rotateZoomV, data.width, data.height);
+                filterComplex += String.Format(";[video]rotate={0}*PI/180,zoompan=z={1}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={2}x{3}:fps={4}[video]", rotate, repeatConfig.rotateZoomV, width, height,framerate);
             }
 
             if (repeatConfig.isZoom)
             {
                 double zoom = Utils.nextRandomRange((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2,2);
-                filterComplex += String.Format(";[video]zoompan=x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={0}x{1},crop={2}:{3}[video]", data.width, (int)(data.height * zoom), data.width, data.height);
+                filterComplex += String.Format(";[video]zoompan=x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={0}x{1}:fps={2},crop={3}:{4}[video]", data.width, (int)(data.height * zoom),framerate,width, height);
             }
 
             if (repeatConfig.isShakes)
             {
                 double shakes = Utils.nextRandomRangeAndExcluding((double)repeatConfig.shakesV1, (double)repeatConfig.shakesV2,2, 0);
-                filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.008,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}[video]", shakes, shakes + repeatConfig.shakesLength, data.width, data.height);
+                filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.008,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}:fps={4}[video]", shakes, shakes + repeatConfig.shakesLength, width, height,framerate);
             }
 
             if (repeatConfig.isBackAudio)
