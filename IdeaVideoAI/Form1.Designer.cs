@@ -518,23 +518,23 @@
             131072});
             this.nUDZoomV2.Location = new System.Drawing.Point(215, 234);
             this.nUDZoomV2.Maximum = new decimal(new int[] {
-            10,
+            115,
             0,
             0,
-            0});
+            131072});
             this.nUDZoomV2.Minimum = new decimal(new int[] {
-            1,
+            105,
             0,
             0,
-            0});
+            131072});
             this.nUDZoomV2.Name = "nUDZoomV2";
             this.nUDZoomV2.Size = new System.Drawing.Size(73, 23);
             this.nUDZoomV2.TabIndex = 97;
             this.nUDZoomV2.Value = new decimal(new int[] {
-            12,
+            115,
             0,
             0,
-            65536});
+            131072});
             // 
             // label7
             // 
@@ -550,9 +550,9 @@
             this.cbZoom.AutoSize = true;
             this.cbZoom.Location = new System.Drawing.Point(15, 236);
             this.cbZoom.Name = "cbZoom";
-            this.cbZoom.Size = new System.Drawing.Size(66, 19);
+            this.cbZoom.Size = new System.Drawing.Size(78, 19);
             this.cbZoom.TabIndex = 94;
-            this.cbZoom.Text = "拉伸(1)";
+            this.cbZoom.Text = "H 拉伸(1)";
             this.cbZoom.UseVisualStyleBackColor = true;
             // 
             // nUDZoomV1
@@ -565,20 +565,20 @@
             131072});
             this.nUDZoomV1.Location = new System.Drawing.Point(113, 234);
             this.nUDZoomV1.Maximum = new decimal(new int[] {
-            10,
+            115,
             0,
             0,
-            0});
+            131072});
             this.nUDZoomV1.Minimum = new decimal(new int[] {
-            1,
+            105,
             0,
             0,
-            0});
+            131072});
             this.nUDZoomV1.Name = "nUDZoomV1";
             this.nUDZoomV1.Size = new System.Drawing.Size(64, 23);
             this.nUDZoomV1.TabIndex = 95;
             this.nUDZoomV1.Value = new decimal(new int[] {
-            101,
+            105,
             0,
             0,
             131072});
@@ -757,7 +757,6 @@
             // cbSetpts
             // 
             this.cbSetpts.AutoSize = true;
-            this.cbSetpts.Enabled = false;
             this.cbSetpts.Location = new System.Drawing.Point(15, 54);
             this.cbSetpts.Name = "cbSetpts";
             this.cbSetpts.Size = new System.Drawing.Size(66, 19);

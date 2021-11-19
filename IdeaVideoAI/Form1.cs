@@ -707,10 +707,12 @@ namespace IdeaVideoAI
                 RepeatVideoItem videoData = repeatDatas[i];
 
                 var mediaInfo = await FFmpeg.GetMediaInfo(videoData.filePath);
-                int width = mediaInfo.VideoStreams.First().Width;
-                int height = mediaInfo.VideoStreams.First().Height;
-                videoData.width = width;
-                videoData.height = height;
+                var videoInfo = mediaInfo.VideoStreams.First();
+                var audioInfo = mediaInfo.AudioStreams.First();
+                videoData.width = videoInfo.Width;
+                videoData.height = videoInfo.Height;
+                videoData.videoDuration = videoInfo.Duration.Seconds;
+                videoData.audioDuration = audioInfo.Duration.Seconds;
 
                 updateRepeatCmd(videoData, repeatConfig);
             }
@@ -738,7 +740,7 @@ namespace IdeaVideoAI
             {
                 double speed = Utils.nextRandomRangeAndExcluding(repeatConfig.setptsV1, repeatConfig.setptsV2, 2, 1);
 
-                double pts = 1 + (1 - speed) * 100 * 0.02;
+                double pts = 3 - 2 * speed;
 
                 filterComplex += string.Format(";[audio]atempo={0}[audio];[video]setpts={1}*PTS[video]", speed, pts);
             }
@@ -773,8 +775,8 @@ namespace IdeaVideoAI
 
             if (repeatConfig.isZoom)
             {
-                double zoom = Utils.nextRandomRangeAndExcluding((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2,2,1);
-                filterComplex += String.Format(";[video]zoompan=z={0}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={1}x{2}[video]", zoom, data.width, data.height);
+                double zoom = Utils.nextRandomRange((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2,2);
+                filterComplex += String.Format(";[video]zoompan=x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={0}x{1},crop={2}:{3}[video]", data.width, (int)(data.height * zoom), data.width, data.height);
             }
 
             if (repeatConfig.isShakes)
