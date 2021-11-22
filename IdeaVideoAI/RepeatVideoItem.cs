@@ -8,10 +8,9 @@ namespace IdeaVideoAI
 {
     public class RepeatVideoItem : VideoItem
     {
-
-        public string repeatCmd;
-
         public string tempRepeatDir;
+
+        public List<String> repeatCmds = new List<string>();
 
     }
 }

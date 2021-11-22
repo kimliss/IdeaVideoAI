@@ -131,7 +131,15 @@ namespace IdeaVideoAI
             {
                 RepeatVideoItem videoData = repeatDatas[i];
 
-                bool result = Utils.ffmpeg(videoData.repeatCmd);
+                bool result = true;
+                for(int j = 0; j < videoData.repeatCmds.Count; j++)
+                {
+                    if (result)
+                    {
+                        result = Utils.ffmpeg(videoData.repeatCmds[j]);
+                    }
+                }
+
                 if (result)
                 {
                     videoData.status = VideoStatus.RepeatDoSuccess;
@@ -711,6 +719,8 @@ namespace IdeaVideoAI
             
             btnRepeat.Enabled = false;
 
+            int count = (int)nUPRepeatCount.Value;
+
             for (int i = 0; i < repeatDatas.Count; i++)
             {
                 RepeatVideoItem videoData = repeatDatas[i];
@@ -720,8 +730,9 @@ namespace IdeaVideoAI
                 videoData.width = videoInfo.Width;
                 videoData.height = videoInfo.Height;
                 videoData.framerate = videoInfo.Framerate;
+                videoData.duration = videoInfo.Duration.Seconds;
 
-                updateRepeatCmd(videoData, repeatConfig);
+                updateRepeatCmd(videoData, repeatConfig, count);
             }
 
             backgroundWorkerRepeat.RunWorkerAsync();
@@ -732,115 +743,121 @@ namespace IdeaVideoAI
         /// </summary>
         /// <param name="data"></param>
         /// <param name="repeatConfig"></param>
-        public void updateRepeatCmd(RepeatVideoItem data, RepeatConfig repeatConfig)
+        public void updateRepeatCmd(RepeatVideoItem data, RepeatConfig repeatConfig, int count)
         {
+            data.repeatCmds.Clear();
+
             int width = data.width;
-            double framerate = data.framerate;
             int height = data.height;
+            double duration = data.duration;
+            double framerate = data.framerate;
 
-            //0: input 1: filterComplex 2: output
-            string cmdFormat = " -y {0} -filter_complex \"{1}\"  -map [audio] -map [video] \"{2}\"";
-
-            List<String> inputCmds = new List<string>();
-            Dictionary<String, int> ssCmds = new Dictionary<String, int>();
-            inputCmds.Add(data.filePath);
-
-            string filterComplex = "[0:v]rotate=0[video];[0:a]atempo=1.0[audio]";
-
-            if (repeatConfig.isSetpts)
+            for(int j = 0; j< count; j++)
             {
-                double speed = Utils.nextRandomRangeAndExcluding(repeatConfig.setptsV1, repeatConfig.setptsV2, 2, 1);
+                //0: input 1: filterComplex 2: output
+                string cmdFormat = " -y {0} -filter_complex \"{1}\"  -map [audio] -map [video] \"{2}\"";
 
-                double pts = 3 - 2 * speed;
+                List<String> inputCmds = new List<string>();
+                Dictionary<String, int> ssCmds = new Dictionary<String, int>();
+                inputCmds.Add(data.filePath);
 
-                filterComplex += string.Format(";[audio]atempo={0}[audio];[video]setpts={1}*PTS[video]", speed, pts);
-            }
+                string filterComplex = "[0:v]rotate=0[video];[0:a]atempo=1.0[audio]";
 
-            if (repeatConfig.isContrast)
-            {
-                double contrast = Utils.nextRandomRangeAndExcluding((double)repeatConfig.contrastV1, (double)repeatConfig.contrastV2, 2,1);
-
-                filterComplex += String.Format(";[video]eq=contrast={0}[video]", contrast);
-            }
-
-            if (repeatConfig.isSaturation)
-            {
-                double saturation = Utils.nextRandomRangeAndExcluding((double)repeatConfig.saturationV1, (double)repeatConfig.saturationV2, 2,1);
-
-                filterComplex += String.Format(";[video]eq=saturation={0}[video]", saturation);
-            }
-
-            if (repeatConfig.isBrightness)
-            {
-                double brightness = Utils.nextRandomRangeAndExcluding((double)repeatConfig.brightnessV1, (double)repeatConfig.brightnessV2,2,0);
-
-                filterComplex += String.Format(";[video]eq=brightness={0}[video]", brightness);
-            }
-
-            if (repeatConfig.isRotate)
-            {
-                double rotate = Utils.nextRandomRangeAndExcluding((double)repeatConfig.rotateV1, (double)repeatConfig.rotateV2,2, 0);
-
-                filterComplex += String.Format(";[video]rotate={0}*PI/180,zoompan=z={1}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={2}x{3}:fps={4}[video]", rotate, repeatConfig.rotateZoomV, width, height,framerate);
-            }
-
-            if (repeatConfig.isZoom)
-            {
-                double zoom = Utils.nextRandomRange((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2,2);
-                filterComplex += String.Format(";[video]zoompan=x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={0}x{1}:fps={2},crop={3}:{4}[video]", data.width, (int)(data.height * zoom),framerate,width, height);
-            }
-
-            if (repeatConfig.isShakes)
-            {
-                double shakes = Utils.nextRandomRangeAndExcluding((double)repeatConfig.shakesV1, (double)repeatConfig.shakesV2,2, 0);
-                filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.008,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}:fps={4}[video]", shakes, shakes + repeatConfig.shakesLength, width, height,framerate);
-            }
-
-            if (repeatConfig.isBackAudio)
-            {
-                string file = repeatConfig.backAudioFiles[new Random().Next(repeatConfig.backAudioFiles.Count)];
-                inputCmds.Add(file);
-
-                int backgroundIndex = inputCmds.Count - 1;
-
-                filterComplex += String.Format(";[audio]volume=volume=2[aout0];[{0}:a]volume=volume=1[aout1];[aout1]aloop=loop=-1:size=2e+09,atrim=0:43[aconcat]; [aout0][aconcat]amix=inputs=2:duration=first:dropout_transition=0 [audio]", backgroundIndex);
-            }
-
-            if (repeatConfig.isOverlay)
-            {
-                for (int i = 0; i < repeatConfig.overlayVideoFiles.Count; i++)
+                if (repeatConfig.isSetpts)
                 {
-                    string file = repeatConfig.overlayVideoFiles[i];
+                    double speed = Utils.nextRandomRangeAndExcluding(repeatConfig.setptsV1, repeatConfig.setptsV2, 2, 1);
+                    double pts = (duration / speed / duration);
+                    filterComplex += string.Format(";[audio]atempo={0}[audio];[video]fps={1},setpts={2}*PTS[video]", speed, (int)(framerate / pts), Math.Round(pts, 2));
+                }
+
+                if (repeatConfig.isContrast)
+                {
+                    double contrast = Utils.nextRandomRangeAndExcluding((double)repeatConfig.contrastV1, (double)repeatConfig.contrastV2, 2, 1);
+
+                    filterComplex += String.Format(";[video]eq=contrast={0}[video]", contrast);
+                }
+
+                if (repeatConfig.isSaturation)
+                {
+                    double saturation = Utils.nextRandomRangeAndExcluding((double)repeatConfig.saturationV1, (double)repeatConfig.saturationV2, 2, 1);
+
+                    filterComplex += String.Format(";[video]eq=saturation={0}[video]", saturation);
+                }
+
+                if (repeatConfig.isBrightness)
+                {
+                    double brightness = Utils.nextRandomRangeAndExcluding((double)repeatConfig.brightnessV1, (double)repeatConfig.brightnessV2, 2, 0);
+
+                    filterComplex += String.Format(";[video]eq=brightness={0}[video]", brightness);
+                }
+
+                if (repeatConfig.isRotate)
+                {
+                    double rotate = Utils.nextRandomRangeAndExcluding((double)repeatConfig.rotateV1, (double)repeatConfig.rotateV2, 2, 0);
+
+                    filterComplex += String.Format(";[video]rotate={0}*PI/180,zoompan=z={1}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={2}x{3}:fps={4}[video]", rotate, repeatConfig.rotateZoomV, width, height, framerate);
+                }
+
+                if (repeatConfig.isZoom)
+                {
+                    double zoom = Utils.nextRandomRange((double)repeatConfig.zoomV1, (double)repeatConfig.zoomV2, 2);
+                    filterComplex += String.Format(";[video]zoompan=x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={0}x{1}:fps={2},crop={3}:{4}[video]", data.width, (int)(data.height * zoom), framerate, width, height);
+                }
+
+                if (repeatConfig.isShakes)
+                {
+                    double shakes = Utils.nextRandomRangeAndExcluding((double)repeatConfig.shakesV1, (double)repeatConfig.shakesV2, 2, 0);
+                    filterComplex += String.Format(";[video]zoompan=z='if(between(in_time,{0},{1}),min(max(zoom,pzoom)+0.008,1.5),1)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={2}x{3}:fps={4}[video]", shakes, shakes + repeatConfig.shakesLength, width, height, framerate);
+                }
+
+                if (repeatConfig.isBackAudio)
+                {
+                    string file = repeatConfig.backAudioFiles[new Random().Next(repeatConfig.backAudioFiles.Count)];
                     inputCmds.Add(file);
-                    int overlayIndex = inputCmds.Count - 1;
-                    ssCmds.Add(file, Utils.nextRandomRange(0, 10));
-                    filterComplex += String.Format(";[{0}:v][0:v]scale2ref=w=iw:h=ih[overlay];[overlay]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
+
+                    int backgroundIndex = inputCmds.Count - 1;
+
+                    filterComplex += String.Format(";[audio]volume=volume=2[aout0];[{0}:a]volume=volume=1[aout1];[aout1]aloop=loop=-1:size=2e+09,atrim=0:43[aconcat]; [aout0][aconcat]amix=inputs=2:duration=first:dropout_transition=0 [audio]", backgroundIndex);
                 }
+
+                if (repeatConfig.isOverlay)
+                {
+                    for (int i = 0; i < repeatConfig.overlayVideoFiles.Count; i++)
+                    {
+                        string file = repeatConfig.overlayVideoFiles[i];
+                        inputCmds.Add(file);
+                        int overlayIndex = inputCmds.Count - 1;
+                        ssCmds.Add(file, Utils.nextRandomRange(0, 10));
+                        filterComplex += String.Format(";[{0}:v][0:v]scale2ref=w=iw:h=ih[overlay];[overlay]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
+                    }
+                }
+
+                string inputCMD = "";
+                inputCmds.ForEach(x =>
+                {
+                    if (ssCmds.ContainsKey(x))
+                    {
+                        inputCMD += String.Format(" -ss {0} -i \"{1}\" ", ssCmds[x], x);
+                    }
+                    else
+                    {
+                        inputCMD += String.Format(" -i \"{0}\" ", x);
+                    }
+                });
+
+                string cmd = String.Format(cmdFormat, inputCMD, filterComplex, Path.Join(data.tempRepeatDir, j + 1 + "__" + data.fileName));
+                data.repeatCmds.Add(cmd);
             }
 
-            string inputCMD = "";
-            inputCmds.ForEach(x =>
-            {
-                if (ssCmds.ContainsKey(x))
-                {
-                    inputCMD += String.Format(" -ss {0} -i \"{1}\" ", ssCmds[x], x);
-                }
-                else
-                {
-                    inputCMD += String.Format(" -i \"{0}\" ", x);
-                }
-            });
-
-            string cmd = String.Format(cmdFormat, inputCMD, filterComplex, Path.Join(data.tempRepeatDir, data.fileName));
-            data.repeatCmd = cmd;
+            string log = System.DateTime.Now + "\r\nffmpeg" + string.Join("\r\nffmpeg", data.repeatCmds);
 
             if (String.IsNullOrEmpty(tbRepeatLog.Text))
             {
-                tbRepeatLog.Text = System.DateTime.Now + "\r\nffmpeg" + cmd;
+                tbRepeatLog.Text = log;
             }
             else
             {
-                tbRepeatLog.Text = System.DateTime.Now + "\r\nffmpeg" + cmd + "\r\n\r\n" + tbRepeatLog.Text;
+                tbRepeatLog.Text = log + "\r\n\r\n" + tbRepeatLog.Text;
             }
         }
 

@@ -21,6 +21,8 @@ namespace IdeaVideoAI
 
         public double framerate;
 
+        public int duration;
+
     }
 
     public enum VideoStatus

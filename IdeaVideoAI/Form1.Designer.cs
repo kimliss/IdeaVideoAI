@@ -93,6 +93,7 @@
             this.cbContrast = new System.Windows.Forms.CheckBox();
             this.nUDContrastV1 = new System.Windows.Forms.NumericUpDown();
             this.btnRepeat = new System.Windows.Forms.Button();
+            this.nUPRepeatCount = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -117,6 +118,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDSaturationV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUPRepeatCount)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -365,6 +367,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.nUPRepeatCount);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.nUDShakesLength);
             this.tabPage2.Controls.Add(this.nUDShakesV2);
@@ -1058,13 +1061,35 @@
             // 
             // btnRepeat
             // 
-            this.btnRepeat.Location = new System.Drawing.Point(6, 707);
+            this.btnRepeat.Location = new System.Drawing.Point(80, 709);
             this.btnRepeat.Name = "btnRepeat";
-            this.btnRepeat.Size = new System.Drawing.Size(575, 36);
+            this.btnRepeat.Size = new System.Drawing.Size(501, 36);
             this.btnRepeat.TabIndex = 9;
             this.btnRepeat.Text = "去重";
             this.btnRepeat.UseVisualStyleBackColor = true;
             this.btnRepeat.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // nUPRepeatCount
+            // 
+            this.nUPRepeatCount.Location = new System.Drawing.Point(3, 716);
+            this.nUPRepeatCount.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUPRepeatCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUPRepeatCount.Name = "nUPRepeatCount";
+            this.nUPRepeatCount.Size = new System.Drawing.Size(73, 23);
+            this.nUPRepeatCount.TabIndex = 104;
+            this.nUPRepeatCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // Form1
             // 
@@ -1105,6 +1130,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDSaturationV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUPRepeatCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1177,5 +1203,6 @@
         private NumericUpDown nUDShakesLength;
         private ToolStripMenuItem 帮助ToolStripMenuItem;
         private ToolStripMenuItem 安装FfmpegToolStripMenuItem;
+        private NumericUpDown nUPRepeatCount;
     }
 }
