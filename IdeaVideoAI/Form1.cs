@@ -763,13 +763,6 @@ namespace IdeaVideoAI
 
                 string filterComplex = "[0:v]rotate=0[video];[0:a]atempo=1.0[audio]";
 
-                if (repeatConfig.isSetpts)
-                {
-                    double speed = Utils.nextRandomRangeAndExcluding(repeatConfig.setptsV1, repeatConfig.setptsV2, 2, 1);
-                    double pts = (duration / speed / duration);
-                    filterComplex += string.Format(";[audio]atempo={0}[audio];[video]fps={1},setpts={2}*PTS[video]", speed, (int)(framerate / pts), Math.Round(pts, 2));
-                }
-
                 if (repeatConfig.isContrast)
                 {
                     double contrast = Utils.nextRandomRangeAndExcluding((double)repeatConfig.contrastV1, (double)repeatConfig.contrastV2, 2, 1);
@@ -830,6 +823,13 @@ namespace IdeaVideoAI
                         ssCmds.Add(file, Utils.nextRandomRange(0, 10));
                         filterComplex += String.Format(";[{0}:v][0:v]scale2ref=w=iw:h=ih[overlay];[overlay]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
                     }
+                }
+
+                if (repeatConfig.isSetpts)
+                {
+                    double speed = Utils.nextRandomRangeAndExcluding(repeatConfig.setptsV1, repeatConfig.setptsV2, 2, 1);
+                    double pts = (duration / speed / duration);
+                    filterComplex += string.Format(";[audio]atempo={0}[audio];[video]setpts={1}*PTS[video]", speed, Math.Round(pts, 2));
                 }
 
                 string inputCMD = "";

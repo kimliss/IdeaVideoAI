@@ -52,6 +52,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.nUPRepeatCount = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.nUDShakesLength = new System.Windows.Forms.NumericUpDown();
             this.nUDShakesV2 = new System.Windows.Forms.NumericUpDown();
@@ -93,7 +94,6 @@
             this.cbContrast = new System.Windows.Forms.CheckBox();
             this.nUDContrastV1 = new System.Windows.Forms.NumericUpDown();
             this.btnRepeat = new System.Windows.Forms.Button();
-            this.nUPRepeatCount = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -102,6 +102,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUPRepeatCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV1)).BeginInit();
@@ -118,7 +119,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDSaturationV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUPRepeatCount)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -416,6 +416,28 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "去重";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // nUPRepeatCount
+            // 
+            this.nUPRepeatCount.Location = new System.Drawing.Point(3, 716);
+            this.nUPRepeatCount.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUPRepeatCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUPRepeatCount.Name = "nUPRepeatCount";
+            this.nUPRepeatCount.Size = new System.Drawing.Size(73, 23);
+            this.nUPRepeatCount.TabIndex = 104;
+            this.nUPRepeatCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label11
             // 
@@ -730,12 +752,12 @@
             131072});
             this.nUDSetptsV2.Location = new System.Drawing.Point(215, 52);
             this.nUDSetptsV2.Maximum = new decimal(new int[] {
-            1,
+            110,
             0,
             0,
-            0});
+            131072});
             this.nUDSetptsV2.Minimum = new decimal(new int[] {
-            90,
+            101,
             0,
             0,
             131072});
@@ -743,7 +765,7 @@
             this.nUDSetptsV2.Size = new System.Drawing.Size(73, 23);
             this.nUDSetptsV2.TabIndex = 83;
             this.nUDSetptsV2.Value = new decimal(new int[] {
-            99,
+            110,
             0,
             0,
             131072});
@@ -777,12 +799,12 @@
             131072});
             this.nUDSetptsV1.Location = new System.Drawing.Point(113, 52);
             this.nUDSetptsV1.Maximum = new decimal(new int[] {
-            1,
+            110,
             0,
             0,
-            0});
+            131072});
             this.nUDSetptsV1.Minimum = new decimal(new int[] {
-            90,
+            101,
             0,
             0,
             131072});
@@ -790,7 +812,7 @@
             this.nUDSetptsV1.Size = new System.Drawing.Size(64, 23);
             this.nUDSetptsV1.TabIndex = 81;
             this.nUDSetptsV1.Value = new decimal(new int[] {
-            90,
+            101,
             0,
             0,
             131072});
@@ -1069,28 +1091,6 @@
             this.btnRepeat.UseVisualStyleBackColor = true;
             this.btnRepeat.Click += new System.EventHandler(this.button6_Click);
             // 
-            // nUPRepeatCount
-            // 
-            this.nUPRepeatCount.Location = new System.Drawing.Point(3, 716);
-            this.nUPRepeatCount.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.nUPRepeatCount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nUPRepeatCount.Name = "nUPRepeatCount";
-            this.nUPRepeatCount.Size = new System.Drawing.Size(73, 23);
-            this.nUPRepeatCount.TabIndex = 104;
-            this.nUPRepeatCount.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1114,6 +1114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUPRepeatCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDShakesV1)).EndInit();
@@ -1130,7 +1131,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDSaturationV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUPRepeatCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
