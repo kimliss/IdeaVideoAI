@@ -48,6 +48,8 @@ namespace IdeaVideoAI
             backgroundWorkerRepeat.WorkerReportsProgress = true;
             backgroundWorkerRepeat.DoWork += new DoWorkEventHandler(backgroundWorkerRepeat_DoWork);
             backgroundWorkerRepeat.ProgressChanged += new ProgressChangedEventHandler(backgroundWorkerRepeat_ProgressChanged);
+
+            FFmpeg.SetExecutablesPath(Environment.CurrentDirectory,ffmpegExeutableName: "ffmpeg.exe", ffprobeExecutableName: "ffprobe.exe");
         }
 
         public void backgroundWorkerCover_DoWork(object sender, DoWorkEventArgs e)
@@ -290,14 +292,11 @@ namespace IdeaVideoAI
 
         private void openVideoFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!Utils.IsInPATH("ffmpeg") && !File.Exists(Path.Join(Environment.CurrentDirectory, "ffmpeg.exe")))
+            if (!File.Exists(Path.Join(Environment.CurrentDirectory, "ffmpeg.exe")))
             {
-                MessageBox.Show("正在下载 Ffmpeg...");
-                FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official);
+                MessageBox.Show("你还未安装 FFmpeg，请点击帮助菜单中的安装 ffmpeg 选项...");
                 return;
             }
-
-
 
             bool isWaterMark = tabControl1.SelectedIndex == 0;
 
@@ -877,8 +876,9 @@ namespace IdeaVideoAI
 
         private async void 安装FfmpegToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("关闭弹窗后，开始安装 FFmpeg，安装成功会提示.");
             await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official);
-            MessageBox.Show("安装成功");
+            MessageBox.Show("FFmpeg 已安装成功...");
         }
     }
 

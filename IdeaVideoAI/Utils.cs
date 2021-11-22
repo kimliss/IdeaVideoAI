@@ -38,23 +38,6 @@ namespace IdeaVideoAI
             return "";
         }
 
-        public static bool IsInPATH(string command)
-        {
-            bool isInPath = false;
-            // 判断PATH中是否存在 命令
-            foreach (string test in (Environment.GetEnvironmentVariable("PATH") ?? "").Split(';'))
-            {
-                string path = test.Trim();
-                if (!String.IsNullOrEmpty(path) && File.Exists(Path.Combine(path, command)))
-                {
-                    isInPath = true;
-                    break; // 如果在PATH中找到 ，则退出循环
-                }
-            }
-
-            return isInPath;
-        }
-
         public static int nextRandomRange(int minimum, int maximum)
         {
             Random rand = new Random();
