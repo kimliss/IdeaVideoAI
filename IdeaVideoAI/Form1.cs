@@ -821,7 +821,7 @@ namespace IdeaVideoAI
                         inputCmds.Add(file);
                         int overlayIndex = inputCmds.Count - 1;
                         ssCmds.Add(file, Utils.nextRandomRange(0, 10));
-                        filterComplex += String.Format(";[{0}:v][0:v]scale2ref=w=iw:h=ih[overlay];[overlay]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
+                        filterComplex += String.Format(";[{0}:v]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
                     }
                 }
 
