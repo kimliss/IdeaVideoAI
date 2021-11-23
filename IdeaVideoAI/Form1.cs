@@ -810,7 +810,7 @@ namespace IdeaVideoAI
 
                     int backgroundIndex = inputCmds.Count - 1;
 
-                    filterComplex += String.Format(";[audio]volume=volume=2[aout0];[{0}:a]volume=volume=1[aout1];[aout1]aloop=loop=-1:size=2e+09,atrim=0:43[aconcat]; [aout0][aconcat]amix=inputs=2:duration=first:dropout_transition=0 [audio]", backgroundIndex);
+                    filterComplex += String.Format(";[audio]volume=volume=2[aout0];[{0}:a]volume=volume=1[aout1];[aout1]aloop=loop=-1:size=2e+09,atrim=0:43[aconcat];[aout0][aconcat]amix=inputs=2:duration=first:dropout_transition=0 [audio]", backgroundIndex);
                 }
 
                 if (repeatConfig.isOverlay)
@@ -821,7 +821,7 @@ namespace IdeaVideoAI
                         inputCmds.Add(file);
                         int overlayIndex = inputCmds.Count - 1;
                         ssCmds.Add(file, Utils.nextRandomRange(0, 10));
-                        filterComplex += String.Format(";[{0}:v]loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex);
+                        filterComplex += String.Format(";[{0}:v]scale={1}:{2},loop=loop=-1:size=1000[overlay];[video][overlay]overlay=shortest=1[video]", overlayIndex,width,height);
                     }
                 }
 
