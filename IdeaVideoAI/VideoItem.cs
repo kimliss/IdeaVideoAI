@@ -28,6 +28,6 @@ namespace IdeaVideoAI
     public enum VideoStatus
     {
         WatermarkLoad,WatermarkDoCoverSuccess,WatermarkDoCoverError,WatermarkDoMark,WatermarkDoSuccess,WatermarkDoError,
-        RepeatLoad,RepeatDoSuccess,RepeatDoError
+        RepeatLoad, RepeatDoing,RepeatDoSuccess, RepeatDoError
     }
 }

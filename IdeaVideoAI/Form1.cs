@@ -131,6 +131,9 @@ namespace IdeaVideoAI
             {
                 RepeatVideoItem videoData = repeatDatas[i];
 
+                videoData.status = VideoStatus.RepeatDoing;
+                backgroundWorkerRepeat.ReportProgress((int)((i + 1.0) / repeatDatas.Count() * 100), i);
+
                 bool result = true;
                 for(int j = 0; j < videoData.repeatCmds.Count; j++)
                 {
@@ -159,7 +162,7 @@ namespace IdeaVideoAI
             int index = (int)e.UserState;
             updateItemInListView(index);
 
-            if (index + 1 == repeatDatas.Count())
+            if (index == repeatDatas.Count()-1 && repeatDatas[index].status != VideoStatus.RepeatDoing)
             {
                 btnRepeat.Enabled = true;
             }
@@ -316,13 +319,20 @@ namespace IdeaVideoAI
             {
                 curVideoIndex = 0;
 
+                string clearWaterMarkPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempDelWaterMark_IdeaVideoAI");
+                string videoCoverPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempVideoCover_IdeaVideoAI");
+                string videoRepeatPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempRepeatVideo_IdeaVideoAI");
+
                 if (isWaterMark)
                 {
                     waterMarkDatas.Clear();
+                    Directory.CreateDirectory(clearWaterMarkPath);
+                    Directory.CreateDirectory(videoCoverPath);
                 }
                 else
                 {
                     repeatDatas.Clear();
+                    Directory.CreateDirectory(videoRepeatPath);
                 }
 
 
@@ -337,41 +347,6 @@ namespace IdeaVideoAI
                     pictureBox1.Update();
                     dummy.Dispose();
                 }
-
-                string clearWaterMarkPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempVideo");
-                string videoCoverPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempCover");
-                string videoRepeatPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempRepeat");
-
-                try
-                {
-                    if (Directory.Exists(clearWaterMarkPath)) Directory.Delete(clearWaterMarkPath, true);
-                    Directory.CreateDirectory(clearWaterMarkPath);
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show(ex.Message);
-                }
-
-                try
-                {
-                    if (Directory.Exists(videoCoverPath)) Directory.Delete(videoCoverPath, true);
-                    Directory.CreateDirectory(videoCoverPath);
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show(ex.Message);
-                }
-
-                try
-                {
-                    if (Directory.Exists(videoRepeatPath)) Directory.Delete(videoRepeatPath, true);
-                    Directory.CreateDirectory(videoRepeatPath);
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show(ex.Message);
-                }
-
 
                 string[] files = fd.FileNames;
 

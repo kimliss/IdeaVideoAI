@@ -29,6 +29,8 @@ namespace IdeaVideoAI
                     return "去水印失败";
                 case VideoStatus.RepeatLoad:
                     return "待去重";
+                case VideoStatus.RepeatDoing:
+                    return "正在去重";
                 case VideoStatus.RepeatDoSuccess:
                     return "去重成功";
                 case VideoStatus.RepeatDoError:
@@ -112,12 +114,14 @@ namespace IdeaVideoAI
             try
             {
                 IConversionResult conversionResult = FFmpeg.Conversions.New()
-                    .Start(arguments).GetAwaiter().GetResult();
+                    .Start(arguments)
+                    .GetAwaiter()
+                    .GetResult();
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
