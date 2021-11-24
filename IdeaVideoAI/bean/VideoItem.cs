@@ -9,11 +9,11 @@ namespace IdeaVideoAI
     public class VideoItem
     {
 
+        public VideoStatus status;
+
         public string filePath;
 
         public string fileName;
-
-        public VideoStatus status;
 
         public int width;
 
@@ -22,6 +22,15 @@ namespace IdeaVideoAI
         public double framerate;
 
         public int duration;
+
+        //输出目录
+        public string outDir;
+
+        //执行命令
+        public string execCmd;
+
+        //批量执行命令
+        public List<String> execCmds = new List<string>();
 
     }
 

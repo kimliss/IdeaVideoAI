@@ -94,6 +94,9 @@
             this.cbContrast = new System.Windows.Forms.CheckBox();
             this.nUDContrastV1 = new System.Windows.Forms.NumericUpDown();
             this.btnRepeat = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -119,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDSaturationV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -279,6 +283,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(268, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -487,7 +492,7 @@
             this.nUDShakesV2.Size = new System.Drawing.Size(73, 23);
             this.nUDShakesV2.TabIndex = 101;
             this.nUDShakesV2.Value = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
@@ -640,10 +645,10 @@
             this.nUDRotateZoom.Size = new System.Drawing.Size(73, 23);
             this.nUDRotateZoom.TabIndex = 92;
             this.nUDRotateZoom.Value = new decimal(new int[] {
-            11,
+            103,
             0,
             0,
-            65536});
+            131072});
             // 
             // nUDRotateV2
             // 
@@ -1091,6 +1096,36 @@
             this.btnRepeat.UseVisualStyleBackColor = true;
             this.btnRepeat.Click += new System.EventHandler(this.button6_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(904, 749);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "加图";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(108, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(124, 15);
+            this.label9.TabIndex = 90;
+            this.label9.Text = "请选择多个背景视频";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 23);
+            this.button1.TabIndex = 89;
+            this.button1.Text = "背景视频库";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1131,6 +1166,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDSaturationV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1204,5 +1241,8 @@
         private ToolStripMenuItem 帮助ToolStripMenuItem;
         private ToolStripMenuItem 安装FfmpegToolStripMenuItem;
         private NumericUpDown nUPRepeatCount;
+        private TabPage tabPage3;
+        private Label label9;
+        private Button button1;
     }
 }
