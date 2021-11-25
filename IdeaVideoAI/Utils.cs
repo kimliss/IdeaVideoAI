@@ -35,9 +35,17 @@ namespace IdeaVideoAI
                     return "去重成功";
                 case VideoStatus.RepeatDoError:
                     return "去重失败";
+                case VideoStatus.PictureLoad:
+                    return "待合成";
+                case VideoStatus.PictureDoing:
+                    return "合成中";
+                case VideoStatus.PictureDoSuccess:
+                    return "合成成功";
+                case VideoStatus.PictureDoError:
+                    return "合成失败";
 
             }
-            return "";
+            return "未知";
         }
 
         public static int nextRandomRange(int minimum, int maximum)

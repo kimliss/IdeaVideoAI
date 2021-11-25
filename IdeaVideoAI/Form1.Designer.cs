@@ -37,18 +37,18 @@
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnRemoveWatermark = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.tbLog = new System.Windows.Forms.TextBox();
+            this.pbProgress = new System.Windows.Forms.ProgressBar();
+            this.btnTab1RmWatermark = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnTab1CancelLabel = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnTab1NextVideo = new System.Windows.Forms.Button();
+            this.btnTab1PrevVideo = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -71,15 +71,14 @@
             this.nUDRotateV1 = new System.Windows.Forms.NumericUpDown();
             this.lbOverCount = new System.Windows.Forms.Label();
             this.lbBackCount = new System.Windows.Forms.Label();
-            this.tbRepeatLog = new System.Windows.Forms.TextBox();
             this.nUDSetptsV2 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.cbSetpts = new System.Windows.Forms.CheckBox();
             this.nUDSetptsV1 = new System.Windows.Forms.NumericUpDown();
-            this.button9 = new System.Windows.Forms.Button();
+            this.btnTab2SelectVideo = new System.Windows.Forms.Button();
             this.cbOverlay = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnTab2SelectAudio = new System.Windows.Forms.Button();
             this.cbBackground = new System.Windows.Forms.CheckBox();
             this.nUDBrightnessV2 = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
@@ -93,10 +92,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbContrast = new System.Windows.Forms.CheckBox();
             this.nUDContrastV1 = new System.Windows.Forms.NumericUpDown();
-            this.btnRepeat = new System.Windows.Forms.Button();
+            this.btnTab2Repeat = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.nUDTab3ExecCount = new System.Windows.Forms.NumericUpDown();
+            this.btnTab3Exec = new System.Windows.Forms.Button();
+            this.labTab3BackgroundCount = new System.Windows.Forms.Label();
+            this.btnTab3BackgroundVideo = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -123,6 +124,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -175,7 +177,7 @@
             this.columnHeader2});
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(242, 769);
+            this.listView1.Size = new System.Drawing.Size(242, 505);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -196,28 +198,40 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.tbLog);
             this.panel1.Controls.Add(this.listView1);
+            this.panel1.Controls.Add(this.pbProgress);
             this.panel1.Location = new System.Drawing.Point(12, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(250, 777);
             this.panel1.TabIndex = 3;
             // 
-            // btnRemoveWatermark
+            // tbLog
             // 
-            this.btnRemoveWatermark.Location = new System.Drawing.Point(3, 162);
-            this.btnRemoveWatermark.Name = "btnRemoveWatermark";
-            this.btnRemoveWatermark.Size = new System.Drawing.Size(242, 23);
-            this.btnRemoveWatermark.TabIndex = 4;
-            this.btnRemoveWatermark.Text = "去水印";
-            this.btnRemoveWatermark.UseVisualStyleBackColor = true;
-            this.btnRemoveWatermark.Click += new System.EventHandler(this.btnRemoveWatermark_Click);
+            this.tbLog.Location = new System.Drawing.Point(3, 543);
+            this.tbLog.Multiline = true;
+            this.tbLog.Name = "tbLog";
+            this.tbLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbLog.Size = new System.Drawing.Size(242, 229);
+            this.tbLog.TabIndex = 3;
+            this.tbLog.Text = "show log";
             // 
-            // progressBar1
+            // pbProgress
             // 
-            this.progressBar1.Location = new System.Drawing.Point(3, 133);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(242, 23);
-            this.progressBar1.TabIndex = 5;
+            this.pbProgress.Location = new System.Drawing.Point(3, 514);
+            this.pbProgress.Name = "pbProgress";
+            this.pbProgress.Size = new System.Drawing.Size(242, 23);
+            this.pbProgress.TabIndex = 5;
+            // 
+            // btnTab1RmWatermark
+            // 
+            this.btnTab1RmWatermark.Location = new System.Drawing.Point(3, 89);
+            this.btnTab1RmWatermark.Name = "btnTab1RmWatermark";
+            this.btnTab1RmWatermark.Size = new System.Drawing.Size(242, 23);
+            this.btnTab1RmWatermark.TabIndex = 4;
+            this.btnTab1RmWatermark.Text = "去水印";
+            this.btnTab1RmWatermark.UseVisualStyleBackColor = true;
+            this.btnTab1RmWatermark.Click += new System.EventHandler(this.btnTab1RmWatermark_Click);
             // 
             // checkBox1
             // 
@@ -231,24 +245,15 @@
             this.checkBox1.Text = "右击图片，打开下一个视频";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // btnTab1CancelLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 115);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 15);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "进度";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(3, 60);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(242, 23);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "撤销水印标注";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnTab1CancelLabel.Location = new System.Drawing.Point(3, 60);
+            this.btnTab1CancelLabel.Name = "btnTab1CancelLabel";
+            this.btnTab1CancelLabel.Size = new System.Drawing.Size(242, 23);
+            this.btnTab1CancelLabel.TabIndex = 9;
+            this.btnTab1CancelLabel.Text = "撤销水印标注";
+            this.btnTab1CancelLabel.UseVisualStyleBackColor = true;
+            this.btnTab1CancelLabel.Click += new System.EventHandler(this.btnTab1CancelLabel_Click);
             // 
             // checkBox2
             // 
@@ -266,11 +271,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.checkBox2);
-            this.panel3.Controls.Add(this.button5);
-            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.btnTab1CancelLabel);
             this.panel3.Controls.Add(this.checkBox1);
-            this.panel3.Controls.Add(this.progressBar1);
-            this.panel3.Controls.Add(this.btnRemoveWatermark);
+            this.panel3.Controls.Add(this.btnTab1RmWatermark);
             this.panel3.Location = new System.Drawing.Point(648, 6);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(250, 737);
@@ -310,8 +313,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.btnTab1NextVideo);
+            this.panel2.Controls.Add(this.btnTab1PrevVideo);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Location = new System.Drawing.Point(6, 9);
@@ -320,29 +323,29 @@
             this.panel2.TabIndex = 4;
             this.panel2.Tag = "";
             // 
-            // button4
+            // btnTab1NextVideo
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnTab1NextVideo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(3, 706);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(628, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "下一个视频";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnTab1NextVideo.Location = new System.Drawing.Point(3, 706);
+            this.btnTab1NextVideo.Name = "btnTab1NextVideo";
+            this.btnTab1NextVideo.Size = new System.Drawing.Size(628, 23);
+            this.btnTab1NextVideo.TabIndex = 9;
+            this.btnTab1NextVideo.Text = "下一个视频";
+            this.btnTab1NextVideo.UseVisualStyleBackColor = true;
+            this.btnTab1NextVideo.Click += new System.EventHandler(this.btnTab1NextVideo_Click);
             // 
-            // button3
+            // btnTab1PrevVideo
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnTab1PrevVideo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(3, 679);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(628, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "上一个视频";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnTab1PrevVideo.Location = new System.Drawing.Point(3, 679);
+            this.btnTab1PrevVideo.Name = "btnTab1PrevVideo";
+            this.btnTab1PrevVideo.Size = new System.Drawing.Size(628, 23);
+            this.btnTab1PrevVideo.TabIndex = 8;
+            this.btnTab1PrevVideo.Text = "上一个视频";
+            this.btnTab1PrevVideo.UseVisualStyleBackColor = true;
+            this.btnTab1PrevVideo.Click += new System.EventHandler(this.btnTab1PrevVideo_Click);
             // 
             // textBox1
             // 
@@ -391,15 +394,14 @@
             this.tabPage2.Controls.Add(this.nUDRotateV1);
             this.tabPage2.Controls.Add(this.lbOverCount);
             this.tabPage2.Controls.Add(this.lbBackCount);
-            this.tabPage2.Controls.Add(this.tbRepeatLog);
             this.tabPage2.Controls.Add(this.nUDSetptsV2);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.cbSetpts);
             this.tabPage2.Controls.Add(this.nUDSetptsV1);
-            this.tabPage2.Controls.Add(this.button9);
+            this.tabPage2.Controls.Add(this.btnTab2SelectVideo);
             this.tabPage2.Controls.Add(this.cbOverlay);
             this.tabPage2.Controls.Add(this.label22);
-            this.tabPage2.Controls.Add(this.button7);
+            this.tabPage2.Controls.Add(this.btnTab2SelectAudio);
             this.tabPage2.Controls.Add(this.cbBackground);
             this.tabPage2.Controls.Add(this.nUDBrightnessV2);
             this.tabPage2.Controls.Add(this.label12);
@@ -413,7 +415,7 @@
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.cbContrast);
             this.tabPage2.Controls.Add(this.nUDContrastV1);
-            this.tabPage2.Controls.Add(this.btnRepeat);
+            this.tabPage2.Controls.Add(this.btnTab2Repeat);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -424,7 +426,7 @@
             // 
             // nUPRepeatCount
             // 
-            this.nUPRepeatCount.Location = new System.Drawing.Point(3, 716);
+            this.nUPRepeatCount.Location = new System.Drawing.Point(8, 680);
             this.nUPRepeatCount.Maximum = new decimal(new int[] {
             10,
             0,
@@ -436,7 +438,7 @@
             0,
             0});
             this.nUPRepeatCount.Name = "nUPRepeatCount";
-            this.nUPRepeatCount.Size = new System.Drawing.Size(73, 23);
+            this.nUPRepeatCount.Size = new System.Drawing.Size(890, 23);
             this.nUPRepeatCount.TabIndex = 104;
             this.nUPRepeatCount.Value = new decimal(new int[] {
             1,
@@ -738,15 +740,6 @@
             this.lbBackCount.TabIndex = 86;
             this.lbBackCount.Text = "请现在背景音乐";
             // 
-            // tbRepeatLog
-            // 
-            this.tbRepeatLog.Location = new System.Drawing.Point(587, 6);
-            this.tbRepeatLog.Multiline = true;
-            this.tbRepeatLog.Name = "tbRepeatLog";
-            this.tbRepeatLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbRepeatLog.Size = new System.Drawing.Size(311, 740);
-            this.tbRepeatLog.TabIndex = 85;
-            // 
             // nUDSetptsV2
             // 
             this.nUDSetptsV2.DecimalPlaces = 2;
@@ -822,15 +815,15 @@
             0,
             131072});
             // 
-            // button9
+            // btnTab2SelectVideo
             // 
-            this.button9.Location = new System.Drawing.Point(111, 427);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 78;
-            this.button9.Text = "视频库";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.btnTab2SelectVideo.Location = new System.Drawing.Point(111, 427);
+            this.btnTab2SelectVideo.Name = "btnTab2SelectVideo";
+            this.btnTab2SelectVideo.Size = new System.Drawing.Size(75, 23);
+            this.btnTab2SelectVideo.TabIndex = 78;
+            this.btnTab2SelectVideo.Text = "视频库";
+            this.btnTab2SelectVideo.UseVisualStyleBackColor = true;
+            this.btnTab2SelectVideo.Click += new System.EventHandler(this.btnTab2SelectVideo_Click);
             // 
             // cbOverlay
             // 
@@ -851,15 +844,15 @@
             this.label22.TabIndex = 75;
             this.label22.Text = "全局随机";
             // 
-            // button7
+            // btnTab2SelectAudio
             // 
-            this.button7.Location = new System.Drawing.Point(111, 379);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 66;
-            this.button7.Text = "音乐库";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.btnTab2SelectAudio.Location = new System.Drawing.Point(111, 379);
+            this.btnTab2SelectAudio.Name = "btnTab2SelectAudio";
+            this.btnTab2SelectAudio.Size = new System.Drawing.Size(75, 23);
+            this.btnTab2SelectAudio.TabIndex = 66;
+            this.btnTab2SelectAudio.Text = "音乐库";
+            this.btnTab2SelectAudio.UseVisualStyleBackColor = true;
+            this.btnTab2SelectAudio.Click += new System.EventHandler(this.btnTab2SelectAudio_Click);
             // 
             // cbBackground
             // 
@@ -1086,20 +1079,22 @@
             0,
             131072});
             // 
-            // btnRepeat
+            // btnTab2Repeat
             // 
-            this.btnRepeat.Location = new System.Drawing.Point(80, 709);
-            this.btnRepeat.Name = "btnRepeat";
-            this.btnRepeat.Size = new System.Drawing.Size(501, 36);
-            this.btnRepeat.TabIndex = 9;
-            this.btnRepeat.Text = "去重";
-            this.btnRepeat.UseVisualStyleBackColor = true;
-            this.btnRepeat.Click += new System.EventHandler(this.button6_Click);
+            this.btnTab2Repeat.Location = new System.Drawing.Point(6, 709);
+            this.btnTab2Repeat.Name = "btnTab2Repeat";
+            this.btnTab2Repeat.Size = new System.Drawing.Size(892, 36);
+            this.btnTab2Repeat.TabIndex = 9;
+            this.btnTab2Repeat.Text = "去重";
+            this.btnTab2Repeat.UseVisualStyleBackColor = true;
+            this.btnTab2Repeat.Click += new System.EventHandler(this.btnTab2Repeat_Click);
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.nUDTab3ExecCount);
+            this.tabPage3.Controls.Add(this.btnTab3Exec);
+            this.tabPage3.Controls.Add(this.labTab3BackgroundCount);
+            this.tabPage3.Controls.Add(this.btnTab3BackgroundVideo);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -1108,23 +1103,51 @@
             this.tabPage3.Text = "加图";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // nUDTab3ExecCount
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(108, 10);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(124, 15);
-            this.label9.TabIndex = 90;
-            this.label9.Text = "请选择多个背景视频";
+            this.nUDTab3ExecCount.Location = new System.Drawing.Point(6, 679);
+            this.nUDTab3ExecCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDTab3ExecCount.Name = "nUDTab3ExecCount";
+            this.nUDTab3ExecCount.Size = new System.Drawing.Size(892, 23);
+            this.nUDTab3ExecCount.TabIndex = 92;
+            this.nUDTab3ExecCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // button1
+            // btnTab3Exec
             // 
-            this.button1.Location = new System.Drawing.Point(6, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 23);
-            this.button1.TabIndex = 89;
-            this.button1.Text = "背景视频库";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnTab3Exec.Location = new System.Drawing.Point(6, 708);
+            this.btnTab3Exec.Name = "btnTab3Exec";
+            this.btnTab3Exec.Size = new System.Drawing.Size(892, 35);
+            this.btnTab3Exec.TabIndex = 91;
+            this.btnTab3Exec.Text = "生成";
+            this.btnTab3Exec.UseVisualStyleBackColor = true;
+            this.btnTab3Exec.Click += new System.EventHandler(this.btnTab3Exec_Click);
+            // 
+            // labTab3BackgroundCount
+            // 
+            this.labTab3BackgroundCount.AutoSize = true;
+            this.labTab3BackgroundCount.Location = new System.Drawing.Point(108, 10);
+            this.labTab3BackgroundCount.Name = "labTab3BackgroundCount";
+            this.labTab3BackgroundCount.Size = new System.Drawing.Size(124, 15);
+            this.labTab3BackgroundCount.TabIndex = 90;
+            this.labTab3BackgroundCount.Text = "请选择多个背景视频";
+            // 
+            // btnTab3BackgroundVideo
+            // 
+            this.btnTab3BackgroundVideo.Location = new System.Drawing.Point(6, 6);
+            this.btnTab3BackgroundVideo.Name = "btnTab3BackgroundVideo";
+            this.btnTab3BackgroundVideo.Size = new System.Drawing.Size(96, 23);
+            this.btnTab3BackgroundVideo.TabIndex = 89;
+            this.btnTab3BackgroundVideo.Text = "背景视频库";
+            this.btnTab3BackgroundVideo.UseVisualStyleBackColor = true;
+            this.btnTab3BackgroundVideo.Click += new System.EventHandler(this.btnTab3BackgroundVideo_Click);
             // 
             // Form1
             // 
@@ -1140,6 +1163,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1168,6 +1192,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1182,22 +1207,24 @@
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private Panel panel1;
-        private Button btnRemoveWatermark;
-        private ProgressBar progressBar1;
+        private Button btnTab1RmWatermark;
+        private ProgressBar pbProgress;
         private CheckBox checkBox1;
         private Label label6;
-        private Button button5;
+        private Button btnTab1CancelLabel;
         private CheckBox checkBox2;
         private Panel panel3;
         private TabControl tabControl1;
         private TabPage tabPage1;
         private Panel panel2;
-        private Button button4;
-        private Button button3;
+        private Button btnTab1NextVideo;
+        private Button btnTab1PrevVideo;
         private TextBox textBox1;
         private PictureBox pictureBox1;
         private TabPage tabPage2;
-        private Button btnRepeat;
+        private Button btnTab2SelectVideo;
+        private Button btnTab2SelectAudio;
+        private Button btnTab2Repeat;
         private CheckBox cbBackground;
         private NumericUpDown nUDBrightnessV2;
         private Label label12;
@@ -1211,15 +1238,12 @@
         private Label label3;
         private CheckBox cbContrast;
         private NumericUpDown nUDContrastV1;
-        private Button button7;
         private Label label22;
-        private Button button9;
         private CheckBox cbOverlay;
         private NumericUpDown nUDSetptsV2;
         private Label label4;
         private CheckBox cbSetpts;
         private NumericUpDown nUDSetptsV1;
-        private TextBox tbRepeatLog;
         private Label lbOverCount;
         private Label lbBackCount;
         private NumericUpDown nUDRotateV2;
@@ -1242,7 +1266,10 @@
         private ToolStripMenuItem 安装FfmpegToolStripMenuItem;
         private NumericUpDown nUPRepeatCount;
         private TabPage tabPage3;
-        private Label label9;
-        private Button button1;
+        private Label labTab3BackgroundCount;
+        private Button btnTab3BackgroundVideo;
+        private TextBox tbLog;
+        private Button btnTab3Exec;
+        private NumericUpDown nUDTab3ExecCount;
     }
 }
