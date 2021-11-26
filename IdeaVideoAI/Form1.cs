@@ -986,7 +986,7 @@ namespace IdeaVideoAI
 
         private void btnTab3BackgroundVideo_Click(object sender, EventArgs e)
         {
-            Config.Instance.tab3BackgroundVideoFiles.Clear();
+            Config.Instance.tab3BgVideoFiles.Clear();
 
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = true;
@@ -994,7 +994,7 @@ namespace IdeaVideoAI
             fd.Filter = "All Video Files|*.mp4;*.mpg;*.mpeg;*.avi;*.rm;*.rmvb;*.mov;*.wmv;*.asf;*.dat;*.asx;*.wvx;*.mpe;*.mpa";
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                Config.Instance.tab3BackgroundVideoFiles.AddRange(fd.FileNames);
+                Config.Instance.tab3BgVideoFiles.AddRange(fd.FileNames);
                 labTab3BackgroundCount.Text = "" + fd.FileNames.Count();
             }
         }
@@ -1008,13 +1008,17 @@ namespace IdeaVideoAI
                 return;
             }
 
-            if(Config.Instance.tab3BackgroundVideoFiles.Count <= 0)
+            if(Config.Instance.tab3BgVideoFiles.Count <= 0)
             {
                 MessageBox.Show("请至少选择一个背景视频");
                 return;
             }
 
             Config.Instance.tab3ExecCount = (int)nUDTab3ExecCount.Value;
+
+            Config.Instance.tab3MinStartTime = (int)nUDTab3VideoMinStartTime.Value;
+            Config.Instance.tab3MaxStartTime = (int)nUDTab3VideoMaxStartTime.Value;
+
 
             for (int i = 0; i < pictureDatas.Count; i++)
             {
@@ -1023,13 +1027,31 @@ namespace IdeaVideoAI
 
                 for(int j = 0; j < Config.Instance.tab3ExecCount; j++)
                 {
-                    int xRandom = Utils.nextRandomRange(0, 100);
+
+                    var ss = Utils.nextRandomRange(Config.Instance.tab3MinStartTime, Config.Instance.tab3MaxStartTime);
+                    var videoFile = Config.Instance.getRandomByTab3BackgroundVideo();
+                    var imageFile = item.filePath;
+                    var fontFile = Config.Instance.tab3FontPictureFile;
+
+                    int xRandom = Utils.nextRandomRange(75, 138);
                     int yRandom = Utils.nextRandomRange(0, 100);
 
-                    var videoFile = Config.Instance.getRandomByTab3BackgroundVideo();
 
-                    var cmd = String.Format(" -y -ss {0} -i \"{1}\" -i \"{2}\" -filter_complex \"[0:a]atempo=1.0[audio];[1:v][0:v]scale2ref=w=8/10*iw:h=ow*mdar[pic];[0][pic]overlay=shortest=1:x=(W-w)/100*{3}:y=(H/100*80-h)/100*{4}[video]\" -map [audio] -map [video] \"{5}\" ",
-                        Utils.nextRandomRange(1,10),videoFile,item.filePath,xRandom,yRandom, Path.Join(item.outDir, j + 1 + "__" + item.fileName + Path.GetExtension(videoFile)));
+                    var ffmpegFormat = " -y {0} -filter_complex \"{1}\" -map [audio] -map [video] \"{2}\" ";
+
+                    var tempInput = string.Format(" -ss {0} -i \"{1}\" -i \"{2}\" ", ss, videoFile, imageFile);
+                    var tempFilter = "[0:a]acopy[audio];[0:v]copy[video];[1:v][video]scale2ref=w=iw/10*8:h=ow/main_a[over][video]";
+                    var tempOut = Path.Join(item.outDir, j + 1 + "__" + item.fileName + Path.GetExtension(videoFile));
+
+                    if (!string.IsNullOrEmpty(fontFile))
+                    {
+                        tempInput += string.Format(" -i {0} ", fontFile);
+                        tempFilter += ";[2:v][over]scale2ref=w=iw:h=ow/main_a[font][over];[over][font]vstack[over]";
+                    }
+                    tempFilter += string.Format(";[video][over]overlay=x=W*{0}/1000:y=H/16+H/16*{1}/100[video]", xRandom, yRandom);
+
+                    //" -y -ss {0} -i \"{1}\" -i \"{2}\" -i \"{3}\" -filter_complex \"[0:a]acopy[audio];[1:v][0:v]scale2ref=w=iw/10*8:h=ow/main_a[pic][video];[2:v][pic]scale2ref=w=iw:h=ow/main_a[font][pic];[pic][font]vstack[over];[video][pic]overlay=x=W*{4}/1000:y=H/16+H/16*{5}/100[video]\" -map [audio] -map [video] \"{6}\" "
+                    var cmd = String.Format(ffmpegFormat, tempInput, tempFilter, tempOut);
                     item.execCmds.Add(cmd);
                 }
 
@@ -1043,6 +1065,20 @@ namespace IdeaVideoAI
 
         }
 
+        private void btnTab3AddFontPicture_Click(object sender, EventArgs e)
+        {
+            Config.Instance.tab3FontPictureFile = "";
+
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Multiselect = true;
+            fd.Title = "Please Select File";
+            fd.Filter = "All Image Files|*.jpg;*.png;*.jepg";
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                Config.Instance.tab3FontPictureFile = fd.FileName;
+                labTab3AddFontPicture.Text = fd.FileName;
+            }
+        }
     }
 
 }

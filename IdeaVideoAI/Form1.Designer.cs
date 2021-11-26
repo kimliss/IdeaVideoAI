@@ -94,6 +94,11 @@
             this.nUDContrastV1 = new System.Windows.Forms.NumericUpDown();
             this.btnTab2Repeat = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.labTab3AddFontPicture = new System.Windows.Forms.Label();
+            this.btnTab3AddFontPicture = new System.Windows.Forms.Button();
+            this.nUDTab3VideoMaxStartTime = new System.Windows.Forms.NumericUpDown();
+            this.nUDTab3VideoMinStartTime = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             this.nUDTab3ExecCount = new System.Windows.Forms.NumericUpDown();
             this.btnTab3Exec = new System.Windows.Forms.Button();
             this.labTab3BackgroundCount = new System.Windows.Forms.Label();
@@ -124,6 +129,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMaxStartTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMinStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1091,6 +1098,11 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.labTab3AddFontPicture);
+            this.tabPage3.Controls.Add(this.btnTab3AddFontPicture);
+            this.tabPage3.Controls.Add(this.nUDTab3VideoMaxStartTime);
+            this.tabPage3.Controls.Add(this.nUDTab3VideoMinStartTime);
+            this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.nUDTab3ExecCount);
             this.tabPage3.Controls.Add(this.btnTab3Exec);
             this.tabPage3.Controls.Add(this.labTab3BackgroundCount);
@@ -1102,6 +1114,53 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "加图";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // labTab3AddFontPicture
+            // 
+            this.labTab3AddFontPicture.AutoSize = true;
+            this.labTab3AddFontPicture.Location = new System.Drawing.Point(138, 39);
+            this.labTab3AddFontPicture.Name = "labTab3AddFontPicture";
+            this.labTab3AddFontPicture.Size = new System.Drawing.Size(111, 15);
+            this.labTab3AddFontPicture.TabIndex = 97;
+            this.labTab3AddFontPicture.Text = "请选择宣传语图片";
+            // 
+            // btnTab3AddFontPicture
+            // 
+            this.btnTab3AddFontPicture.Location = new System.Drawing.Point(3, 35);
+            this.btnTab3AddFontPicture.Name = "btnTab3AddFontPicture";
+            this.btnTab3AddFontPicture.Size = new System.Drawing.Size(127, 23);
+            this.btnTab3AddFontPicture.TabIndex = 96;
+            this.btnTab3AddFontPicture.Text = "宣传语图片";
+            this.btnTab3AddFontPicture.UseVisualStyleBackColor = true;
+            this.btnTab3AddFontPicture.Click += new System.EventHandler(this.btnTab3AddFontPicture_Click);
+            // 
+            // nUDTab3VideoMaxStartTime
+            // 
+            this.nUDTab3VideoMaxStartTime.Location = new System.Drawing.Point(356, 6);
+            this.nUDTab3VideoMaxStartTime.Name = "nUDTab3VideoMaxStartTime";
+            this.nUDTab3VideoMaxStartTime.Size = new System.Drawing.Size(120, 23);
+            this.nUDTab3VideoMaxStartTime.TabIndex = 95;
+            this.nUDTab3VideoMaxStartTime.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // nUDTab3VideoMinStartTime
+            // 
+            this.nUDTab3VideoMinStartTime.Location = new System.Drawing.Point(219, 6);
+            this.nUDTab3VideoMinStartTime.Name = "nUDTab3VideoMinStartTime";
+            this.nUDTab3VideoMinStartTime.Size = new System.Drawing.Size(120, 23);
+            this.nUDTab3VideoMinStartTime.TabIndex = 94;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(138, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(75, 15);
+            this.label9.TabIndex = 93;
+            this.label9.Text = "随机开始:(s)";
             // 
             // nUDTab3ExecCount
             // 
@@ -1133,7 +1192,7 @@
             // labTab3BackgroundCount
             // 
             this.labTab3BackgroundCount.AutoSize = true;
-            this.labTab3BackgroundCount.Location = new System.Drawing.Point(108, 10);
+            this.labTab3BackgroundCount.Location = new System.Drawing.Point(482, 10);
             this.labTab3BackgroundCount.Name = "labTab3BackgroundCount";
             this.labTab3BackgroundCount.Size = new System.Drawing.Size(124, 15);
             this.labTab3BackgroundCount.TabIndex = 90;
@@ -1141,11 +1200,11 @@
             // 
             // btnTab3BackgroundVideo
             // 
-            this.btnTab3BackgroundVideo.Location = new System.Drawing.Point(6, 6);
+            this.btnTab3BackgroundVideo.Location = new System.Drawing.Point(3, 6);
             this.btnTab3BackgroundVideo.Name = "btnTab3BackgroundVideo";
-            this.btnTab3BackgroundVideo.Size = new System.Drawing.Size(96, 23);
+            this.btnTab3BackgroundVideo.Size = new System.Drawing.Size(127, 23);
             this.btnTab3BackgroundVideo.TabIndex = 89;
-            this.btnTab3BackgroundVideo.Text = "背景视频库";
+            this.btnTab3BackgroundVideo.Text = "随机背景视频库";
             this.btnTab3BackgroundVideo.UseVisualStyleBackColor = true;
             this.btnTab3BackgroundVideo.Click += new System.EventHandler(this.btnTab3BackgroundVideo_Click);
             // 
@@ -1192,6 +1251,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMaxStartTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMinStartTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1271,5 +1332,10 @@
         private TextBox tbLog;
         private Button btnTab3Exec;
         private NumericUpDown nUDTab3ExecCount;
+        private Label label9;
+        private NumericUpDown nUDTab3VideoMaxStartTime;
+        private NumericUpDown nUDTab3VideoMinStartTime;
+        private Label labTab3AddFontPicture;
+        private Button btnTab3AddFontPicture;
     }
 }
