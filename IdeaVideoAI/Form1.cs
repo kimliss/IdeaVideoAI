@@ -1018,6 +1018,7 @@ namespace IdeaVideoAI
 
             Config.Instance.tab3MinStartTime = (int)nUDTab3VideoMinStartTime.Value;
             Config.Instance.tab3MaxStartTime = (int)nUDTab3VideoMaxStartTime.Value;
+            Config.Instance.tab3OutTime = (int)nUDTab3OutTime.Value;
 
 
             for (int i = 0; i < pictureDatas.Count; i++)
@@ -1039,7 +1040,7 @@ namespace IdeaVideoAI
 
                     var ffmpegFormat = " -y {0} -filter_complex \"{1}\" -map [audio] -map [video] \"{2}\" ";
 
-                    var tempInput = string.Format(" -ss {0} -i \"{1}\" -i \"{2}\" ", ss, videoFile, imageFile);
+                    var tempInput = string.Format(" -ss {0} -t {1} -i \"{2}\" -i \"{3}\" ", ss, Config.Instance.tab3OutTime, videoFile, imageFile);
                     var tempFilter = "[0:a]acopy[audio];[0:v]copy[video];[1:v][video]scale2ref=w=iw/10*8:h=ow/main_a[over][video]";
                     var tempOut = Path.Join(item.outDir, j + 1 + "__" + item.fileName + Path.GetExtension(videoFile));
 

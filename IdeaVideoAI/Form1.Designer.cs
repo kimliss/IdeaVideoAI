@@ -103,6 +103,8 @@
             this.btnTab3Exec = new System.Windows.Forms.Button();
             this.labTab3BackgroundCount = new System.Windows.Forms.Label();
             this.btnTab3BackgroundVideo = new System.Windows.Forms.Button();
+            this.nUDTab3OutTime = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -132,6 +134,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMaxStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMinStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3OutTime)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1098,6 +1101,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.nUDTab3OutTime);
+            this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.labTab3AddFontPicture);
             this.tabPage3.Controls.Add(this.btnTab3AddFontPicture);
             this.tabPage3.Controls.Add(this.nUDTab3VideoMaxStartTime);
@@ -1208,6 +1213,32 @@
             this.btnTab3BackgroundVideo.UseVisualStyleBackColor = true;
             this.btnTab3BackgroundVideo.Click += new System.EventHandler(this.btnTab3BackgroundVideo_Click);
             // 
+            // nUPTab3OutTime
+            // 
+            this.nUDTab3OutTime.Location = new System.Drawing.Point(138, 69);
+            this.nUDTab3OutTime.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDTab3OutTime.Name = "nUPTab3OutTime";
+            this.nUDTab3OutTime.Size = new System.Drawing.Size(120, 23);
+            this.nUDTab3OutTime.TabIndex = 99;
+            this.nUDTab3OutTime.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 73);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(129, 15);
+            this.label10.TabIndex = 98;
+            this.label10.Text = "输出视频时长：（s）";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1254,6 +1285,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMaxStartTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMinStartTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3OutTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1337,5 +1369,7 @@
         private NumericUpDown nUDTab3VideoMinStartTime;
         private Label labTab3AddFontPicture;
         private Button btnTab3AddFontPicture;
+        private NumericUpDown nUDTab3OutTime;
+        private Label label10;
     }
 }

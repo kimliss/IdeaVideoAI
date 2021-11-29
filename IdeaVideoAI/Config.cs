@@ -30,6 +30,7 @@ namespace IdeaVideoAI
         public int tab3MinStartTime;
         public int tab3MaxStartTime;
         public string tab3FontPictureFile;
+        public int tab3OutTime;
 
         //背景视频
         public List<String> tab3BgVideoFiles;
