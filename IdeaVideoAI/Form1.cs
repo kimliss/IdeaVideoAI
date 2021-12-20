@@ -44,7 +44,7 @@ namespace IdeaVideoAI
             switch (tabControl1.SelectedIndex)
             {
                 case 2:
-                    fd.Filter = "All Image Files|*.jpg;*.png;*.jepg";
+                    fd.Filter = "All Image Files|*.jpg;*.png;*.jpeg";
                     break;
                 default:
                     fd.Filter = "All Video Files|*.mp4;*.mpg;*.mpeg;*.avi;*.rm;*.rmvb;*.mov;*.wmv;*.asf;*.dat;*.asx;*.wvx;*.mpe;*.mpa";
