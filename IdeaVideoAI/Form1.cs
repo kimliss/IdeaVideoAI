@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using Xabe.FFmpeg;
 using Xabe.FFmpeg.Downloader;
@@ -1019,6 +1020,7 @@ namespace IdeaVideoAI
             Config.Instance.tab3MinStartTime = (int)nUDTab3VideoMinStartTime.Value;
             Config.Instance.tab3MaxStartTime = (int)nUDTab3VideoMaxStartTime.Value;
             Config.Instance.tab3OutTime = (int)nUDTab3OutTime.Value;
+            Config.Instance.tab3PictureSharpen = cbTab3PictureSharpen.Checked;
 
 
             for (int i = 0; i < pictureDatas.Count; i++)
@@ -1038,18 +1040,23 @@ namespace IdeaVideoAI
                     int yRandom = Utils.nextRandomRange(0, 100);
 
 
-                    var ffmpegFormat = " -y {0} -filter_complex \"{1}\" -map [audio] -map [video] \"{2}\" ";
+                    var ffmpegFormat = " -y {0} -filter_complex \"{1}\" \"{2}\" ";
 
                     var tempInput = string.Format(" -ss {0} -t {1} -i \"{2}\" -i \"{3}\" ", ss, Config.Instance.tab3OutTime, videoFile, imageFile);
-                    var tempFilter = "[0:a]acopy[audio];[0:v]copy[video];[1:v][video]scale2ref=w=iw/10*8:h=ow/main_a[over][video]";
+                    var tempFilter = "[1:v][0:v]scale2ref=w=iw/10*8:h=ow/main_a[over][video]";
                     var tempOut = Path.Join(item.outDir, j + 1 + "__" + item.fileName + Path.GetExtension(videoFile));
+
+                    if (Config.Instance.tab3PictureSharpen)
+                    {
+                        tempFilter += ";[over]unsharp=3:3:5[over]";
+                    }
 
                     if (!string.IsNullOrEmpty(fontFile))
                     {
                         tempInput += string.Format(" -i {0} ", fontFile);
                         tempFilter += ";[2:v][over]scale2ref=w=iw:h=ow/main_a[font][over];[over][font]vstack[over]";
                     }
-                    tempFilter += string.Format(";[video][over]overlay=x=W*{0}/1000:y=H/16+H/16*{1}/100[video]", xRandom, yRandom);
+                    tempFilter += string.Format(";[video][over]overlay=x=W*{0}/1000:y=H/16+H/16*{1}/100", xRandom, yRandom);
 
                     //" -y -ss {0} -i \"{1}\" -i \"{2}\" -i \"{3}\" -filter_complex \"[0:a]acopy[audio];[1:v][0:v]scale2ref=w=iw/10*8:h=ow/main_a[pic][video];[2:v][pic]scale2ref=w=iw:h=ow/main_a[font][pic];[pic][font]vstack[over];[video][pic]overlay=x=W*{4}/1000:y=H/16+H/16*{5}/100[video]\" -map [audio] -map [video] \"{6}\" "
                     var cmd = String.Format(ffmpegFormat, tempInput, tempFilter, tempOut);
@@ -1079,6 +1086,15 @@ namespace IdeaVideoAI
                 Config.Instance.tab3FontPictureFile = fd.FileName;
                 labTab3AddFontPicture.Text = fd.FileName;
             }
+        }
+
+        private void ¸üÐÂToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/itwangxiang/IdeaVideoAI/releases",
+                UseShellExecute = true
+            });
         }
     }
 

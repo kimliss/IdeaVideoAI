@@ -33,6 +33,7 @@
             this.openVideoFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.安装FfmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -94,6 +95,9 @@
             this.nUDContrastV1 = new System.Windows.Forms.NumericUpDown();
             this.btnTab2Repeat = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.cbTab3PictureSharpen = new System.Windows.Forms.CheckBox();
+            this.nUDTab3OutTime = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.labTab3AddFontPicture = new System.Windows.Forms.Label();
             this.btnTab3AddFontPicture = new System.Windows.Forms.Button();
             this.nUDTab3VideoMaxStartTime = new System.Windows.Forms.NumericUpDown();
@@ -103,8 +107,6 @@
             this.btnTab3Exec = new System.Windows.Forms.Button();
             this.labTab3BackgroundCount = new System.Windows.Forms.Label();
             this.btnTab3BackgroundVideo = new System.Windows.Forms.Button();
-            this.nUDTab3OutTime = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -131,10 +133,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3OutTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMaxStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMinStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3OutTime)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -160,13 +162,14 @@
             // 
             this.openVideoFileToolStripMenuItem.Name = "openVideoFileToolStripMenuItem";
             this.openVideoFileToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.openVideoFileToolStripMenuItem.Text = "打开视频";
+            this.openVideoFileToolStripMenuItem.Text = "打开文件";
             this.openVideoFileToolStripMenuItem.Click += new System.EventHandler(this.openVideoFileToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.安装FfmpegToolStripMenuItem});
+            this.安装FfmpegToolStripMenuItem,
+            this.更新ToolStripMenuItem});
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.帮助ToolStripMenuItem.Text = "帮助";
@@ -177,6 +180,13 @@
             this.安装FfmpegToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.安装FfmpegToolStripMenuItem.Text = "安装 ffmpeg";
             this.安装FfmpegToolStripMenuItem.Click += new System.EventHandler(this.安装FfmpegToolStripMenuItem_Click);
+            // 
+            // 更新ToolStripMenuItem
+            // 
+            this.更新ToolStripMenuItem.Name = "更新ToolStripMenuItem";
+            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.更新ToolStripMenuItem.Text = "更新";
+            this.更新ToolStripMenuItem.Click += new System.EventHandler(this.更新ToolStripMenuItem_Click);
             // 
             // listView1
             // 
@@ -448,7 +458,7 @@
             0,
             0});
             this.nUPRepeatCount.Name = "nUPRepeatCount";
-            this.nUPRepeatCount.Size = new System.Drawing.Size(890, 23);
+            this.nUPRepeatCount.Size = new System.Drawing.Size(892, 23);
             this.nUPRepeatCount.TabIndex = 104;
             this.nUPRepeatCount.Value = new decimal(new int[] {
             1,
@@ -1101,6 +1111,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.cbTab3PictureSharpen);
             this.tabPage3.Controls.Add(this.nUDTab3OutTime);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.labTab3AddFontPicture);
@@ -1120,18 +1131,56 @@
             this.tabPage3.Text = "加图";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // cbTab3PictureSharpen
+            // 
+            this.cbTab3PictureSharpen.AutoSize = true;
+            this.cbTab3PictureSharpen.Checked = true;
+            this.cbTab3PictureSharpen.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbTab3PictureSharpen.Location = new System.Drawing.Point(6, 106);
+            this.cbTab3PictureSharpen.Name = "cbTab3PictureSharpen";
+            this.cbTab3PictureSharpen.Size = new System.Drawing.Size(78, 19);
+            this.cbTab3PictureSharpen.TabIndex = 100;
+            this.cbTab3PictureSharpen.Text = "图片锐化";
+            this.cbTab3PictureSharpen.UseVisualStyleBackColor = true;
+            // 
+            // nUDTab3OutTime
+            // 
+            this.nUDTab3OutTime.Location = new System.Drawing.Point(138, 69);
+            this.nUDTab3OutTime.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUDTab3OutTime.Name = "nUDTab3OutTime";
+            this.nUDTab3OutTime.Size = new System.Drawing.Size(34, 23);
+            this.nUDTab3OutTime.TabIndex = 99;
+            this.nUDTab3OutTime.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 73);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(129, 15);
+            this.label10.TabIndex = 98;
+            this.label10.Text = "输出视频时长：（s）";
+            // 
             // labTab3AddFontPicture
             // 
             this.labTab3AddFontPicture.AutoSize = true;
             this.labTab3AddFontPicture.Location = new System.Drawing.Point(138, 39);
             this.labTab3AddFontPicture.Name = "labTab3AddFontPicture";
-            this.labTab3AddFontPicture.Size = new System.Drawing.Size(111, 15);
+            this.labTab3AddFontPicture.Size = new System.Drawing.Size(13, 15);
             this.labTab3AddFontPicture.TabIndex = 97;
-            this.labTab3AddFontPicture.Text = "请选择宣传语图片";
+            this.labTab3AddFontPicture.Text = "0";
             // 
             // btnTab3AddFontPicture
             // 
-            this.btnTab3AddFontPicture.Location = new System.Drawing.Point(3, 35);
+            this.btnTab3AddFontPicture.Location = new System.Drawing.Point(6, 35);
             this.btnTab3AddFontPicture.Name = "btnTab3AddFontPicture";
             this.btnTab3AddFontPicture.Size = new System.Drawing.Size(127, 23);
             this.btnTab3AddFontPicture.TabIndex = 96;
@@ -1141,9 +1190,9 @@
             // 
             // nUDTab3VideoMaxStartTime
             // 
-            this.nUDTab3VideoMaxStartTime.Location = new System.Drawing.Point(356, 6);
+            this.nUDTab3VideoMaxStartTime.Location = new System.Drawing.Point(341, 6);
             this.nUDTab3VideoMaxStartTime.Name = "nUDTab3VideoMaxStartTime";
-            this.nUDTab3VideoMaxStartTime.Size = new System.Drawing.Size(120, 23);
+            this.nUDTab3VideoMaxStartTime.Size = new System.Drawing.Size(40, 23);
             this.nUDTab3VideoMaxStartTime.TabIndex = 95;
             this.nUDTab3VideoMaxStartTime.Value = new decimal(new int[] {
             10,
@@ -1153,19 +1202,19 @@
             // 
             // nUDTab3VideoMinStartTime
             // 
-            this.nUDTab3VideoMinStartTime.Location = new System.Drawing.Point(219, 6);
+            this.nUDTab3VideoMinStartTime.Location = new System.Drawing.Point(296, 6);
             this.nUDTab3VideoMinStartTime.Name = "nUDTab3VideoMinStartTime";
-            this.nUDTab3VideoMinStartTime.Size = new System.Drawing.Size(120, 23);
+            this.nUDTab3VideoMinStartTime.Size = new System.Drawing.Size(39, 23);
             this.nUDTab3VideoMinStartTime.TabIndex = 94;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(138, 10);
+            this.label9.Location = new System.Drawing.Point(189, 10);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 15);
+            this.label9.Size = new System.Drawing.Size(101, 15);
             this.label9.TabIndex = 93;
-            this.label9.Text = "随机开始:(s)";
+            this.label9.Text = "随机开始时间:(s)";
             // 
             // nUDTab3ExecCount
             // 
@@ -1197,47 +1246,21 @@
             // labTab3BackgroundCount
             // 
             this.labTab3BackgroundCount.AutoSize = true;
-            this.labTab3BackgroundCount.Location = new System.Drawing.Point(482, 10);
+            this.labTab3BackgroundCount.Location = new System.Drawing.Point(138, 10);
             this.labTab3BackgroundCount.Name = "labTab3BackgroundCount";
-            this.labTab3BackgroundCount.Size = new System.Drawing.Size(124, 15);
+            this.labTab3BackgroundCount.Size = new System.Drawing.Size(13, 15);
             this.labTab3BackgroundCount.TabIndex = 90;
-            this.labTab3BackgroundCount.Text = "请选择多个背景视频";
+            this.labTab3BackgroundCount.Text = "0";
             // 
             // btnTab3BackgroundVideo
             // 
-            this.btnTab3BackgroundVideo.Location = new System.Drawing.Point(3, 6);
+            this.btnTab3BackgroundVideo.Location = new System.Drawing.Point(6, 6);
             this.btnTab3BackgroundVideo.Name = "btnTab3BackgroundVideo";
             this.btnTab3BackgroundVideo.Size = new System.Drawing.Size(127, 23);
             this.btnTab3BackgroundVideo.TabIndex = 89;
             this.btnTab3BackgroundVideo.Text = "随机背景视频库";
             this.btnTab3BackgroundVideo.UseVisualStyleBackColor = true;
             this.btnTab3BackgroundVideo.Click += new System.EventHandler(this.btnTab3BackgroundVideo_Click);
-            // 
-            // nUPTab3OutTime
-            // 
-            this.nUDTab3OutTime.Location = new System.Drawing.Point(138, 69);
-            this.nUDTab3OutTime.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nUDTab3OutTime.Name = "nUPTab3OutTime";
-            this.nUDTab3OutTime.Size = new System.Drawing.Size(120, 23);
-            this.nUDTab3OutTime.TabIndex = 99;
-            this.nUDTab3OutTime.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 73);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(129, 15);
-            this.label10.TabIndex = 98;
-            this.label10.Text = "输出视频时长：（s）";
             // 
             // Form1
             // 
@@ -1282,10 +1305,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDContrastV1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3OutTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMaxStartTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMinStartTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDTab3OutTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1371,5 +1394,7 @@
         private Button btnTab3AddFontPicture;
         private NumericUpDown nUDTab3OutTime;
         private Label label10;
+        private CheckBox cbTab3PictureSharpen;
+        private ToolStripMenuItem 更新ToolStripMenuItem;
     }
 }
