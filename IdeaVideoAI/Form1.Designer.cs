@@ -107,6 +107,7 @@
             this.btnTab3Exec = new System.Windows.Forms.Button();
             this.labTab3BackgroundCount = new System.Windows.Forms.Label();
             this.btnTab3BackgroundVideo = new System.Windows.Forms.Button();
+            this.cbTab3PictureWidthMax = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -141,12 +142,14 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1192, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(1873, 34);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -155,13 +158,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openVideoFileToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.fileToolStripMenuItem.Text = "文件";
             // 
             // openVideoFileToolStripMenuItem
             // 
             this.openVideoFileToolStripMenuItem.Name = "openVideoFileToolStripMenuItem";
-            this.openVideoFileToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.openVideoFileToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.openVideoFileToolStripMenuItem.Text = "打开文件";
             this.openVideoFileToolStripMenuItem.Click += new System.EventHandler(this.openVideoFileToolStripMenuItem_Click);
             // 
@@ -171,20 +174,20 @@
             this.安装FfmpegToolStripMenuItem,
             this.更新ToolStripMenuItem});
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.帮助ToolStripMenuItem.Text = "帮助";
             // 
             // 安装FfmpegToolStripMenuItem
             // 
             this.安装FfmpegToolStripMenuItem.Name = "安装FfmpegToolStripMenuItem";
-            this.安装FfmpegToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.安装FfmpegToolStripMenuItem.Size = new System.Drawing.Size(214, 34);
             this.安装FfmpegToolStripMenuItem.Text = "安装 ffmpeg";
             this.安装FfmpegToolStripMenuItem.Click += new System.EventHandler(this.安装FfmpegToolStripMenuItem_Click);
             // 
             // 更新ToolStripMenuItem
             // 
             this.更新ToolStripMenuItem.Name = "更新ToolStripMenuItem";
-            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(214, 34);
             this.更新ToolStripMenuItem.Text = "更新";
             this.更新ToolStripMenuItem.Click += new System.EventHandler(this.更新ToolStripMenuItem_Click);
             // 
@@ -195,9 +198,10 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-            this.listView1.Location = new System.Drawing.Point(3, 3);
+            this.listView1.Location = new System.Drawing.Point(5, 5);
+            this.listView1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(242, 505);
+            this.listView1.Size = new System.Drawing.Size(378, 806);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -221,33 +225,37 @@
             this.panel1.Controls.Add(this.tbLog);
             this.panel1.Controls.Add(this.listView1);
             this.panel1.Controls.Add(this.pbProgress);
-            this.panel1.Location = new System.Drawing.Point(12, 27);
+            this.panel1.Location = new System.Drawing.Point(19, 43);
+            this.panel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(250, 777);
+            this.panel1.Size = new System.Drawing.Size(392, 1242);
             this.panel1.TabIndex = 3;
             // 
             // tbLog
             // 
-            this.tbLog.Location = new System.Drawing.Point(3, 543);
+            this.tbLog.Location = new System.Drawing.Point(5, 869);
+            this.tbLog.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.tbLog.Multiline = true;
             this.tbLog.Name = "tbLog";
             this.tbLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbLog.Size = new System.Drawing.Size(242, 229);
+            this.tbLog.Size = new System.Drawing.Size(378, 364);
             this.tbLog.TabIndex = 3;
             this.tbLog.Text = "show log";
             // 
             // pbProgress
             // 
-            this.pbProgress.Location = new System.Drawing.Point(3, 514);
+            this.pbProgress.Location = new System.Drawing.Point(5, 822);
+            this.pbProgress.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.pbProgress.Name = "pbProgress";
-            this.pbProgress.Size = new System.Drawing.Size(242, 23);
+            this.pbProgress.Size = new System.Drawing.Size(380, 37);
             this.pbProgress.TabIndex = 5;
             // 
             // btnTab1RmWatermark
             // 
-            this.btnTab1RmWatermark.Location = new System.Drawing.Point(3, 89);
+            this.btnTab1RmWatermark.Location = new System.Drawing.Point(5, 142);
+            this.btnTab1RmWatermark.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab1RmWatermark.Name = "btnTab1RmWatermark";
-            this.btnTab1RmWatermark.Size = new System.Drawing.Size(242, 23);
+            this.btnTab1RmWatermark.Size = new System.Drawing.Size(380, 37);
             this.btnTab1RmWatermark.TabIndex = 4;
             this.btnTab1RmWatermark.Text = "去水印";
             this.btnTab1RmWatermark.UseVisualStyleBackColor = true;
@@ -258,18 +266,20 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(3, 6);
+            this.checkBox1.Location = new System.Drawing.Point(5, 10);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(182, 19);
+            this.checkBox1.Size = new System.Drawing.Size(252, 28);
             this.checkBox1.TabIndex = 7;
             this.checkBox1.Text = "右击图片，打开下一个视频";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // btnTab1CancelLabel
             // 
-            this.btnTab1CancelLabel.Location = new System.Drawing.Point(3, 60);
+            this.btnTab1CancelLabel.Location = new System.Drawing.Point(5, 96);
+            this.btnTab1CancelLabel.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab1CancelLabel.Name = "btnTab1CancelLabel";
-            this.btnTab1CancelLabel.Size = new System.Drawing.Size(242, 23);
+            this.btnTab1CancelLabel.Size = new System.Drawing.Size(380, 37);
             this.btnTab1CancelLabel.TabIndex = 9;
             this.btnTab1CancelLabel.Text = "撤销水印标注";
             this.btnTab1CancelLabel.UseVisualStyleBackColor = true;
@@ -278,9 +288,10 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(3, 31);
+            this.checkBox2.Location = new System.Drawing.Point(5, 50);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(234, 19);
+            this.checkBox2.Size = new System.Drawing.Size(324, 28);
             this.checkBox2.TabIndex = 10;
             this.checkBox2.Text = "自动标注水印（采用上个视频标注）";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -294,9 +305,10 @@
             this.panel3.Controls.Add(this.btnTab1CancelLabel);
             this.panel3.Controls.Add(this.checkBox1);
             this.panel3.Controls.Add(this.btnTab1RmWatermark);
-            this.panel3.Location = new System.Drawing.Point(648, 6);
+            this.panel3.Location = new System.Drawing.Point(1018, 10);
+            this.panel3.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(250, 737);
+            this.panel3.Size = new System.Drawing.Size(392, 1178);
             this.panel3.TabIndex = 5;
             // 
             // tabControl1
@@ -307,10 +319,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(268, 27);
+            this.tabControl1.Location = new System.Drawing.Point(421, 43);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(912, 777);
+            this.tabControl1.Size = new System.Drawing.Size(1433, 1243);
             this.tabControl1.TabIndex = 6;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -318,10 +331,11 @@
             // 
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.panel3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 33);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(904, 749);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tabPage1.Size = new System.Drawing.Size(1425, 1206);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "去水印";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -337,9 +351,10 @@
             this.panel2.Controls.Add(this.btnTab1PrevVideo);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Location = new System.Drawing.Point(6, 9);
+            this.panel2.Location = new System.Drawing.Point(9, 14);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(636, 734);
+            this.panel2.Size = new System.Drawing.Size(998, 1173);
             this.panel2.TabIndex = 4;
             this.panel2.Tag = "";
             // 
@@ -347,9 +362,10 @@
             // 
             this.btnTab1NextVideo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTab1NextVideo.Location = new System.Drawing.Point(3, 706);
+            this.btnTab1NextVideo.Location = new System.Drawing.Point(5, 1130);
+            this.btnTab1NextVideo.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab1NextVideo.Name = "btnTab1NextVideo";
-            this.btnTab1NextVideo.Size = new System.Drawing.Size(628, 23);
+            this.btnTab1NextVideo.Size = new System.Drawing.Size(987, 37);
             this.btnTab1NextVideo.TabIndex = 9;
             this.btnTab1NextVideo.Text = "下一个视频";
             this.btnTab1NextVideo.UseVisualStyleBackColor = true;
@@ -359,9 +375,10 @@
             // 
             this.btnTab1PrevVideo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTab1PrevVideo.Location = new System.Drawing.Point(3, 679);
+            this.btnTab1PrevVideo.Location = new System.Drawing.Point(5, 1086);
+            this.btnTab1PrevVideo.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab1PrevVideo.Name = "btnTab1PrevVideo";
-            this.btnTab1PrevVideo.Size = new System.Drawing.Size(628, 23);
+            this.btnTab1PrevVideo.Size = new System.Drawing.Size(987, 37);
             this.btnTab1PrevVideo.TabIndex = 8;
             this.btnTab1PrevVideo.Text = "上一个视频";
             this.btnTab1PrevVideo.UseVisualStyleBackColor = true;
@@ -371,9 +388,10 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 650);
+            this.textBox1.Location = new System.Drawing.Point(5, 1040);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(628, 23);
+            this.textBox1.Size = new System.Drawing.Size(985, 30);
             this.textBox1.TabIndex = 7;
             // 
             // pictureBox1
@@ -382,9 +400,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Info;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(5, 5);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(628, 641);
+            this.pictureBox1.Size = new System.Drawing.Size(987, 1026);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -436,17 +455,19 @@
             this.tabPage2.Controls.Add(this.cbContrast);
             this.tabPage2.Controls.Add(this.nUDContrastV1);
             this.tabPage2.Controls.Add(this.btnTab2Repeat);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 33);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(904, 749);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tabPage2.Size = new System.Drawing.Size(1425, 1206);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "去重";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // nUPRepeatCount
             // 
-            this.nUPRepeatCount.Location = new System.Drawing.Point(8, 680);
+            this.nUPRepeatCount.Location = new System.Drawing.Point(13, 1088);
+            this.nUPRepeatCount.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUPRepeatCount.Maximum = new decimal(new int[] {
             10,
             0,
@@ -458,7 +479,7 @@
             0,
             0});
             this.nUPRepeatCount.Name = "nUPRepeatCount";
-            this.nUPRepeatCount.Size = new System.Drawing.Size(892, 23);
+            this.nUPRepeatCount.Size = new System.Drawing.Size(1402, 30);
             this.nUPRepeatCount.TabIndex = 104;
             this.nUPRepeatCount.Value = new decimal(new int[] {
             1,
@@ -469,15 +490,17 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(307, 285);
+            this.label11.Location = new System.Drawing.Point(482, 456);
+            this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 15);
+            this.label11.Size = new System.Drawing.Size(46, 24);
             this.label11.TabIndex = 103;
             this.label11.Text = "长度";
             // 
             // nUDShakesLength
             // 
-            this.nUDShakesLength.Location = new System.Drawing.Point(372, 282);
+            this.nUDShakesLength.Location = new System.Drawing.Point(585, 451);
+            this.nUDShakesLength.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDShakesLength.Maximum = new decimal(new int[] {
             10,
             0,
@@ -489,7 +512,7 @@
             0,
             0});
             this.nUDShakesLength.Name = "nUDShakesLength";
-            this.nUDShakesLength.Size = new System.Drawing.Size(73, 23);
+            this.nUDShakesLength.Size = new System.Drawing.Size(115, 30);
             this.nUDShakesLength.TabIndex = 102;
             this.nUDShakesLength.Value = new decimal(new int[] {
             5,
@@ -499,7 +522,8 @@
             // 
             // nUDShakesV2
             // 
-            this.nUDShakesV2.Location = new System.Drawing.Point(215, 282);
+            this.nUDShakesV2.Location = new System.Drawing.Point(338, 451);
+            this.nUDShakesV2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDShakesV2.Maximum = new decimal(new int[] {
             10,
             0,
@@ -511,7 +535,7 @@
             0,
             0});
             this.nUDShakesV2.Name = "nUDShakesV2";
-            this.nUDShakesV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDShakesV2.Size = new System.Drawing.Size(115, 30);
             this.nUDShakesV2.TabIndex = 101;
             this.nUDShakesV2.Value = new decimal(new int[] {
             10,
@@ -522,25 +546,28 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(183, 286);
+            this.label8.Location = new System.Drawing.Point(288, 458);
+            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(15, 15);
+            this.label8.Size = new System.Drawing.Size(23, 24);
             this.label8.TabIndex = 100;
             this.label8.Text = "~";
             // 
             // cBShakes
             // 
             this.cBShakes.AutoSize = true;
-            this.cBShakes.Location = new System.Drawing.Point(15, 284);
+            this.cBShakes.Location = new System.Drawing.Point(24, 454);
+            this.cBShakes.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cBShakes.Name = "cBShakes";
-            this.cBShakes.Size = new System.Drawing.Size(65, 19);
+            this.cBShakes.Size = new System.Drawing.Size(92, 28);
             this.cBShakes.TabIndex = 98;
             this.cBShakes.Text = "抖动(s)";
             this.cBShakes.UseVisualStyleBackColor = true;
             // 
             // nUDShakesV1
             // 
-            this.nUDShakesV1.Location = new System.Drawing.Point(113, 282);
+            this.nUDShakesV1.Location = new System.Drawing.Point(178, 451);
+            this.nUDShakesV1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDShakesV1.Maximum = new decimal(new int[] {
             10,
             0,
@@ -552,7 +579,7 @@
             0,
             0});
             this.nUDShakesV1.Name = "nUDShakesV1";
-            this.nUDShakesV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDShakesV1.Size = new System.Drawing.Size(101, 30);
             this.nUDShakesV1.TabIndex = 99;
             this.nUDShakesV1.Value = new decimal(new int[] {
             2,
@@ -568,7 +595,8 @@
             0,
             0,
             131072});
-            this.nUDZoomV2.Location = new System.Drawing.Point(215, 234);
+            this.nUDZoomV2.Location = new System.Drawing.Point(338, 374);
+            this.nUDZoomV2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDZoomV2.Maximum = new decimal(new int[] {
             115,
             0,
@@ -580,7 +608,7 @@
             0,
             131072});
             this.nUDZoomV2.Name = "nUDZoomV2";
-            this.nUDZoomV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDZoomV2.Size = new System.Drawing.Size(115, 30);
             this.nUDZoomV2.TabIndex = 97;
             this.nUDZoomV2.Value = new decimal(new int[] {
             115,
@@ -591,18 +619,20 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(183, 238);
+            this.label7.Location = new System.Drawing.Point(288, 381);
+            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(15, 15);
+            this.label7.Size = new System.Drawing.Size(23, 24);
             this.label7.TabIndex = 96;
             this.label7.Text = "~";
             // 
             // cbZoom
             // 
             this.cbZoom.AutoSize = true;
-            this.cbZoom.Location = new System.Drawing.Point(15, 236);
+            this.cbZoom.Location = new System.Drawing.Point(24, 378);
+            this.cbZoom.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbZoom.Name = "cbZoom";
-            this.cbZoom.Size = new System.Drawing.Size(78, 19);
+            this.cbZoom.Size = new System.Drawing.Size(114, 28);
             this.cbZoom.TabIndex = 94;
             this.cbZoom.Text = "H 拉伸(1)";
             this.cbZoom.UseVisualStyleBackColor = true;
@@ -615,7 +645,8 @@
             0,
             0,
             131072});
-            this.nUDZoomV1.Location = new System.Drawing.Point(113, 234);
+            this.nUDZoomV1.Location = new System.Drawing.Point(178, 374);
+            this.nUDZoomV1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDZoomV1.Maximum = new decimal(new int[] {
             115,
             0,
@@ -627,7 +658,7 @@
             0,
             131072});
             this.nUDZoomV1.Name = "nUDZoomV1";
-            this.nUDZoomV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDZoomV1.Size = new System.Drawing.Size(101, 30);
             this.nUDZoomV1.TabIndex = 95;
             this.nUDZoomV1.Value = new decimal(new int[] {
             105,
@@ -638,9 +669,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(307, 332);
+            this.label2.Location = new System.Drawing.Point(482, 531);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 15);
+            this.label2.Size = new System.Drawing.Size(64, 24);
             this.label2.TabIndex = 93;
             this.label2.Text = "先放大";
             // 
@@ -652,7 +684,8 @@
             0,
             0,
             131072});
-            this.nUDRotateZoom.Location = new System.Drawing.Point(372, 329);
+            this.nUDRotateZoom.Location = new System.Drawing.Point(585, 526);
+            this.nUDRotateZoom.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDRotateZoom.Maximum = new decimal(new int[] {
             10,
             0,
@@ -664,7 +697,7 @@
             0,
             0});
             this.nUDRotateZoom.Name = "nUDRotateZoom";
-            this.nUDRotateZoom.Size = new System.Drawing.Size(73, 23);
+            this.nUDRotateZoom.Size = new System.Drawing.Size(115, 30);
             this.nUDRotateZoom.TabIndex = 92;
             this.nUDRotateZoom.Value = new decimal(new int[] {
             103,
@@ -680,14 +713,15 @@
             0,
             0,
             131072});
-            this.nUDRotateV2.Location = new System.Drawing.Point(215, 329);
+            this.nUDRotateV2.Location = new System.Drawing.Point(338, 526);
+            this.nUDRotateV2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDRotateV2.Maximum = new decimal(new int[] {
             2,
             0,
             0,
             0});
             this.nUDRotateV2.Name = "nUDRotateV2";
-            this.nUDRotateV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDRotateV2.Size = new System.Drawing.Size(115, 30);
             this.nUDRotateV2.TabIndex = 91;
             this.nUDRotateV2.Value = new decimal(new int[] {
             2,
@@ -698,18 +732,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(183, 333);
+            this.label1.Location = new System.Drawing.Point(288, 533);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(15, 15);
+            this.label1.Size = new System.Drawing.Size(23, 24);
             this.label1.TabIndex = 90;
             this.label1.Text = "~";
             // 
             // cbRotate
             // 
             this.cbRotate.AutoSize = true;
-            this.cbRotate.Location = new System.Drawing.Point(15, 331);
+            this.cbRotate.Location = new System.Drawing.Point(24, 530);
+            this.cbRotate.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbRotate.Name = "cbRotate";
-            this.cbRotate.Size = new System.Drawing.Size(66, 19);
+            this.cbRotate.Size = new System.Drawing.Size(95, 28);
             this.cbRotate.TabIndex = 88;
             this.cbRotate.Text = "旋转(0)";
             this.cbRotate.UseVisualStyleBackColor = true;
@@ -722,7 +758,8 @@
             0,
             0,
             131072});
-            this.nUDRotateV1.Location = new System.Drawing.Point(113, 329);
+            this.nUDRotateV1.Location = new System.Drawing.Point(178, 526);
+            this.nUDRotateV1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDRotateV1.Maximum = new decimal(new int[] {
             0,
             0,
@@ -734,7 +771,7 @@
             0,
             -2147483648});
             this.nUDRotateV1.Name = "nUDRotateV1";
-            this.nUDRotateV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDRotateV1.Size = new System.Drawing.Size(101, 30);
             this.nUDRotateV1.TabIndex = 89;
             this.nUDRotateV1.Value = new decimal(new int[] {
             2,
@@ -745,18 +782,20 @@
             // lbOverCount
             // 
             this.lbOverCount.AutoSize = true;
-            this.lbOverCount.Location = new System.Drawing.Point(217, 431);
+            this.lbOverCount.Location = new System.Drawing.Point(341, 690);
+            this.lbOverCount.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbOverCount.Name = "lbOverCount";
-            this.lbOverCount.Size = new System.Drawing.Size(111, 15);
+            this.lbOverCount.Size = new System.Drawing.Size(154, 24);
             this.lbOverCount.TabIndex = 87;
             this.lbOverCount.Text = "请选择叠加的视频";
             // 
             // lbBackCount
             // 
             this.lbBackCount.AutoSize = true;
-            this.lbBackCount.Location = new System.Drawing.Point(217, 383);
+            this.lbBackCount.Location = new System.Drawing.Point(341, 613);
+            this.lbBackCount.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbBackCount.Name = "lbBackCount";
-            this.lbBackCount.Size = new System.Drawing.Size(98, 15);
+            this.lbBackCount.Size = new System.Drawing.Size(136, 24);
             this.lbBackCount.TabIndex = 86;
             this.lbBackCount.Text = "请现在背景音乐";
             // 
@@ -768,7 +807,8 @@
             0,
             0,
             131072});
-            this.nUDSetptsV2.Location = new System.Drawing.Point(215, 52);
+            this.nUDSetptsV2.Location = new System.Drawing.Point(338, 83);
+            this.nUDSetptsV2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDSetptsV2.Maximum = new decimal(new int[] {
             110,
             0,
@@ -780,7 +820,7 @@
             0,
             131072});
             this.nUDSetptsV2.Name = "nUDSetptsV2";
-            this.nUDSetptsV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDSetptsV2.Size = new System.Drawing.Size(115, 30);
             this.nUDSetptsV2.TabIndex = 83;
             this.nUDSetptsV2.Value = new decimal(new int[] {
             110,
@@ -791,18 +831,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(183, 56);
+            this.label4.Location = new System.Drawing.Point(288, 90);
+            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(15, 15);
+            this.label4.Size = new System.Drawing.Size(23, 24);
             this.label4.TabIndex = 82;
             this.label4.Text = "~";
             // 
             // cbSetpts
             // 
             this.cbSetpts.AutoSize = true;
-            this.cbSetpts.Location = new System.Drawing.Point(15, 54);
+            this.cbSetpts.Location = new System.Drawing.Point(24, 86);
+            this.cbSetpts.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSetpts.Name = "cbSetpts";
-            this.cbSetpts.Size = new System.Drawing.Size(66, 19);
+            this.cbSetpts.Size = new System.Drawing.Size(95, 28);
             this.cbSetpts.TabIndex = 80;
             this.cbSetpts.Text = "倍速(1)";
             this.cbSetpts.UseVisualStyleBackColor = true;
@@ -815,7 +857,8 @@
             0,
             0,
             131072});
-            this.nUDSetptsV1.Location = new System.Drawing.Point(113, 52);
+            this.nUDSetptsV1.Location = new System.Drawing.Point(178, 83);
+            this.nUDSetptsV1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDSetptsV1.Maximum = new decimal(new int[] {
             110,
             0,
@@ -827,7 +870,7 @@
             0,
             131072});
             this.nUDSetptsV1.Name = "nUDSetptsV1";
-            this.nUDSetptsV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDSetptsV1.Size = new System.Drawing.Size(101, 30);
             this.nUDSetptsV1.TabIndex = 81;
             this.nUDSetptsV1.Value = new decimal(new int[] {
             101,
@@ -837,9 +880,10 @@
             // 
             // btnTab2SelectVideo
             // 
-            this.btnTab2SelectVideo.Location = new System.Drawing.Point(111, 427);
+            this.btnTab2SelectVideo.Location = new System.Drawing.Point(174, 683);
+            this.btnTab2SelectVideo.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab2SelectVideo.Name = "btnTab2SelectVideo";
-            this.btnTab2SelectVideo.Size = new System.Drawing.Size(75, 23);
+            this.btnTab2SelectVideo.Size = new System.Drawing.Size(118, 37);
             this.btnTab2SelectVideo.TabIndex = 78;
             this.btnTab2SelectVideo.Text = "视频库";
             this.btnTab2SelectVideo.UseVisualStyleBackColor = true;
@@ -848,9 +892,10 @@
             // cbOverlay
             // 
             this.cbOverlay.AutoSize = true;
-            this.cbOverlay.Location = new System.Drawing.Point(15, 429);
+            this.cbOverlay.Location = new System.Drawing.Point(24, 686);
+            this.cbOverlay.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbOverlay.Name = "cbOverlay";
-            this.cbOverlay.Size = new System.Drawing.Size(78, 19);
+            this.cbOverlay.Size = new System.Drawing.Size(108, 28);
             this.cbOverlay.TabIndex = 77;
             this.cbOverlay.Text = "叠加视频";
             this.cbOverlay.UseVisualStyleBackColor = true;
@@ -858,17 +903,19 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(15, 15);
+            this.label22.Location = new System.Drawing.Point(24, 24);
+            this.label22.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(59, 15);
+            this.label22.Size = new System.Drawing.Size(82, 24);
             this.label22.TabIndex = 75;
             this.label22.Text = "全局随机";
             // 
             // btnTab2SelectAudio
             // 
-            this.btnTab2SelectAudio.Location = new System.Drawing.Point(111, 379);
+            this.btnTab2SelectAudio.Location = new System.Drawing.Point(174, 606);
+            this.btnTab2SelectAudio.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab2SelectAudio.Name = "btnTab2SelectAudio";
-            this.btnTab2SelectAudio.Size = new System.Drawing.Size(75, 23);
+            this.btnTab2SelectAudio.Size = new System.Drawing.Size(118, 37);
             this.btnTab2SelectAudio.TabIndex = 66;
             this.btnTab2SelectAudio.Text = "音乐库";
             this.btnTab2SelectAudio.UseVisualStyleBackColor = true;
@@ -877,9 +924,10 @@
             // cbBackground
             // 
             this.cbBackground.AutoSize = true;
-            this.cbBackground.Location = new System.Drawing.Point(15, 381);
+            this.cbBackground.Location = new System.Drawing.Point(24, 610);
+            this.cbBackground.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbBackground.Name = "cbBackground";
-            this.cbBackground.Size = new System.Drawing.Size(78, 19);
+            this.cbBackground.Size = new System.Drawing.Size(108, 28);
             this.cbBackground.TabIndex = 61;
             this.cbBackground.Text = "背景音乐";
             this.cbBackground.UseVisualStyleBackColor = true;
@@ -892,7 +940,8 @@
             0,
             0,
             131072});
-            this.nUDBrightnessV2.Location = new System.Drawing.Point(215, 182);
+            this.nUDBrightnessV2.Location = new System.Drawing.Point(338, 291);
+            this.nUDBrightnessV2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDBrightnessV2.Maximum = new decimal(new int[] {
             1,
             0,
@@ -904,7 +953,7 @@
             0,
             -2147483648});
             this.nUDBrightnessV2.Name = "nUDBrightnessV2";
-            this.nUDBrightnessV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDBrightnessV2.Size = new System.Drawing.Size(115, 30);
             this.nUDBrightnessV2.TabIndex = 55;
             this.nUDBrightnessV2.Value = new decimal(new int[] {
             15,
@@ -915,18 +964,20 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(183, 186);
+            this.label12.Location = new System.Drawing.Point(288, 298);
+            this.label12.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(15, 15);
+            this.label12.Size = new System.Drawing.Size(23, 24);
             this.label12.TabIndex = 54;
             this.label12.Text = "~";
             // 
             // cbBrightness
             // 
             this.cbBrightness.AutoSize = true;
-            this.cbBrightness.Location = new System.Drawing.Point(15, 184);
+            this.cbBrightness.Location = new System.Drawing.Point(24, 294);
+            this.cbBrightness.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbBrightness.Name = "cbBrightness";
-            this.cbBrightness.Size = new System.Drawing.Size(66, 19);
+            this.cbBrightness.Size = new System.Drawing.Size(95, 28);
             this.cbBrightness.TabIndex = 51;
             this.cbBrightness.Text = "亮度(0)";
             this.cbBrightness.UseVisualStyleBackColor = true;
@@ -939,7 +990,8 @@
             0,
             0,
             131072});
-            this.nUDBrightnessV1.Location = new System.Drawing.Point(113, 182);
+            this.nUDBrightnessV1.Location = new System.Drawing.Point(178, 291);
+            this.nUDBrightnessV1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDBrightnessV1.Maximum = new decimal(new int[] {
             1,
             0,
@@ -951,7 +1003,7 @@
             0,
             -2147483648});
             this.nUDBrightnessV1.Name = "nUDBrightnessV1";
-            this.nUDBrightnessV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDBrightnessV1.Size = new System.Drawing.Size(101, 30);
             this.nUDBrightnessV1.TabIndex = 53;
             this.nUDBrightnessV1.Value = new decimal(new int[] {
             1,
@@ -967,14 +1019,15 @@
             0,
             0,
             131072});
-            this.nUDSaturationV2.Location = new System.Drawing.Point(215, 134);
+            this.nUDSaturationV2.Location = new System.Drawing.Point(338, 214);
+            this.nUDSaturationV2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDSaturationV2.Maximum = new decimal(new int[] {
             3,
             0,
             0,
             0});
             this.nUDSaturationV2.Name = "nUDSaturationV2";
-            this.nUDSaturationV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDSaturationV2.Size = new System.Drawing.Size(115, 30);
             this.nUDSaturationV2.TabIndex = 50;
             this.nUDSaturationV2.Value = new decimal(new int[] {
             199,
@@ -985,18 +1038,20 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(183, 138);
+            this.label5.Location = new System.Drawing.Point(288, 221);
+            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(15, 15);
+            this.label5.Size = new System.Drawing.Size(23, 24);
             this.label5.TabIndex = 49;
             this.label5.Text = "~";
             // 
             // cbSaturation
             // 
             this.cbSaturation.AutoSize = true;
-            this.cbSaturation.Location = new System.Drawing.Point(15, 136);
+            this.cbSaturation.Location = new System.Drawing.Point(24, 218);
+            this.cbSaturation.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSaturation.Name = "cbSaturation";
-            this.cbSaturation.Size = new System.Drawing.Size(79, 19);
+            this.cbSaturation.Size = new System.Drawing.Size(113, 28);
             this.cbSaturation.TabIndex = 46;
             this.cbSaturation.Text = "饱和度(1)";
             this.cbSaturation.UseVisualStyleBackColor = true;
@@ -1009,14 +1064,15 @@
             0,
             0,
             131072});
-            this.nUDSaturationV1.Location = new System.Drawing.Point(113, 134);
+            this.nUDSaturationV1.Location = new System.Drawing.Point(178, 214);
+            this.nUDSaturationV1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDSaturationV1.Maximum = new decimal(new int[] {
             3,
             0,
             0,
             0});
             this.nUDSaturationV1.Name = "nUDSaturationV1";
-            this.nUDSaturationV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDSaturationV1.Size = new System.Drawing.Size(101, 30);
             this.nUDSaturationV1.TabIndex = 48;
             this.nUDSaturationV1.Value = new decimal(new int[] {
             101,
@@ -1032,7 +1088,8 @@
             0,
             0,
             131072});
-            this.nUDContrastV2.Location = new System.Drawing.Point(215, 91);
+            this.nUDContrastV2.Location = new System.Drawing.Point(338, 146);
+            this.nUDContrastV2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDContrastV2.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1044,7 +1101,7 @@
             0,
             -2147483648});
             this.nUDContrastV2.Name = "nUDContrastV2";
-            this.nUDContrastV2.Size = new System.Drawing.Size(73, 23);
+            this.nUDContrastV2.Size = new System.Drawing.Size(115, 30);
             this.nUDContrastV2.TabIndex = 45;
             this.nUDContrastV2.Value = new decimal(new int[] {
             145,
@@ -1055,18 +1112,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(183, 95);
+            this.label3.Location = new System.Drawing.Point(288, 152);
+            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(15, 15);
+            this.label3.Size = new System.Drawing.Size(23, 24);
             this.label3.TabIndex = 44;
             this.label3.Text = "~";
             // 
             // cbContrast
             // 
             this.cbContrast.AutoSize = true;
-            this.cbContrast.Location = new System.Drawing.Point(15, 93);
+            this.cbContrast.Location = new System.Drawing.Point(24, 149);
+            this.cbContrast.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbContrast.Name = "cbContrast";
-            this.cbContrast.Size = new System.Drawing.Size(79, 19);
+            this.cbContrast.Size = new System.Drawing.Size(113, 28);
             this.cbContrast.TabIndex = 41;
             this.cbContrast.Text = "对比度(1)";
             this.cbContrast.UseVisualStyleBackColor = true;
@@ -1079,7 +1138,8 @@
             0,
             0,
             131072});
-            this.nUDContrastV1.Location = new System.Drawing.Point(113, 91);
+            this.nUDContrastV1.Location = new System.Drawing.Point(178, 146);
+            this.nUDContrastV1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDContrastV1.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1091,7 +1151,7 @@
             0,
             -2147483648});
             this.nUDContrastV1.Name = "nUDContrastV1";
-            this.nUDContrastV1.Size = new System.Drawing.Size(64, 23);
+            this.nUDContrastV1.Size = new System.Drawing.Size(101, 30);
             this.nUDContrastV1.TabIndex = 43;
             this.nUDContrastV1.Value = new decimal(new int[] {
             101,
@@ -1101,9 +1161,10 @@
             // 
             // btnTab2Repeat
             // 
-            this.btnTab2Repeat.Location = new System.Drawing.Point(6, 709);
+            this.btnTab2Repeat.Location = new System.Drawing.Point(9, 1134);
+            this.btnTab2Repeat.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab2Repeat.Name = "btnTab2Repeat";
-            this.btnTab2Repeat.Size = new System.Drawing.Size(892, 36);
+            this.btnTab2Repeat.Size = new System.Drawing.Size(1402, 58);
             this.btnTab2Repeat.TabIndex = 9;
             this.btnTab2Repeat.Text = "去重";
             this.btnTab2Repeat.UseVisualStyleBackColor = true;
@@ -1111,6 +1172,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.cbTab3PictureWidthMax);
             this.tabPage3.Controls.Add(this.cbTab3PictureSharpen);
             this.tabPage3.Controls.Add(this.nUDTab3OutTime);
             this.tabPage3.Controls.Add(this.label10);
@@ -1123,10 +1185,11 @@
             this.tabPage3.Controls.Add(this.btnTab3Exec);
             this.tabPage3.Controls.Add(this.labTab3BackgroundCount);
             this.tabPage3.Controls.Add(this.btnTab3BackgroundVideo);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Location = new System.Drawing.Point(4, 33);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(904, 749);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tabPage3.Size = new System.Drawing.Size(1425, 1206);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "加图";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1136,23 +1199,25 @@
             this.cbTab3PictureSharpen.AutoSize = true;
             this.cbTab3PictureSharpen.Checked = true;
             this.cbTab3PictureSharpen.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbTab3PictureSharpen.Location = new System.Drawing.Point(6, 106);
+            this.cbTab3PictureSharpen.Location = new System.Drawing.Point(9, 170);
+            this.cbTab3PictureSharpen.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbTab3PictureSharpen.Name = "cbTab3PictureSharpen";
-            this.cbTab3PictureSharpen.Size = new System.Drawing.Size(78, 19);
+            this.cbTab3PictureSharpen.Size = new System.Drawing.Size(108, 28);
             this.cbTab3PictureSharpen.TabIndex = 100;
             this.cbTab3PictureSharpen.Text = "图片锐化";
             this.cbTab3PictureSharpen.UseVisualStyleBackColor = true;
             // 
             // nUDTab3OutTime
             // 
-            this.nUDTab3OutTime.Location = new System.Drawing.Point(138, 69);
+            this.nUDTab3OutTime.Location = new System.Drawing.Point(217, 110);
+            this.nUDTab3OutTime.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDTab3OutTime.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nUDTab3OutTime.Name = "nUDTab3OutTime";
-            this.nUDTab3OutTime.Size = new System.Drawing.Size(34, 23);
+            this.nUDTab3OutTime.Size = new System.Drawing.Size(53, 30);
             this.nUDTab3OutTime.TabIndex = 99;
             this.nUDTab3OutTime.Value = new decimal(new int[] {
             8,
@@ -1163,26 +1228,29 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 73);
+            this.label10.Location = new System.Drawing.Point(9, 117);
+            this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(129, 15);
+            this.label10.Size = new System.Drawing.Size(180, 24);
             this.label10.TabIndex = 98;
             this.label10.Text = "输出视频时长：（s）";
             // 
             // labTab3AddFontPicture
             // 
             this.labTab3AddFontPicture.AutoSize = true;
-            this.labTab3AddFontPicture.Location = new System.Drawing.Point(138, 39);
+            this.labTab3AddFontPicture.Location = new System.Drawing.Point(217, 62);
+            this.labTab3AddFontPicture.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labTab3AddFontPicture.Name = "labTab3AddFontPicture";
-            this.labTab3AddFontPicture.Size = new System.Drawing.Size(13, 15);
+            this.labTab3AddFontPicture.Size = new System.Drawing.Size(21, 24);
             this.labTab3AddFontPicture.TabIndex = 97;
             this.labTab3AddFontPicture.Text = "0";
             // 
             // btnTab3AddFontPicture
             // 
-            this.btnTab3AddFontPicture.Location = new System.Drawing.Point(6, 35);
+            this.btnTab3AddFontPicture.Location = new System.Drawing.Point(9, 56);
+            this.btnTab3AddFontPicture.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab3AddFontPicture.Name = "btnTab3AddFontPicture";
-            this.btnTab3AddFontPicture.Size = new System.Drawing.Size(127, 23);
+            this.btnTab3AddFontPicture.Size = new System.Drawing.Size(200, 37);
             this.btnTab3AddFontPicture.TabIndex = 96;
             this.btnTab3AddFontPicture.Text = "宣传语图片";
             this.btnTab3AddFontPicture.UseVisualStyleBackColor = true;
@@ -1190,9 +1258,10 @@
             // 
             // nUDTab3VideoMaxStartTime
             // 
-            this.nUDTab3VideoMaxStartTime.Location = new System.Drawing.Point(341, 6);
+            this.nUDTab3VideoMaxStartTime.Location = new System.Drawing.Point(536, 10);
+            this.nUDTab3VideoMaxStartTime.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDTab3VideoMaxStartTime.Name = "nUDTab3VideoMaxStartTime";
-            this.nUDTab3VideoMaxStartTime.Size = new System.Drawing.Size(40, 23);
+            this.nUDTab3VideoMaxStartTime.Size = new System.Drawing.Size(63, 30);
             this.nUDTab3VideoMaxStartTime.TabIndex = 95;
             this.nUDTab3VideoMaxStartTime.Value = new decimal(new int[] {
             10,
@@ -1202,30 +1271,33 @@
             // 
             // nUDTab3VideoMinStartTime
             // 
-            this.nUDTab3VideoMinStartTime.Location = new System.Drawing.Point(296, 6);
+            this.nUDTab3VideoMinStartTime.Location = new System.Drawing.Point(465, 10);
+            this.nUDTab3VideoMinStartTime.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDTab3VideoMinStartTime.Name = "nUDTab3VideoMinStartTime";
-            this.nUDTab3VideoMinStartTime.Size = new System.Drawing.Size(39, 23);
+            this.nUDTab3VideoMinStartTime.Size = new System.Drawing.Size(61, 30);
             this.nUDTab3VideoMinStartTime.TabIndex = 94;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(189, 10);
+            this.label9.Location = new System.Drawing.Point(297, 16);
+            this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(101, 15);
+            this.label9.Size = new System.Drawing.Size(142, 24);
             this.label9.TabIndex = 93;
             this.label9.Text = "随机开始时间:(s)";
             // 
             // nUDTab3ExecCount
             // 
-            this.nUDTab3ExecCount.Location = new System.Drawing.Point(6, 679);
+            this.nUDTab3ExecCount.Location = new System.Drawing.Point(9, 1086);
+            this.nUDTab3ExecCount.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.nUDTab3ExecCount.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nUDTab3ExecCount.Name = "nUDTab3ExecCount";
-            this.nUDTab3ExecCount.Size = new System.Drawing.Size(892, 23);
+            this.nUDTab3ExecCount.Size = new System.Drawing.Size(1402, 30);
             this.nUDTab3ExecCount.TabIndex = 92;
             this.nUDTab3ExecCount.Value = new decimal(new int[] {
             1,
@@ -1235,9 +1307,10 @@
             // 
             // btnTab3Exec
             // 
-            this.btnTab3Exec.Location = new System.Drawing.Point(6, 708);
+            this.btnTab3Exec.Location = new System.Drawing.Point(9, 1133);
+            this.btnTab3Exec.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab3Exec.Name = "btnTab3Exec";
-            this.btnTab3Exec.Size = new System.Drawing.Size(892, 35);
+            this.btnTab3Exec.Size = new System.Drawing.Size(1402, 56);
             this.btnTab3Exec.TabIndex = 91;
             this.btnTab3Exec.Text = "生成";
             this.btnTab3Exec.UseVisualStyleBackColor = true;
@@ -1246,31 +1319,44 @@
             // labTab3BackgroundCount
             // 
             this.labTab3BackgroundCount.AutoSize = true;
-            this.labTab3BackgroundCount.Location = new System.Drawing.Point(138, 10);
+            this.labTab3BackgroundCount.Location = new System.Drawing.Point(217, 16);
+            this.labTab3BackgroundCount.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labTab3BackgroundCount.Name = "labTab3BackgroundCount";
-            this.labTab3BackgroundCount.Size = new System.Drawing.Size(13, 15);
+            this.labTab3BackgroundCount.Size = new System.Drawing.Size(21, 24);
             this.labTab3BackgroundCount.TabIndex = 90;
             this.labTab3BackgroundCount.Text = "0";
             // 
             // btnTab3BackgroundVideo
             // 
-            this.btnTab3BackgroundVideo.Location = new System.Drawing.Point(6, 6);
+            this.btnTab3BackgroundVideo.Location = new System.Drawing.Point(9, 10);
+            this.btnTab3BackgroundVideo.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnTab3BackgroundVideo.Name = "btnTab3BackgroundVideo";
-            this.btnTab3BackgroundVideo.Size = new System.Drawing.Size(127, 23);
+            this.btnTab3BackgroundVideo.Size = new System.Drawing.Size(200, 37);
             this.btnTab3BackgroundVideo.TabIndex = 89;
             this.btnTab3BackgroundVideo.Text = "随机背景视频库";
             this.btnTab3BackgroundVideo.UseVisualStyleBackColor = true;
             this.btnTab3BackgroundVideo.Click += new System.EventHandler(this.btnTab3BackgroundVideo_Click);
             // 
+            // cbTab3PictureWidthMax
+            // 
+            this.cbTab3PictureWidthMax.AutoSize = true;
+            this.cbTab3PictureWidthMax.Location = new System.Drawing.Point(125, 170);
+            this.cbTab3PictureWidthMax.Name = "cbTab3PictureWidthMax";
+            this.cbTab3PictureWidthMax.Size = new System.Drawing.Size(144, 28);
+            this.cbTab3PictureWidthMax.TabIndex = 101;
+            this.cbTab3PictureWidthMax.Text = "图片宽度全屏";
+            this.cbTab3PictureWidthMax.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 816);
+            this.ClientSize = new System.Drawing.Size(1873, 1306);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "Form1";
             this.Text = "IdeaVideoAI";
             this.menuStrip1.ResumeLayout(false);
@@ -1396,5 +1482,6 @@
         private Label label10;
         private CheckBox cbTab3PictureSharpen;
         private ToolStripMenuItem 更新ToolStripMenuItem;
+        private CheckBox cbTab3PictureWidthMax;
     }
 }

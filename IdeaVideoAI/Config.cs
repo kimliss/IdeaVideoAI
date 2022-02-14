@@ -32,6 +32,7 @@ namespace IdeaVideoAI
         public string tab3FontPictureFile;
         public int tab3OutTime;
         public bool tab3PictureSharpen;
+        public bool tab3PictureWidthMax;
 
         //背景视频
         public List<String> tab3BgVideoFiles;
