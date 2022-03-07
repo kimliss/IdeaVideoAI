@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IdeaVideoAI
 {
-    public class WatermarkVideoItem : VideoItem
+    public class WatermarkVideoItem : FileItem
     {
         public string coverName;
 

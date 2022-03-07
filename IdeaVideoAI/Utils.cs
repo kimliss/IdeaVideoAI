@@ -1,47 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xabe.FFmpeg;
+﻿using Xabe.FFmpeg;
 
 namespace IdeaVideoAI
 {
     public static class Utils
     {
 
-        public static string getVideoStatus(VideoStatus videoStatus)
+        public static string getVideoStatus(FileStatus videoStatus)
         {
             switch (videoStatus)
             {
-                case VideoStatus.WatermarkLoad:
+                case FileStatus.WatermarkLoad:
                     return "待读取封面";
-                case VideoStatus.WatermarkDoCoverSuccess:
+                case FileStatus.WatermarkDoCoverSuccess:
                     return "已读取封面";
-                case VideoStatus.WatermarkDoCoverError:
+                case FileStatus.WatermarkDoCoverError:
                     return "读取封面失败";
-                case VideoStatus.WatermarkDoMark:
+                case FileStatus.WatermarkDoMark:
                     return "已标注";
-                case VideoStatus.WatermarkDoSuccess:
+                case FileStatus.WatermarkDoSuccess:
                     return "去水印成功";
-                case VideoStatus.WatermarkDoError:
+                case FileStatus.WatermarkDoError:
                     return "去水印失败";
-                case VideoStatus.RepeatLoad:
+                case FileStatus.RepeatLoad:
                     return "待去重";
-                case VideoStatus.RepeatDoing:
+                case FileStatus.RepeatDoing:
                     return "正在去重";
-                case VideoStatus.RepeatDoSuccess:
+                case FileStatus.RepeatDoSuccess:
                     return "去重成功";
-                case VideoStatus.RepeatDoError:
+                case FileStatus.RepeatDoError:
                     return "去重失败";
-                case VideoStatus.PictureLoad:
+                case FileStatus.PictureLoad:
                     return "待合成";
-                case VideoStatus.PictureDoing:
+                case FileStatus.PictureDoing:
                     return "合成中";
-                case VideoStatus.PictureDoSuccess:
+                case FileStatus.PictureDoSuccess:
                     return "合成成功";
-                case VideoStatus.PictureDoError:
+                case FileStatus.PictureDoError:
                     return "合成失败";
 
             }
@@ -134,5 +128,19 @@ namespace IdeaVideoAI
             }
         }
 
+        public static bool IsRealImage(string path)
+        {
+            try
+            {
+                Image img = Image.FromFile(path);
+                Console.WriteLine("\nIt is a real image");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\nIt is a fate image");
+                return false;
+            }
+        }
     }
 }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IdeaVideoAI
+﻿namespace IdeaVideoAI
 {
-    public class VideoItem
+    public class FileItem
     {
 
-        public VideoStatus status;
+        public FileStatus status;
 
         public string filePath;
 
@@ -34,7 +28,7 @@ namespace IdeaVideoAI
 
     }
 
-    public enum VideoStatus
+    public enum FileStatus
     {
         WatermarkLoad,WatermarkDoCoverSuccess,WatermarkDoCoverError,WatermarkDoMark,WatermarkDoSuccess,WatermarkDoError,
         RepeatLoad, RepeatDoing,RepeatDoSuccess, RepeatDoError,

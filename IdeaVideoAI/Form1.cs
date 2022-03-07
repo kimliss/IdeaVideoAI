@@ -16,11 +16,11 @@ namespace IdeaVideoAI
 
             FFmpeg.SetExecutablesPath(Path.Join(Environment.CurrentDirectory, "ffmpeg"), ffmpegExeutableName: "ffmpeg.exe", ffprobeExecutableName: "ffprobe.exe");
 
-            initRmWatermark();
+            initRemoveWatermark();
 
-            initRepeat();
+            initRemoveRepeat();
 
-            initAddPicture();
+            initOverlayPicture();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace IdeaVideoAI
                     fd.Filter = "All Image Files|*.jpg;*.png;*.jpeg";
                     break;
                 default:
-                    fd.Filter = "All Video Files|*.mp4;*.mpg;*.mpeg;*.avi;*.rm;*.rmvb;*.mov;*.wmv;*.asf;*.dat;*.asx;*.wvx;*.mpe;*.mpa";
+                    fd.Filter = "Image Or Video Files|*.jpg;*.png;*.jpeg;*.mp4;*.mpg;*.mpeg;*.avi;*.rm;*.rmvb;*.mov;*.wmv;*.asf;*.dat;*.asx;*.wvx;*.mpe;*.mpa";
                     break;
             }
 
@@ -107,29 +107,37 @@ namespace IdeaVideoAI
                         videoData.outDir = delWaterMarkPath;
 
                         videoData.coverName = i + 1 + ".jpg";
-                        videoData.coverCmd = String.Format(" -y -ss 00:00:05 -i \"{0}\" -vframes 1 \"{1}\"", videoData.filePath, Path.Join(videoCoverPath, videoData.coverName));
-                        videoData.status = VideoStatus.WatermarkLoad;
+                        if (Utils.IsRealImage(videoData.filePath))
+                        {
+                            videoData.coverCmd = String.Format(" -y -i \"{0}\" -c copy \"{1}\"", videoData.filePath, Path.Join(videoCoverPath, videoData.coverName));
+                        }
+                        else
+                        {
+                            videoData.coverCmd = String.Format(" -y -ss 00:00:05 -i \"{0}\" -vframes 1 \"{1}\"", videoData.filePath, Path.Join(videoCoverPath, videoData.coverName));
+                        }
+                        
+                        videoData.status = FileStatus.WatermarkLoad;
 
                         waterMarkDatas.Add(videoData);
                     }
                     else if(tabControl1.SelectedIndex == 1)
                     {
-                        var videoData = new VideoItem();
+                        var videoData = new FileItem();
 
                         videoData.filePath = files[i];
                         videoData.fileName = Path.GetFileName(videoData.filePath);
-                        videoData.status = VideoStatus.RepeatLoad;
+                        videoData.status = FileStatus.RepeatLoad;
 
                         videoData.outDir = repeatVideoPath;
 
                         repeatDatas.Add(videoData);
                     }else if(tabControl1.SelectedIndex == 2)
                     {
-                        var videoData = new VideoItem();
+                        var videoData = new FileItem();
 
                         videoData.filePath = files[i];
                         videoData.fileName = Path.GetFileName(videoData.filePath);
-                        videoData.status = VideoStatus.PictureLoad;
+                        videoData.status = FileStatus.PictureLoad;
 
                         videoData.outDir = pictureVideoPath;
 
@@ -162,7 +170,7 @@ namespace IdeaVideoAI
         {
 
             var isWaterMark = tabControl1.SelectedIndex == 0;
-            var tempDatas = new List<VideoItem>();
+            var tempDatas = new List<FileItem>();
 
             if (tabControl1.SelectedIndex == 0)
             {
@@ -185,7 +193,7 @@ namespace IdeaVideoAI
             for (int i = 0; i < tempDatas.Count; i++)
             {
 
-                VideoItem data = tempDatas[i];
+                FileItem data = tempDatas[i];
 
                 ListViewItem listViewItem = new ListViewItem();
 
@@ -206,7 +214,7 @@ namespace IdeaVideoAI
         {
             if (index < 0) return;
 
-            VideoItem videoData;
+            FileItem videoData;
 
             if (tabControl1.SelectedIndex == 0)
             {
@@ -265,7 +273,7 @@ namespace IdeaVideoAI
         public Point pointStart = Point.Empty;
         public Point pointContinue = Point.Empty;
 
-        public void initRmWatermark()
+        public void initRemoveWatermark()
         {
             backgroundWorkerCover = new System.ComponentModel.BackgroundWorker();
             backgroundWorkerCover.WorkerReportsProgress = true;
@@ -338,11 +346,11 @@ namespace IdeaVideoAI
                 bool result = Utils.ffmpeg(videoData.coverCmd);
                 if (result)
                 {
-                    videoData.status = VideoStatus.WatermarkDoCoverSuccess;
+                    videoData.status = FileStatus.WatermarkDoCoverSuccess;
                 }
                 else
                 {
-                    videoData.status = VideoStatus.WatermarkDoCoverError;
+                    videoData.status = FileStatus.WatermarkDoCoverError;
                 }
 
 
@@ -374,11 +382,11 @@ namespace IdeaVideoAI
                 bool result = Utils.ffmpeg(videoData.getExecCmd());
                 if (result)
                 {
-                    videoData.status = VideoStatus.WatermarkDoSuccess;
+                    videoData.status = FileStatus.WatermarkDoSuccess;
                 }
                 else
                 {
-                    videoData.status = VideoStatus.WatermarkDoError;
+                    videoData.status = FileStatus.WatermarkDoError;
                 }
 
 
@@ -474,7 +482,7 @@ namespace IdeaVideoAI
 
                     WatermarkVideoItem curVideoData = waterMarkDatas[curSelectIndexAtWatermarkDatas];
 
-                    curVideoData.status = VideoStatus.WatermarkDoMark;
+                    curVideoData.status = FileStatus.WatermarkDoMark;
                     curVideoData.docPoints.Remove(pointStart);
                     curVideoData.docPoints.Add(pointStart, pointContinue);
                     curVideoData.waterMarkDatas.Add(water);
@@ -549,7 +557,7 @@ namespace IdeaVideoAI
                     {
                         next.docPoints = new Dictionary<Point, Point>(cur.docPoints);
                         next.waterMarkDatas = new List<WaterMarkConfig>(cur.waterMarkDatas);
-                        next.status = VideoStatus.WatermarkDoMark;
+                        next.status = FileStatus.WatermarkDoMark;
                         updateItemInListView(curSelectIndexAtWatermarkDatas + 1);
                     }
                 }
@@ -572,7 +580,7 @@ namespace IdeaVideoAI
 
                 if (curVideoData.waterMarkDatas.Count <= 0)
                 {
-                    curVideoData.status = VideoStatus.WatermarkDoCoverSuccess;
+                    curVideoData.status = FileStatus.WatermarkDoCoverSuccess;
                 }
             }
 
@@ -626,15 +634,15 @@ namespace IdeaVideoAI
 
 
         /// <summary>
-        /// 去重
+        /// 视频去重 - 随机修改
         /// </summary>
 
-        private List<VideoItem> repeatDatas = new List<VideoItem>();
+        private List<FileItem> repeatDatas = new List<FileItem>();
         private BackgroundWorker backgroundWorkerRepeat;
 
         RepeatConfig repeatConfig = new RepeatConfig();
 
-        public void initRepeat()
+        public void initRemoveRepeat()
         {
             backgroundWorkerRepeat = new System.ComponentModel.BackgroundWorker();
             backgroundWorkerRepeat.WorkerReportsProgress = true;
@@ -645,9 +653,9 @@ namespace IdeaVideoAI
         {
             for (int i = 0; i < repeatDatas.Count; i++)
             {
-                VideoItem videoData = repeatDatas[i];
+                FileItem videoData = repeatDatas[i];
 
-                videoData.status = VideoStatus.RepeatDoing;
+                videoData.status = FileStatus.RepeatDoing;
                 backgroundWorkerRepeat.ReportProgress((int)((i + 0.0) / repeatDatas.Count() * 100), i);
 
                 bool result = true;
@@ -661,11 +669,11 @@ namespace IdeaVideoAI
 
                 if (result)
                 {
-                    videoData.status = VideoStatus.RepeatDoSuccess;
+                    videoData.status = FileStatus.RepeatDoSuccess;
                 }
                 else
                 {
-                    videoData.status = VideoStatus.RepeatDoError;
+                    videoData.status = FileStatus.RepeatDoError;
                 }
 
                 backgroundWorkerRepeat.ReportProgress((int)((i + 1.0) / repeatDatas.Count() * 100), i);
@@ -679,7 +687,7 @@ namespace IdeaVideoAI
             int index = (int)e.UserState;
             updateItemInListView(index);
 
-            if (index == repeatDatas.Count() - 1 && repeatDatas[index].status != VideoStatus.RepeatDoing)
+            if (index == repeatDatas.Count() - 1 && repeatDatas[index].status != FileStatus.RepeatDoing)
             {
                 btnTab2Repeat.Enabled = true;
             }
@@ -690,7 +698,7 @@ namespace IdeaVideoAI
         /// </summary>
         /// <param name="data"></param>
         /// <param name="repeatConfig"></param>
-        public void updateRepeatCmd(VideoItem data, RepeatConfig repeatConfig, int count)
+        public void updateRepeatCmd(FileItem data, RepeatConfig repeatConfig, int count)
         {
             data.execCmds.Clear();
 
@@ -909,7 +917,7 @@ namespace IdeaVideoAI
 
             for (int i = 0; i < repeatDatas.Count; i++)
             {
-                VideoItem videoData = repeatDatas[i];
+                FileItem videoData = repeatDatas[i];
 
                 var mediaInfo = await FFmpeg.GetMediaInfo(videoData.filePath);
                 var videoInfo = mediaInfo.VideoStreams.First();
@@ -925,13 +933,16 @@ namespace IdeaVideoAI
         }
 
         /// <summary>
-        /// 加图
+        /// 叠加图片
         /// </summary>
 
-        private List<VideoItem> pictureDatas = new List<VideoItem>();
+        private List<FileItem> pictureDatas = new List<FileItem>();
         private BackgroundWorker backgroundWorkerAddPicture;
 
-        public void initAddPicture()
+        /// <summary>
+        /// 叠加图片
+        /// </summary>
+        public void initOverlayPicture()
         {
             backgroundWorkerAddPicture = new System.ComponentModel.BackgroundWorker();
             backgroundWorkerAddPicture.WorkerReportsProgress = true;
@@ -944,9 +955,9 @@ namespace IdeaVideoAI
 
             for (int i = 0; i < pictureDatas.Count; i++)
             {
-                VideoItem videoData = pictureDatas[i];
+                FileItem videoData = pictureDatas[i];
 
-                videoData.status = VideoStatus.PictureDoing;
+                videoData.status = FileStatus.PictureDoing;
                 backgroundWorkerAddPicture.ReportProgress((int)((i + 0.0) / pictureDatas.Count() * 100), i);
 
                 bool result = true;
@@ -960,11 +971,11 @@ namespace IdeaVideoAI
 
                 if (result)
                 {
-                    videoData.status = VideoStatus.PictureDoSuccess;
+                    videoData.status = FileStatus.PictureDoSuccess;
                 }
                 else
                 {
-                    videoData.status = VideoStatus.PictureDoError;
+                    videoData.status = FileStatus.PictureDoError;
                 }
 
                 backgroundWorkerAddPicture.ReportProgress((int)((i + 1.0) / pictureDatas.Count() * 100), i);
@@ -979,7 +990,7 @@ namespace IdeaVideoAI
             int index = (int)e.UserState;
             updateItemInListView(index);
 
-            if (index == pictureDatas.Count() - 1 && pictureDatas[index].status != VideoStatus.PictureDoing)
+            if (index == pictureDatas.Count() - 1 && pictureDatas[index].status != FileStatus.PictureDoing)
             {
                 btnTab3Exec.Enabled = true;
             }
@@ -1026,7 +1037,7 @@ namespace IdeaVideoAI
 
             for (int i = 0; i < pictureDatas.Count; i++)
             {
-                VideoItem item = pictureDatas[i];
+                FileItem item = pictureDatas[i];
                 item.execCmds.Clear();
 
                 for(int j = 0; j < Config.Instance.tab3ExecCount; j++)
@@ -1035,7 +1046,7 @@ namespace IdeaVideoAI
                     var ss = Utils.nextRandomRange(Config.Instance.tab3MinStartTime, Config.Instance.tab3MaxStartTime);
                     var videoFile = Config.Instance.getRandomByTab3BackgroundVideo();
                     var imageFile = item.filePath;
-                    var fontFile = Config.Instance.tab3FontPictureFile;
+                    var fontFile = Config.Instance.tab3LogoPictureFile;
 
                     int xRandom = Utils.nextRandomRange(75, 138);
                     int yRandom = Utils.nextRandomRange(0, 100);
@@ -1059,9 +1070,9 @@ namespace IdeaVideoAI
                         tempFilter += ";[over]unsharp=3:3:5[over]";
                     }
 
-                    if (!string.IsNullOrEmpty(fontFile))
+                    if (fontFile.Count > 0)
                     {
-                        tempInput += string.Format(" -i {0} ", fontFile);
+                        tempInput += string.Format(" -i {0} ", Config.Instance.getRandomByTab3LogoPicture());
                         tempFilter += ";[2:v][over]scale2ref=w=iw:h=ow/main_a[font][over];[over][font]vstack[over]";
                     }
 
@@ -1092,7 +1103,6 @@ namespace IdeaVideoAI
 
         private void btnTab3AddFontPicture_Click(object sender, EventArgs e)
         {
-            Config.Instance.tab3FontPictureFile = "";
 
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = true;
@@ -1100,8 +1110,15 @@ namespace IdeaVideoAI
             fd.Filter = "All Image Files|*.jpg;*.png;*.jepg";
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                Config.Instance.tab3FontPictureFile = fd.FileName;
-                labTab3AddFontPicture.Text = fd.FileName;
+                Config.Instance.tab3LogoPictureFile = new List<String>();
+                string[] files = fd.FileNames;
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    Config.Instance.tab3LogoPictureFile.Add(files[i]);
+                }
+
+                labTab3AddFontPicture.Text = "" + files.Length;
             }
         }
 

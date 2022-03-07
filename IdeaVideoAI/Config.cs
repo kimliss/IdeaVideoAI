@@ -29,10 +29,16 @@ namespace IdeaVideoAI
         public int tab3ExecCount;
         public int tab3MinStartTime;
         public int tab3MaxStartTime;
-        public string tab3FontPictureFile;
         public int tab3OutTime;
         public bool tab3PictureSharpen;
         public bool tab3PictureWidthMax;
+
+        //logo 图
+        public List<String> tab3LogoPictureFile;
+        public string getRandomByTab3LogoPicture()
+        {
+            return tab3LogoPictureFile[new Random().Next(tab3LogoPictureFile.Count())];
+        }
 
         //背景视频
         public List<String> tab3BgVideoFiles;
