@@ -37,6 +37,16 @@ namespace IdeaVideoAI
                     return "合成成功";
                 case FileStatus.PictureDoError:
                     return "合成失败";
+                case FileStatus.Init:
+                    return "已加载";
+                case FileStatus.Ready:
+                    return "已准备";
+                case FileStatus.Process:
+                    return "处理中";
+                case FileStatus.Complete:
+                    return "处理完成";
+                case FileStatus.Fail:
+                    return "处理失败";
 
             }
             return "未知";

@@ -32,6 +32,27 @@
     {
         WatermarkLoad,WatermarkDoCoverSuccess,WatermarkDoCoverError,WatermarkDoMark,WatermarkDoSuccess,WatermarkDoError,
         RepeatLoad, RepeatDoing,RepeatDoSuccess, RepeatDoError,
-        PictureLoad,PictureDoing,PictureDoSuccess,PictureDoError
+        PictureLoad,PictureDoing,PictureDoSuccess,PictureDoError,
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        Init,
+        /// <summary>
+        /// 准备完
+        /// </summary>
+        Ready, 
+        /// <summary>
+        /// 处理中
+        /// </summary>
+        Process, 
+        /// <summary>
+        /// 完成
+        /// </summary>
+        Complete, 
+        /// <summary>
+        /// 失败
+        /// </summary>
+        Fail
     }
 }

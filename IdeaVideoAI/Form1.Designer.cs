@@ -109,6 +109,9 @@
             this.labTab3BackgroundCount = new System.Windows.Forms.Label();
             this.btnTab3BackgroundVideo = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.labTab4BgCount = new System.Windows.Forms.Label();
+            this.btnTab4Exec = new System.Windows.Forms.Button();
+            this.btnTab4BgImage = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -139,6 +142,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMaxStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMinStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1351,6 +1355,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.labTab4BgCount);
+            this.tabPage4.Controls.Add(this.btnTab4Exec);
+            this.tabPage4.Controls.Add(this.btnTab4BgImage);
             this.tabPage4.Location = new System.Drawing.Point(4, 33);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -1358,6 +1365,35 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "加边框";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // labTab4BgCount
+            // 
+            this.labTab4BgCount.AutoSize = true;
+            this.labTab4BgCount.Location = new System.Drawing.Point(124, 11);
+            this.labTab4BgCount.Name = "labTab4BgCount";
+            this.labTab4BgCount.Size = new System.Drawing.Size(21, 24);
+            this.labTab4BgCount.TabIndex = 2;
+            this.labTab4BgCount.Text = "0";
+            // 
+            // btnTab4Exec
+            // 
+            this.btnTab4Exec.Location = new System.Drawing.Point(6, 1119);
+            this.btnTab4Exec.Name = "btnTab4Exec";
+            this.btnTab4Exec.Size = new System.Drawing.Size(1416, 81);
+            this.btnTab4Exec.TabIndex = 1;
+            this.btnTab4Exec.Text = "生成";
+            this.btnTab4Exec.UseVisualStyleBackColor = true;
+            this.btnTab4Exec.Click += new System.EventHandler(this.btnTab4Exec_Click);
+            // 
+            // btnTab4BgImage
+            // 
+            this.btnTab4BgImage.Location = new System.Drawing.Point(6, 6);
+            this.btnTab4BgImage.Name = "btnTab4BgImage";
+            this.btnTab4BgImage.Size = new System.Drawing.Size(112, 34);
+            this.btnTab4BgImage.TabIndex = 0;
+            this.btnTab4BgImage.Text = "边框库";
+            this.btnTab4BgImage.UseVisualStyleBackColor = true;
+            this.btnTab4BgImage.Click += new System.EventHandler(this.btnTab4BgImage_Click);
             // 
             // Form1
             // 
@@ -1407,6 +1443,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMaxStartTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3VideoMinStartTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDTab3ExecCount)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1424,7 +1462,7 @@
         private Button btnTab1RmWatermark;
         private ProgressBar pbProgress;
         private CheckBox checkBox1;
-        private Label label6;
+        private Label labTab4BgCount;
         private Button btnTab1CancelLabel;
         private CheckBox checkBox2;
         private Panel panel3;
@@ -1496,5 +1534,7 @@
         private ToolStripMenuItem 更新ToolStripMenuItem;
         private CheckBox cbTab3PictureWidthMax;
         private TabPage tabPage4;
+        private Button btnTab4Exec;
+        private Button btnTab4BgImage;
     }
 }

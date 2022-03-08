@@ -10,6 +10,9 @@ namespace IdeaVideoAI
     public partial class Form1 : Form
     {
 
+        public static Dictionary<string,List<FileItem>> files = new Dictionary<string, List<FileItem>>();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +24,8 @@ namespace IdeaVideoAI
             initRemoveRepeat();
 
             initOverlayPicture();
+
+            initBgWorker();
         }
 
         /// <summary>
@@ -59,6 +64,7 @@ namespace IdeaVideoAI
                 string delWaterMarkPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempDelWaterMark_IdeaVideoAI");
                 string repeatVideoPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempRepeatVideo_IdeaVideoAI");
                 string pictureVideoPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempPictureVideo_IdeaVideoAI");
+                string tempOutPath = Path.Join(Path.GetDirectoryName(fd.FileName), ".tempOut_IdeaVideoAI");
 
 
                 switch (tabControl1.SelectedIndex)
@@ -89,6 +95,10 @@ namespace IdeaVideoAI
                     case 2:
                         pictureDatas.Clear();
                         Directory.CreateDirectory(pictureVideoPath);
+                        break;
+                    default:
+                        fileDatas.Clear();
+                        Directory.CreateDirectory(tempOutPath);
                         break;
                 }
 
@@ -142,6 +152,17 @@ namespace IdeaVideoAI
                         videoData.outDir = pictureVideoPath;
 
                         pictureDatas.Add(videoData);
+                    }else
+                    {
+                        var fileItem = new FileItem();
+
+                        fileItem.filePath = files[i];
+                        fileItem.fileName = Path.GetFileName(fileItem.filePath);
+                        fileItem.status = FileStatus.Init;
+
+                        fileItem.outDir = tempOutPath;
+
+                        fileDatas.Add(fileItem);
                     }
                 }
 
@@ -184,7 +205,7 @@ namespace IdeaVideoAI
                 pictureDatas.ForEach(data => tempDatas.Add(data));
             }else
             {
-                return;
+                fileDatas.ForEach(data => tempDatas.Add(data));
             }
 
             listView1.BeginUpdate();
@@ -1070,7 +1091,7 @@ namespace IdeaVideoAI
                         tempFilter += ";[over]unsharp=3:3:5[over]";
                     }
 
-                    if (fontFile.Count > 0)
+                    if (fontFile != null && fontFile.Count > 0)
                     {
                         tempInput += string.Format(" -i {0} ", Config.Instance.getRandomByTab3LogoPicture());
                         tempFilter += ";[2:v][over]scale2ref=w=iw:h=ow/main_a[font][over];[over][font]vstack[over]";
@@ -1129,6 +1150,111 @@ namespace IdeaVideoAI
                 FileName = "https://github.com/itwangxiang/IdeaVideoAI/releases",
                 UseShellExecute = true
             });
+        }
+
+
+        /// ÊÓÆµ¼Ó±ß¿ò
+        private List<FileItem> fileDatas = new List<FileItem>();
+        private BackgroundWorker backgroundWorker;
+
+        public void initBgWorker()
+        {
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
+            backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker_ProgressChanged);
+        }
+
+        public async void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            for (int i = 0; i < fileDatas.Count; i++)
+            {
+                FileItem fileItem = fileDatas[i];
+
+                fileItem.status = FileStatus.Process;
+                backgroundWorker.ReportProgress((int)((i + 0.0) / fileDatas.Count() * 100), i);
+
+                bool result = true;
+                if (!Utils.ffmpeg(fileItem.execCmd))
+                {
+                    result = false;
+                }
+
+                if (result)
+                {
+                    fileItem.status = FileStatus.Complete;
+                }
+                else
+                {
+                    fileItem.status = FileStatus.Fail;
+                }
+
+                backgroundWorker.ReportProgress((int)((i + 1.0) / fileDatas.Count() * 100), i);
+            }
+        }
+
+        public void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+            pbProgress.Value = e.ProgressPercentage;
+
+            int index = (int)e.UserState;
+            updateItemInListView(index);
+
+            if (index == pictureDatas.Count() - 1 && pictureDatas[index].status != FileStatus.Process)
+            {
+                btnTab3Exec.Enabled = true;
+            }
+        }
+
+        private void btnTab4BgImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Multiselect = true;
+            fd.Title = "Please Select File";
+            fd.Filter = "All Image Files|*.jpg;*.png;*.jepg";
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                Config.Instance.tab4FrameFile = new List<String>();
+                string[] files = fd.FileNames;
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    Config.Instance.tab4FrameFile.Add(files[i]);
+                }
+
+                labTab4BgCount.Text = "" + files.Length;
+            }
+        }
+
+        private void btnTab4Exec_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < fileDatas.Count; i++)
+            {
+                FileItem item = fileDatas[i];
+
+                var frameFile = Config.Instance.getRandomByTab4Frame();
+
+
+                var ffmpegFormat = " -y {0} -filter_complex \"{1}\" \"{2}\" ";
+
+                var tempInput = string.Format(" -i \"{0}\" -i \"{1}\" ", frameFile, item.filePath);
+
+                var tempFilter = "[1:v][0:v]scale2ref=w=iw/10*8:h=ih/10*8[vout][iout];[iout][vout]overlay=x=(W-w)/2:y=(H-h)/2";
+                var tempOut = Path.Join(item.outDir, item.fileName + Path.GetExtension(item.filePath));
+
+
+                var cmd = String.Format(ffmpegFormat, tempInput, tempFilter, tempOut);
+                item.execCmd = cmd;
+
+                string log = System.DateTime.Now + "\r\nffmpeg" + string.Join("\r\nffmpeg", item.execCmd);
+                recodeLog(log);
+            }
+
+            btnTab4Exec.Enabled = false;
+            pbProgress.Value = 0;
+            backgroundWorker.RunWorkerAsync();
         }
     }
 

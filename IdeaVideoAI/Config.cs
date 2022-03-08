@@ -20,11 +20,14 @@ namespace IdeaVideoAI
             tab3BgVideoFiles = new List<string>();
             tab3ExecCount = 1;
 
+            //加边框
+            tab4FrameFile = new List<string>();
+
         }
 
-        /// <summary>
+        /// 
         /// 加图
-        /// </summary>
+        /// 
 
         public int tab3ExecCount;
         public int tab3MinStartTime;
@@ -46,5 +49,18 @@ namespace IdeaVideoAI
         {
             return tab3BgVideoFiles[new Random().Next(tab3BgVideoFiles.Count())];
         }
+
+        ///
+        /// 加边框
+        /// 
+
+
+        //logo 图
+        public List<String> tab4FrameFile;
+        public string getRandomByTab4Frame()
+        {
+            return tab4FrameFile[new Random().Next(tab4FrameFile.Count())];
+        }
+
     }
 }
