@@ -1239,9 +1239,10 @@ namespace IdeaVideoAI
 
                 var ffmpegFormat = " -y {0} -filter_complex \"{1}\" \"{2}\" ";
 
-                var tempInput = string.Format(" -i \"{0}\" -i \"{1}\" ", frameFile, item.filePath);
+                var tempInput = string.Format(" -i \"{0}\" -i \"{1}\" ", item.filePath, frameFile);
 
-                var tempFilter = "[1:v][0:v]scale2ref=w=iw/10*8:h=ih/10*8[vout][iout];[iout][vout]overlay=x=(W-w)/2:y=(H-h)/2";
+                //                var tempFilter = "[1:v][0:v]scale2ref=w=iw/10*8:h=ih/10*8[vout][iout];[iout][vout]overlay=x=(W-w)/2:y=(H-h)/2";
+                var tempFilter = "[0:v][1:v]scale2ref=w=iw:h=ow-ih[imgout][insout];[imgout][insout]vstack";
                 var tempOut = Path.Join(item.outDir, item.fileName + Path.GetExtension(item.filePath));
 
 

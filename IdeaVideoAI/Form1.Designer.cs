@@ -1363,7 +1363,7 @@
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(1425, 1206);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "加边框";
+            this.tabPage4.Text = "加底图";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // labTab4BgCount
@@ -1391,7 +1391,7 @@
             this.btnTab4BgImage.Name = "btnTab4BgImage";
             this.btnTab4BgImage.Size = new System.Drawing.Size(112, 34);
             this.btnTab4BgImage.TabIndex = 0;
-            this.btnTab4BgImage.Text = "边框库";
+            this.btnTab4BgImage.Text = "底图库";
             this.btnTab4BgImage.UseVisualStyleBackColor = true;
             this.btnTab4BgImage.Click += new System.EventHandler(this.btnTab4BgImage_Click);
             // 
